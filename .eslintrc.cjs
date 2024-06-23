@@ -22,7 +22,7 @@ module.exports = {
   ignorePatterns: ['!**/.server', '!**/.client'],
 
   // Base config
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:storybook/recommended', 'prettier'],
 
   overrides: [
     // React
