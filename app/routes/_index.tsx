@@ -1,10 +1,19 @@
+import { json } from '@remix-run/node'
 import type { MetaFunction } from '@remix-run/node'
+
+import { env } from '../env/env.server'
 
 export const meta: MetaFunction = () => {
   return [
     { title: 'New Remix App' },
     { name: 'description', content: 'Welcome to Remix!' },
   ]
+}
+
+export async function loader() {
+  console.info('CMS_API_KEY', env.CMS_API_KEY)
+  // TODO: 投稿情報を返却する
+  return json({ ok: true })
 }
 
 export default function Index() {
