@@ -19,7 +19,6 @@ const formatErrors = (errors: ZodFormattedError<Map<string, string>, string>) =>
     .filter(Boolean)
 
 if (_serverEnv.success === false) {
-  // eslint-disable-next-line no-console
   console.error(
     '❌ Invalid environment variables:\n',
     ...formatErrors(_serverEnv.error.format())

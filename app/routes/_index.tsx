@@ -1,7 +1,8 @@
 import { json } from '@remix-run/node'
-import type { MetaFunction } from '@remix-run/node'
 
 import { env } from '../env/env.server'
+
+import type { MetaFunction } from '@remix-run/node'
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,6 +12,7 @@ export const meta: MetaFunction = () => {
 }
 
 export async function loader() {
+  // eslint-disable-next-line no-console
   console.info('CMS_API_KEY', env.CMS_API_KEY)
   // TODO: 投稿情報を返却する
   return json({ ok: true })
