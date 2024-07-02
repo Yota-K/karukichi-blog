@@ -1,4 +1,6 @@
-import { z, ZodFormattedError } from 'zod'
+import { z } from 'zod'
+
+import type { ZodFormattedError } from 'zod';
 
 // 参考: https://stackoverflow.com/questions/75485109/not-able-to-access-env-variables-in-remix-even-in-a-server-file
 //

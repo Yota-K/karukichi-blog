@@ -1,6 +1,6 @@
 import { createClient } from 'microcms-js-sdk'
 
-import { env } from '../../env/env.server'
+import { env } from '../../env'
 
 export const endpoints = {
   blogs: 'blogs',

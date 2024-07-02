@@ -1,8 +1,7 @@
-import { MicroCMSQueries } from 'microcms-js-sdk'
-
 import { client, endpoints } from '../client'
 
 import type { Content } from '../../../types'
+import type { MicroCMSQueries } from 'microcms-js-sdk'
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
 

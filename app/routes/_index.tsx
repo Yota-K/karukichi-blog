@@ -1,8 +1,9 @@
-import { HeadersFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
 import { loader } from '../.server'
 import { TopPage } from '../pages'
+
+import type { HeadersFunction } from '@remix-run/node'
 
 export const headers: HeadersFunction = () => {
   return {

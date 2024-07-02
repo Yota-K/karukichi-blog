@@ -63,6 +63,19 @@ const config = [
           'newlines-between': 'always',
         },
       ],
+      'object-shorthand': 'error',
+      'import/no-internal-modules': [
+        'error',
+        {
+          // 許可しないとキツいものは追加していく。
+          allow: [
+            'react-dom/client',
+            'react-dom/server',
+            '**/.eslint/*.mjs',
+            '**/app/*.css',
+          ],
+        },
+      ],
     },
   },
 ]
