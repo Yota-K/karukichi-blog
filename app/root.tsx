@@ -7,6 +7,19 @@ import {
 } from '@remix-run/react'
 import './tailwind.css'
 
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'カルキチブログ' },
+    {
+      name: 'description',
+      content:
+        'カルキチ副島が運営するウェブ系の技術について執筆しているブログです',
+    },
+  ]
+}
+
+import type { MetaFunction } from '@remix-run/node'
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
