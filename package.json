@@ -12,7 +12,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "prettier --cache --write .",
     "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc",
+    "type-check": "tsc --noEmit",
     "build-storybook": "storybook build"
   },
   "dependencies": {
