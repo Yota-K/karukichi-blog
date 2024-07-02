@@ -13,7 +13,8 @@
     "format": "prettier --cache --write .",
     "start": "remix-serve ./build/server/index.js",
     "type-check": "tsc --noEmit",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "validate:dependency": "depcruise app"
   },
   "dependencies": {
     "@remix-run/node": "2.9.2",
@@ -45,6 +46,7 @@
     "@typescript-eslint/parser": "6.7.4",
     "autoprefixer": "10.4.19",
     "concurrently": "8.2.2",
+    "dependency-cruiser": "16.3.5",
     "eslint": "9.5.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",
