@@ -1,3 +1,5 @@
+import { Heading } from '../Heading'
+
 import { Header } from './Header'
 
 import type { Meta, StoryObj } from '@storybook/react'
@@ -15,6 +17,10 @@ type Story = StoryObj<typeof meta>
 
 export const Base: Story = {
   args: {
-    children: 'Hello, world!',
+    children: (
+      <Heading as="h1" size="xl" className="text-white">
+        title
+      </Heading>
+    ),
   },
 }

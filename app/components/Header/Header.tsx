@@ -5,5 +5,5 @@ type Props = {
 }
 
 export const Header = ({ children }: Props) => {
-  return <header className="bg-headerBlue-background p-4">{children}</header>
+  return <header className="p-4 bg-blue-headerBlue">{children}</header>
 }
