@@ -1,18 +1,19 @@
-import { Text } from './Text'
+import { Link } from '.'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'components/Text',
-  component: Text,
+  title: 'components/Link',
+  component: Link,
   tags: ['autodocs'],
-} satisfies Meta<typeof Text>
+} as Meta<typeof Link>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Base: Story = {
+export const Default: Story = {
   args: {
-    children: 'Hello, world!',
+    to: '/',
+    children: 'link',
   },
 }

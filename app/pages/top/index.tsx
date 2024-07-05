@@ -6,7 +6,7 @@ type Props = {
 
 export const TopPage = ({ contents }: Props) => {
   return (
-    <div className="font-sans p-4">
+    <div className="p-4 font-sans">
       {contents.map((content) => (
         <div key={content.id}>
           <h2>{content.title}</h2>
