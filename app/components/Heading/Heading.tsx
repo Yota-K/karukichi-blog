@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
 import type { HtmlHTMLAttributes } from 'react'
 
-const heading = cva('text-gray-900 font-bold ', {
+const heading = cva('font-bold text-gray-900 ', {
   variants: {
     size: {
       xs: 'text-xs',

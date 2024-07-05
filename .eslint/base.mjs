@@ -1,6 +1,7 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
 import { FlatCompat } from '@eslint/eslintrc'
 import importPlugin from 'eslint-plugin-import'
+import tailwind from "eslint-plugin-tailwindcss";
 
 const compat = new FlatCompat()
 
@@ -12,6 +13,8 @@ const config = [
       files: ['**/*.{js,ts,tsx}'],
     })
   ),
+
+  ...tailwind.configs["flat/recommended"],
 
   {
     plugins: {
