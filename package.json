@@ -11,7 +11,7 @@
     "dev:storybook": "storybook dev -p 6006",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "prettier --cache --write .",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "wrangler pages dev build/client",
     "type-check": "tsc --noEmit",
     "build-storybook": "storybook build",
     "validate:dependency": "depcruise app"
