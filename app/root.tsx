@@ -18,7 +18,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/cloudflare'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

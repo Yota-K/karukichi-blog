@@ -3,7 +3,7 @@ import { useLoaderData } from '@remix-run/react'
 import { loader } from '../.server'
 import { TopPage } from '../pages'
 
-import type { HeadersFunction } from '@remix-run/node'
+import type { HeadersFunction } from '@remix-run/cloudflare'
 
 export const headers: HeadersFunction = () => {
   return {
