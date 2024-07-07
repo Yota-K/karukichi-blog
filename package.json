@@ -11,15 +11,15 @@
     "dev:storybook": "storybook dev -p 6006",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "prettier --cache --write .",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "wrangler pages dev build/client",
     "type-check": "tsc --noEmit",
     "build-storybook": "storybook build",
     "validate:dependency": "depcruise app"
   },
   "dependencies": {
-    "@remix-run/node": "2.9.2",
-    "@remix-run/react": "2.9.2",
-    "@remix-run/serve": "2.9.2",
+    "@remix-run/cloudflare": "2.10.2",
+    "@remix-run/cloudflare-pages": "2.10.2",
+    "@remix-run/react": "2.10.2",
     "class-variance-authority": "0.7.0",
     "isbot": "4.1.0",
     "microcms-js-sdk": "3.1.2",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "1.5.0",
+    "@cloudflare/workers-types": "4.20240620.0",
     "@eslint/compat": "1.1.0",
     "@eslint/eslintrc": "3.1.0",
     "@remix-run/dev": "2.9.2",
@@ -65,7 +66,8 @@
     "tailwindcss": "3.4.4",
     "typescript": "5.1.6",
     "vite": "5.1.0",
-    "vite-tsconfig-paths": "4.2.1"
+    "vite-tsconfig-paths": "4.2.1",
+    "wrangler": "3.63.1"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -1,14 +1,9 @@
 import { createClient } from 'microcms-js-sdk'
 
-import { env } from '../../env'
+export const client = (apiKey: Env['CMS_API_KEY']) =>
+  createClient({
+    serviceDomain: 'karukichi-tech-blog',
+    apiKey,
+  })
 
-export const endpoints = {
-  blogs: 'blogs',
-  category: 'category',
-  tags: 'tags',
-} as const
-
-export const client = createClient({
-  serviceDomain: 'karukichi-tech-blog',
-  apiKey: env.CMS_API_KEY,
-})
+export type ClientType = ReturnType<typeof client>

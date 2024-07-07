@@ -1,6 +1,7 @@
-import { client, endpoints } from '../client'
+import { endpoints } from '../endpoints'
 
 import type { Content } from '../../../types'
+import type { ClientType } from '../client'
 import type { MicroCMSQueries } from 'microcms-js-sdk'
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
@@ -11,7 +12,10 @@ type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
  * @param limit 取得件数の指定。初期値は5。
  * @param filters? 取得条件の指定
  */
-export const getPosts = async (queries?: PickMicroCMSQueries) => {
+export const getPosts = async (
+  client: ClientType,
+  queries?: PickMicroCMSQueries
+) => {
   const data = await client.getList<Content>({
     endpoint: endpoints.blogs,
     queries: {
