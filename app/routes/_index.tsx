@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react'
 
-import { loader } from '../.server'
+import { indexLoader as loader } from '../.server'
 import { TopPage } from '../pages'
 
 import type { HeadersFunction } from '@remix-run/cloudflare'

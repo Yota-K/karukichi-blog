@@ -7,6 +7,10 @@ import {
 } from '@remix-run/react'
 import './tailwind.css'
 
+import { rootLoader as loader } from './.server'
+
+import type { MetaFunction } from '@remix-run/cloudflare'
+
 export const meta: MetaFunction = () => {
   return [
     { title: 'カルキチブログ' },
@@ -18,7 +22,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-import type { MetaFunction } from '@remix-run/cloudflare'
+export { loader }
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

@@ -1,0 +1,6 @@
+# ワーカー関数またはページ関数を開発するときは、.dev.vars ファイルをrootに配置する必要がある。
+
+# https://developers.cloudflare.com/workers/configuration/secrets/#add-secrets-to-your-project
+
+CMS_API_KEY=
+RECAPTCHA_KEY=
