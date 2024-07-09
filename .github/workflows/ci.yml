@@ -15,9 +15,8 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install pnpm
+      # Omit version input to use the version in the packageManager field in the package.json.
       uses: pnpm/action-setup@v4
-      with:
-        version: 9.5.0
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
