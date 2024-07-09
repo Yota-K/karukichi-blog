@@ -8,31 +8,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+
     strategy:
       matrix:
         node-version: [21]
+
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
+      - name: Install pnpm
+        # Omit version input to use the version in the packageManager field in the package.json.
+        uses: pnpm/action-setup@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: Run eslint
-      run: pnpm lint
+      - name: Run eslint
+        run: pnpm lint
 
-    - name: Run type check
-      run: pnpm type-check
+      - name: Run type check
+        run: pnpm type-check
 
-    - name: Run validate dependency
-      run: pnpm validate:dependency
+      - name: Run validate dependency
+        run: pnpm validate:dependency
