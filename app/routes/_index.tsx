@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react'
 
 import { indexLoader as loader } from '../.server'
-import { TopPage } from '../pages'
+import { ArticleListPage } from '../features'
 
 import type { HeadersFunction } from '@remix-run/cloudflare'
 
@@ -20,5 +20,5 @@ export { loader }
 
 export default function Index() {
   const { contents } = useLoaderData<typeof loader>()
-  return <TopPage contents={contents} />
+  return <ArticleListPage contents={contents} />
 }

@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react'
 
 import { postDetailLoader as loader } from '../.server'
-import { PostDetailPage } from '../pages'
+import { ArticleDetailPage } from '../features'
 
 import type { HeadersFunction } from '@remix-run/cloudflare'
 
@@ -21,5 +21,5 @@ export { loader }
 export default function PostDetail() {
   const content = useLoaderData<typeof loader>()
   content.category_field
-  return <PostDetailPage content={content} />
+  return <ArticleDetailPage content={content} />
 }
