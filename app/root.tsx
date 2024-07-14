@@ -27,9 +27,11 @@ export { loader }
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useLoaderData<typeof loader>()
+  // TODO: リリース時に消す
   if (!data?.authorized) {
     return <div>Unauthorized</div>
   }
+  // TODO: リリース時に消す
 
   return (
     <html lang="ja">
