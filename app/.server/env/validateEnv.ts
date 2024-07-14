@@ -5,6 +5,10 @@ import type { ZodFormattedError } from 'zod'
 const envSchema = z.object({
   CMS_API_KEY: z.string().uuid().nonempty(),
   RECAPTCHA_KEY: z.string().nonempty(),
+  // TODO: リリース時に消す
+  BASIC_USER: z.string().nonempty(),
+  BASIC_PASS: z.string().nonempty(),
+  // TODO: リリース時に消す
 })
 
 export const validateEnv = (env: Env): z.infer<typeof envSchema> => {
