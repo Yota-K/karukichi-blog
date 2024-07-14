@@ -37,6 +37,8 @@ export default async function handleRequest(
   }
 
   responseHeaders.set('Content-Type', 'text/html')
+
+  responseHeaders.set('WWW-Authenticate', 'basic') // Basic認証のヘッダを全レスポンスで返す
   return new Response(body, {
     headers: responseHeaders,
     status: responseStatusCode,

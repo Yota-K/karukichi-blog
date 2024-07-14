@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react'
 import './tailwind.css'
 
@@ -25,6 +26,11 @@ export const meta: MetaFunction = () => {
 export { loader }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<typeof loader>()
+  if (!data?.authorized) {
+    return <div>Unauthorized</div>
+  }
+
   return (
     <html lang="ja">
       <head>
