@@ -6,6 +6,8 @@ import { getUsesMiddleware } from './get-uses-middleware'
 	User credentials are stored in a KV namespace called REALTOR_PAGES_AUTH
 */
 export async function auth({ env, next, request }) {
+  // eslint-disable-next-line no-console
+  console.log(env)
   try {
     const usesMiddleware = getUsesMiddleware({ url: request.url })
 
@@ -22,8 +24,8 @@ export async function auth({ env, next, request }) {
       })
     }
 
-    const base64Credentials = authHeader?.split(' ')[1]
-    const [username, password] = atob(base64Credentials).split(':')
+    // const base64Credentials = authHeader?.split(' ')[1]
+    // const [username, password] = atob(base64Credentials).split(':')
     // const userPasswordKV = await env?.REALTOR_PAGES_AUTH?.get(username)
 
     // if (userPasswordKV !== password) {
