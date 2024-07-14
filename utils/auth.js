@@ -1,5 +1,3 @@
-import { getUsesMiddleware } from './get-uses-middleware'
-
 /* 
 	Use HTTP Basic authentication to control access to protected resources
 
@@ -9,12 +7,6 @@ export async function auth({ env, next, request }) {
   // eslint-disable-next-line no-console
   console.log(env)
   try {
-    const usesMiddleware = getUsesMiddleware({ url: request.url })
-
-    if (!usesMiddleware) {
-      return await next()
-    }
-
     const authHeader = request?.headers?.get('authorization')
 
     if (!authHeader?.includes('Basic')) {
@@ -27,7 +19,7 @@ export async function auth({ env, next, request }) {
     const base64Credentials = authHeader?.split(' ')[1]
     const [username, password] = atob(base64Credentials).split(':')
 
-    if (username !== 'test' || password !== 'test') {
+    if (username !== env?.BASIC_USER || password !== env?.BASIC_PASS) {
       return new Response('Unauthorized', {
         status: 401,
         headers: { 'WWW-Authenticate': 'Basic' },
