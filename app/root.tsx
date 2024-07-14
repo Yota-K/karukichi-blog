@@ -27,7 +27,8 @@ export { loader }
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useLoaderData<typeof loader>()
-  if (data?.authorized) {
+  // TODO: リリース時に消す
+  if (!data?.authorized) {
     return (
       <html lang="ja">
         <head>
@@ -37,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Links />
         </head>
         <body>
-          {children}
+          <div>Unauthorized</div>
           <ScrollRestoration />
           <Scripts />
         </body>
@@ -45,8 +46,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
     )
   }
 
-  // TODO: リリース時に消す
-  return <div>Unauthorized</div>
+  return (
+    <html lang="ja">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
 }
 
 export default function App() {
