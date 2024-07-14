@@ -2,7 +2,7 @@ import { endpoints } from '../endpoints'
 
 import type { Content } from '../../../types'
 import type { ClientType } from '../client'
-import type { MicroCMSQueries } from 'microcms-js-sdk'
+import type { MicroCMSListResponse, MicroCMSQueries } from 'microcms-js-sdk'
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
 
@@ -27,3 +27,18 @@ export const getPosts = async (
 
   return data
 }
+
+/**
+ * 特定の記事を取得
+ * @param contentId 記事ページのスラッグ
+ */
+export const findPost = async (client: ClientType, contentId: string) => {
+  const data = await client.get<Content>({
+    endpoint: endpoints.blogs,
+    contentId,
+  })
+
+  return data
+}
+
+export { MicroCMSListResponse }

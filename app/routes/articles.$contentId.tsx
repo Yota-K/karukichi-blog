@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react'
 
-import { indexLoader as loader } from '../.server'
-import { ArticleListPage } from '../features'
+import { postDetailLoader as loader } from '../.server'
+import { ArticleDetailPage } from '../features'
 
 import type { HeadersFunction } from '@remix-run/cloudflare'
 
@@ -18,7 +18,8 @@ export const headers: HeadersFunction = () => {
 
 export { loader }
 
-export default function Index() {
-  const { contents } = useLoaderData<typeof loader>()
-  return <ArticleListPage contents={contents} />
+export default function PostDetail() {
+  const content = useLoaderData<typeof loader>()
+  content.category_field
+  return <ArticleDetailPage content={content} />
 }

@@ -2,11 +2,17 @@ import { json } from '@remix-run/cloudflare'
 
 import { client, getPosts } from '../../cms'
 
-import type { LoaderFunctionArgs } from '@remix-run/cloudflare'
+import type { Content } from '../../../types'
+import type { MicroCMSListResponse } from '../../cms'
+import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare'
 
-export const indexLoader = async ({ context }: LoaderFunctionArgs) => {
+export const indexLoader = async ({
+  context,
+}: LoaderFunctionArgs): Promise<
+  TypedResponse<MicroCMSListResponse<Content>>
+> => {
   const { CMS_API_KEY } = context.cloudflare.env
-  const cmsClient = client(CMS_API_KEY)
-  const posts = await getPosts(cmsClient)
+  const posts = await getPosts(client(CMS_API_KEY))
+
   return json({ ...posts })
 }
