@@ -24,16 +24,15 @@ export async function auth({ env, next, request }) {
       })
     }
 
-    // const base64Credentials = authHeader?.split(' ')[1]
-    // const [username, password] = atob(base64Credentials).split(':')
-    // const userPasswordKV = await env?.REALTOR_PAGES_AUTH?.get(username)
+    const base64Credentials = authHeader?.split(' ')[1]
+    const [username, password] = atob(base64Credentials).split(':')
 
-    // if (userPasswordKV !== password) {
-    //   return new Response('Unauthorized', {
-    //     status: 401,
-    //     headers: { 'WWW-Authenticate': 'Basic' },
-    //   })
-    // }
+    if (username !== 'test' || password !== 'test') {
+      return new Response('Unauthorized', {
+        status: 401,
+        headers: { 'WWW-Authenticate': 'Basic' },
+      })
+    }
 
     return await next()
   } catch (error) {
