@@ -11,24 +11,4 @@ import * as build from '../build/server'
 
 // Pages Functions では onRequest 関数を named-export する必要がある。
 // ref: https://developers.cloudflare.com/pages/functions/get-started/#create-a-function
-export const onRequest = (request: Request, env: Env) => {
-  // TODO: リリース時に消す
-  const isAuthorized = () => {
-    const header = request.headers.get('Authorization')
-    if (!header) return false
-    const base64 = header.replace('Basic ', '')
-    const [username, password] = Buffer.from(base64, 'base64')
-      .toString()
-      .split(':')
-    return username === env.BASIC_USER && password === env.BASIC_PASS
-  }
-
-  if (isAuthorized()) {
-    return createPagesFunctionHandler({ build })
-  }
-
-  return new Response(null, {
-    status: 401,
-    statusText: 'Unauthorized',
-  })
-}
+export const onRequest = createPagesFunctionHandler({ build })
