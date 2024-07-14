@@ -94,6 +94,7 @@ function basicAuthentication(request: Request): { user: string; pass: string } {
 
   // The user & password are split by the first colon and MUST NOT contain control characters.
   // @see https://tools.ietf.org/html/rfc5234#appendix-B.1 (=> "CTL = %x00-1F / %x7F")
+  // eslint-disable-next-line no-control-regex
   if (index === -1 || /[\0-\x1F\x7F]/.test(decoded)) {
     throw new BadRequestException('Invalid authorization value.')
   }
