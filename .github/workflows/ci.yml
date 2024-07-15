@@ -6,12 +6,23 @@ on:
 
 # https://github.com/pnpm/action-setup
 jobs:
-  build:
+  define-matrix:
     runs-on: ubuntu-22.04
 
+    outputs:
+      node: ${{ steps.define-matrix.outputs.matrix }}
+
+    steps:
+      - name: Define Node version
+        id: node-version
+        run: cat .node-version | xargs -I {value} echo "NODE_VERSION={value}" >> $GITHUB_ENV
+
+  ci :
+    runs-on: ubuntu-22.04
+    needs: define-matrix
     strategy:
       matrix:
-        node-version: [21]
+        node-version: ${{ needs.define-matrix.outputs.node }}
 
     steps:
       - uses: actions/checkout@v4
