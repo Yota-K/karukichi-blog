@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     outputs:
-      node: ${{ steps.define-matrix.outputs.matrix }}
+      node: ${{ steps.define-matrix.outputs.node-version }}
 
     steps:
       - name: Define Node version
@@ -22,7 +22,7 @@ jobs:
     needs: define-matrix
     strategy:
       matrix:
-        node-version: ${{ needs.define-matrix.outputs.node }}
+        node-version: ${{ needs.define-matrix.outputs.node-version }}
 
     steps:
       - uses: actions/checkout@v4
