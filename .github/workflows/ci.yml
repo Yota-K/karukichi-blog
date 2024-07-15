@@ -17,7 +17,7 @@ jobs:
         id: node-version
         run: cat .node-version | xargs -I {value} echo "NODE_VERSION={value}" >> $GITHUB_ENV
 
-  ci :
+  ci:
     runs-on: ubuntu-22.04
     needs: define-matrix
     strategy:
