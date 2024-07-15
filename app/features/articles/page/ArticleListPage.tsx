@@ -1,4 +1,4 @@
-import { Heading, Link } from '../../../components'
+import { PostList } from '../components'
 
 import type { Content } from '../../../types'
 
@@ -7,17 +7,5 @@ type Props = {
 }
 
 export const ArticleListPage = ({ contents }: Props) => {
-  return (
-    <div className="p-4 font-sans">
-      {contents.map((content) => (
-        <div key={content.id}>
-          <Link to={`/articles/${content.id}`}>
-            <Heading as="h2" size="lg">
-              {content.title}
-            </Heading>
-          </Link>
-        </div>
-      ))}
-    </div>
-  )
+  return <PostList contents={contents} />
 }
