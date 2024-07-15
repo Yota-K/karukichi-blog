@@ -1,0 +1,20 @@
+import { useLoaderData } from '@remix-run/react'
+
+import { tagLoader as loader } from '../.server'
+import { TagRelatedArticleListPage } from '../features'
+
+import type { HeadersFunction } from '@remix-run/cloudflare'
+
+export const headers: HeadersFunction = () => {
+  return {
+    'Cache-Control':
+      'max-age=0, s-maxage=604800, stale-while-revalidate=360, stale-if-error=86400',
+  }
+}
+
+export { loader }
+
+export default function Page() {
+  const { contents, tagName } = useLoaderData<typeof loader>()
+  return <TagRelatedArticleListPage contents={contents} tagName={tagName} />
+}
