@@ -4,25 +4,29 @@ on:
   pull_request:
     branches: [ main ]
 
-# https://github.com/pnpm/action-setup
 jobs:
-  define-matrix:
+  define-node-version:
     runs-on: ubuntu-22.04
-
     outputs:
-      node: ${{ steps.define-matrix.outputs.node-version }}
-
+      node-version: ${{ steps.define-node-version.outputs.node-version }}
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: Define Node version
-        id: node-version
-        run: cat .node-version | xargs -I {value} echo "NODE_VERSION={value}" >> $GITHUB_ENV
+        id: define-node-version
+        run: |
+          NODE_VERSION=$(cat .node-version)
+          echo "NODE_VERSION=$NODE_VERSION" >> $GITHUB_ENV
+        env:
+          NODE_VERSION: ${{ steps.define-node-version.outputs.node-version }}
 
   ci:
     runs-on: ubuntu-22.04
     needs: define-matrix
     strategy:
       matrix:
-        node-version: ${{ needs.define-matrix.outputs.node-version }}
+        node-version: ["${{ needs.define-matrix.outputs.node-version }}"]
 
     steps:
       - uses: actions/checkout@v4
