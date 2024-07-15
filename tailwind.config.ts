@@ -12,7 +12,8 @@ export default {
         blue: {
           headerBlue: '#39394d',
           primary: '#7180ea',
-          secondary: '#dbeafe',
+          secondary: '#331cbf',
+          tertiary: '#dbeafe',
         },
       },
     },
