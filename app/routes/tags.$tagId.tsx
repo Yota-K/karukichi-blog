@@ -1,9 +1,10 @@
 import { useLoaderData } from '@remix-run/react'
 
 import { tagLoader as loader } from '../.server'
+import { Config } from '../config'
 import { TagRelatedArticleListPage } from '../features'
 
-import type { HeadersFunction } from '@remix-run/cloudflare'
+import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare'
 
 export const headers: HeadersFunction = () => {
   return {
@@ -13,6 +14,10 @@ export const headers: HeadersFunction = () => {
 }
 
 export { loader }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [{ title: `${data?.tagName} | ${Config.siteTitle}` }]
+}
 
 export default function Page() {
   const { contents, tagName } = useLoaderData<typeof loader>()
