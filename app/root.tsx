@@ -8,12 +8,14 @@ import {
 import './tailwind.css'
 
 import { rootLoader as loader } from './.server'
+import { Config } from './config'
+import { AppFooter, AppHeader } from './features'
 
 import type { MetaFunction } from '@remix-run/cloudflare'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'カルキチブログ' },
+    { title: Config.siteTitle },
     {
       name: 'description',
       content:
@@ -34,7 +36,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <AppHeader />
         {children}
+        <AppFooter />
         <ScrollRestoration />
         <Scripts />
       </body>

@@ -20,7 +20,8 @@ export const getPosts = async (
     endpoint: endpoints.blogs,
     queries: {
       offset: queries?.offset ?? 0,
-      limit: queries?.limit ?? 5,
+      // 1ページあたりの取得件数は一旦20にしておく。
+      limit: queries?.limit ?? 20,
       filters: queries?.filters ?? undefined,
     },
   })

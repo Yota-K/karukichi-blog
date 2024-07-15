@@ -1,11 +1,9 @@
+import type { ReactNode } from 'react'
+
 type Props = {
-  siteTitle: string
+  children: ReactNode
 }
 
-export const Footer = ({ siteTitle }: Props) => {
-  return (
-    <footer className="p-4">
-      © 2020〜{new Date().getFullYear()} {siteTitle}
-    </footer>
-  )
+export const Footer = ({ children }: Props) => {
+  return <footer className="p-4">{children}</footer>
 }

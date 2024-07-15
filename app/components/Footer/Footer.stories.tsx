@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    siteTitle: 'カルキチのブログ',
+    // children: '© 2020〜2024 カルキチのブログ All rights reserved.',
+    children: '© 2020〜2024 site All rights reserved.',
   },
 }
