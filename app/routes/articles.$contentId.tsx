@@ -29,7 +29,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ]
 }
 
-export default function PostDetail() {
+export default function Page() {
   const content = useLoaderData<typeof loader>()
   return <ArticleDetailPage content={content} />
 }
