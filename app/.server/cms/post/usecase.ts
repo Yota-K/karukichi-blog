@@ -39,13 +39,11 @@ export const cmsUseCase = {
       filters: `tag_field[contains]${tagId}`,
     })
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId)
-    const tagName = findTag?.name
-    const tagSlug = findTag?.id
 
     return {
       posts,
-      tagName,
-      tagSlug,
+      tagName: findTag?.name,
+      tagSlug: findTag?.id,
     }
   },
 
