@@ -13,7 +13,6 @@ export const indexLoader = async ({
   TypedResponse<MicroCMSListResponse<Content>>
 > => {
   const url = new URL(request.url)
-  console.log(url)
   const pageQueryParams = url.searchParams.get('page')
 
   const { CMS_API_KEY } = context.cloudflare.env
