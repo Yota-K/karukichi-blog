@@ -7,8 +7,8 @@ export const cmsUseCase = {
   /**
    * 記事一覧を取得
    */
-  getPosts: async (client: ClientType, pageQuery: string | null) => {
-    const paginateNum = paginateSchema.safeParse(pageQuery)
+  getPosts: async (client: ClientType, pageQueryParams: string | null) => {
+    const paginateNum = paginateSchema.safeParse(pageQueryParams)
 
     if (paginateNum.success) {
       const offset = paginateNum.data * paginateLimit - paginateLimit
