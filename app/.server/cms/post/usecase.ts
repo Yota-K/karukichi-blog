@@ -1,15 +1,23 @@
-import { cmsApi } from './api'
+import { cmsApi, paginateLimit } from './api'
+import { paginateSchema } from './schema'
 
 import type { ClientType } from '../client'
-
-type GetPostsArgsTypes = Parameters<typeof cmsApi.getPosts>
 
 export const cmsUseCase = {
   /**
    * 記事一覧を取得
    */
-  getPosts: async (client: ClientType, queries?: GetPostsArgsTypes[1]) => {
-    return cmsApi.getPosts(client, queries)
+  getPosts: async (client: ClientType, pageQuery: string | null) => {
+    const paginateNum = paginateSchema.safeParse(pageQuery)
+
+    if (paginateNum.success) {
+      const offset = paginateNum.data * paginateLimit - paginateLimit
+      return cmsApi.getPosts(client, {
+        offset,
+      })
+    }
+
+    return cmsApi.getPosts(client)
   },
 
   /**
