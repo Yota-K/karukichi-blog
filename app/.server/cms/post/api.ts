@@ -6,8 +6,8 @@ import type { MicroCMSQueries } from 'microcms-js-sdk'
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
 
-// 1ページあたりの取得件数は一旦20にしておく。
-export const paginateLimit = 20 as const
+// 1ページあたりの取得件数は10にしておく。
+export const paginateLimit = 10 as const
 
 export const cmsApi = {
   /**

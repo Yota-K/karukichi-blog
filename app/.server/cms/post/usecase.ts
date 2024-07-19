@@ -23,8 +23,19 @@ export const cmsUseCase = {
   /**
    * タグに関連する記事一覧を取得
    */
-  getPostsByTag: async (client: ClientType, tagId: string) => {
+  getPostsByTag: async (
+    client: ClientType,
+    tagId: string,
+    pageQueryParams: string | null
+  ) => {
+    const paginateNum = paginateSchema.safeParse(pageQueryParams)
+    let offset: undefined | number = undefined
+    if (paginateNum.success) {
+      offset = paginateNum.data * paginateLimit - paginateLimit
+    }
+
     const posts = await cmsApi.getPosts(client, {
+      offset,
       filters: `tag_field[contains]${tagId}`,
     })
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId)

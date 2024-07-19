@@ -16,6 +16,7 @@ type LoaderResponse = Promise<
 >
 
 export const tagLoader = async ({
+  request,
   params,
   context,
 }: LoaderFunctionArgs): LoaderResponse => {
@@ -26,10 +27,14 @@ export const tagLoader = async ({
     })
   }
 
+  const url = new URL(request.url)
+  const pageQueryParams = url.searchParams.get('page')
+
   const { CMS_API_KEY } = context.cloudflare.env
   const { posts, tagName, tagSlug } = await cmsUseCase.getPostsByTag(
     client(CMS_API_KEY),
-    params.tagId
+    params.tagId,
+    pageQueryParams
   )
 
   return json({ ...posts, tagName, tagSlug })
