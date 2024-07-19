@@ -1,6 +1,6 @@
 import { json } from '@remix-run/cloudflare'
 
-import { client, getPosts } from '../../cms'
+import { client, cmsUseCase } from '../../cms'
 
 import type { Content } from '../../../types'
 import type { MicroCMSListResponse } from '../../cms'
@@ -12,7 +12,7 @@ export const indexLoader = async ({
   TypedResponse<MicroCMSListResponse<Content>>
 > => {
   const { CMS_API_KEY } = context.cloudflare.env
-  const posts = await getPosts(client(CMS_API_KEY))
+  const posts = await cmsUseCase.getPosts(client(CMS_API_KEY))
 
   return json({ ...posts })
 }
