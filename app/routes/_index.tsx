@@ -19,6 +19,12 @@ export const headers: HeadersFunction = () => {
 export { loader }
 
 export default function Page() {
-  const { contents } = useLoaderData<typeof loader>()
-  return <ArticleListPage contents={contents} />
+  const { contents, totalCount, paginateNum } = useLoaderData<typeof loader>()
+  return (
+    <ArticleListPage
+      contents={contents}
+      paginateNum={paginateNum}
+      totalCount={totalCount}
+    />
+  )
 }

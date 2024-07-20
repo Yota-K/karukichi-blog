@@ -1,7 +1,11 @@
-import { cmsApi, paginateLimit } from './api'
+import { Config } from '../../../config'
+
+import { cmsApi } from './api'
 import { paginateSchema } from './schema'
 
 import type { ClientType } from '../client'
+
+const { paginateLimit } = Config
 
 export const cmsUseCase = {
   /**
@@ -12,12 +16,21 @@ export const cmsUseCase = {
 
     if (paginateNum.success) {
       const offset = paginateNum.data * paginateLimit - paginateLimit
-      return cmsApi.getPosts(client, {
+      const posts = await cmsApi.getPosts(client, {
         offset,
       })
+
+      return {
+        posts,
+        paginateNum: paginateNum.data,
+      }
     }
 
-    return cmsApi.getPosts(client)
+    const posts = await cmsApi.getPosts(client)
+    return {
+      posts,
+      paginateNum: undefined,
+    }
   },
 
   /**

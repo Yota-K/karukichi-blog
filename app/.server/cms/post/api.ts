@@ -1,3 +1,4 @@
+import { Config } from '../../../config'
 import { endpoints } from '../endpoints'
 
 import type { Content } from '../../../types'
@@ -5,9 +6,6 @@ import type { ClientType } from '../client'
 import type { MicroCMSQueries } from 'microcms-js-sdk'
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
-
-// 1ページあたりの取得件数は10にしておく。
-export const paginateLimit = 10 as const
 
 export const cmsApi = {
   /**
@@ -18,7 +16,7 @@ export const cmsApi = {
       endpoint: endpoints.blogs,
       queries: {
         offset: queries?.offset ?? 0,
-        limit: queries?.limit ?? paginateLimit,
+        limit: queries?.limit ?? Config.paginateLimit,
         filters: queries?.filters ?? undefined,
       },
     })
