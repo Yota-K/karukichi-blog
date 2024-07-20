@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 
 import baseEslintConfig from './.eslint/base.mjs';
@@ -14,7 +13,6 @@ export default [
   },
 
   js.configs.recommended,
-  eslintConfigPrettier,
 
   {
     languageOptions: {
