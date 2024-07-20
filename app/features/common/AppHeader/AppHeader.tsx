@@ -1,5 +1,5 @@
-import { Heading, Link, Header as UiHeader } from '../../../components'
-import { Config } from '../../../config'
+import { Heading, Link, Header as UiHeader } from '../../../components';
+import { Config } from '../../../config';
 
 export const AppHeader = () => {
   return (
@@ -10,5 +10,5 @@ export const AppHeader = () => {
         </Heading>
       </Link>
     </UiHeader>
-  )
-}
+  );
+};

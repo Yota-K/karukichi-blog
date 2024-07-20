@@ -1,10 +1,10 @@
-import { Link } from '../Link'
+import { Link } from '../Link';
 
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<{
-  to: string
-}>
+  to: string;
+}>;
 
 export const Tag = ({ children, to }: Props) => {
   return (
@@ -14,5 +14,5 @@ export const Tag = ({ children, to }: Props) => {
     >
       {children}
     </Link>
-  )
-}
+  );
+};

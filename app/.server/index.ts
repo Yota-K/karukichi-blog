@@ -1,2 +1,2 @@
-export * from './cms'
-export * from './loaders'
+export * from './cms';
+export * from './loaders';

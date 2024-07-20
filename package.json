@@ -10,7 +10,7 @@
     "dev:remix": "remix vite:dev",
     "dev:storybook": "storybook dev -p 6006",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "format": "prettier --cache --write .",
+    "format": "biome check --write .",
     "start": "wrangler pages dev build/client",
     "type-check": "tsc --noEmit",
     "build-storybook": "storybook build",
@@ -28,6 +28,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@chromatic-com/storybook": "1.5.0",
     "@cloudflare/workers-types": "4.20240620.0",
     "@eslint/compat": "1.1.0",
@@ -50,7 +51,6 @@
     "concurrently": "8.2.2",
     "dependency-cruiser": "16.3.5",
     "eslint": "9.5.0",
-    "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-import": "2.28.1",
     "eslint-plugin-jsx-a11y": "6.7.1",
@@ -60,7 +60,6 @@
     "eslint-plugin-tailwindcss": "3.17.4",
     "globals": "15.6.0",
     "postcss": "8.4.38",
-    "prettier": "3.3.2",
     "storybook": "8.1.10",
     "storybook-addon-remix-react-router": "3.0.0",
     "tailwindcss": "3.4.4",
@@ -70,7 +69,7 @@
     "wrangler": "3.63.1"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903"
 }

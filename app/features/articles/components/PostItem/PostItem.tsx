@@ -1,11 +1,11 @@
-import { Heading, Link, Tag } from '../../../../components'
-import { dateFormat } from '../../../../utils'
+import { Heading, Link, Tag } from '../../../../components';
+import { dateFormat } from '../../../../utils';
 
-import type { Content } from '../../../../types'
+import type { Content } from '../../../../types';
 
 type Props = {
-  content: Content
-}
+  content: Content;
+};
 
 export const PostItem = ({ content }: Props) => {
   return (
@@ -29,5 +29,5 @@ export const PostItem = ({ content }: Props) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

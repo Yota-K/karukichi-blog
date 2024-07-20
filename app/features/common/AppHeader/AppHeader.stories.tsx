@@ -1,6 +1,6 @@
-import { AppHeader } from '.'
+import { AppHeader } from '.';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'features/common/AppHeader',
@@ -8,9 +8,9 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof AppHeader>
+} satisfies Meta<typeof AppHeader>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};

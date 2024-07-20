@@ -1,11 +1,11 @@
-import { Config } from '../../../config'
-import { endpoints } from '../endpoints'
+import { Config } from '../../../config';
+import { endpoints } from '../endpoints';
 
-import type { Content } from '../../../types'
-import type { ClientType } from '../client'
-import type { MicroCMSQueries } from 'microcms-js-sdk'
+import type { Content } from '../../../types';
+import type { ClientType } from '../client';
+import type { MicroCMSQueries } from 'microcms-js-sdk';
 
-type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>
+type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters'>;
 
 export const cmsApi = {
   /**
@@ -19,9 +19,9 @@ export const cmsApi = {
         limit: queries?.limit ?? Config.paginateLimit,
         filters: queries?.filters ?? undefined,
       },
-    })
+    });
 
-    return data
+    return data;
   },
 
   /**
@@ -31,8 +31,8 @@ export const cmsApi = {
     const data = await client.get<Content>({
       endpoint: endpoints.blogs,
       contentId,
-    })
+    });
 
-    return data
+    return data;
   },
-}
+};

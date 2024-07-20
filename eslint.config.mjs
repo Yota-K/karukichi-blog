@@ -1,26 +1,18 @@
-import js from '@eslint/js'
-import eslintConfigPrettier from 'eslint-config-prettier'
-import globals from 'globals'
+import js from '@eslint/js';
+import globals from 'globals';
 
-import baseEslintConfig from './.eslint/base.mjs'
-import nodeEslintConfig from './.eslint/node.mjs'
-import reactEslintConfig from './.eslint/react.mjs'
-import tsEslintConfig from './.eslint/typescript.mjs'
+import baseEslintConfig from './.eslint/base.mjs';
+import nodeEslintConfig from './.eslint/node.mjs';
+import reactEslintConfig from './.eslint/react.mjs';
+import tsEslintConfig from './.eslint/typescript.mjs';
 
 /** @type { import("eslint").Linter.FlatConfig[] } */
 export default [
   {
-    ignores: [
-      '!**/.server',
-      '!**/.client',
-      '**/node_modules/',
-      '**/*.md',
-      '!.storybook',
-    ],
+    ignores: ['!**/.server', '!**/.client', '**/node_modules/', '**/*.md', '!.storybook'],
   },
 
   js.configs.recommended,
-  eslintConfigPrettier,
 
   {
     languageOptions: {
@@ -44,4 +36,4 @@ export default [
   ...tsEslintConfig,
   ...reactEslintConfig,
   ...nodeEslintConfig,
-]
+];
