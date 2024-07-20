@@ -11,6 +11,7 @@ type LoaderResponse = Promise<
     MicroCMSListResponse<Content> & {
       tagName: string | undefined
       tagSlug: string | undefined
+      paginateNum: number | undefined
     }
   >
 >
@@ -31,11 +32,12 @@ export const tagLoader = async ({
   const pageQueryParams = url.searchParams.get('page')
 
   const { CMS_API_KEY } = context.cloudflare.env
-  const { posts, tagName, tagSlug } = await cmsUseCase.getPostsByTag(
-    client(CMS_API_KEY),
-    params.tagId,
-    pageQueryParams
-  )
+  const { posts, tagName, tagSlug, paginateNum } =
+    await cmsUseCase.getPostsByTag(
+      client(CMS_API_KEY),
+      params.tagId,
+      pageQueryParams
+    )
 
-  return json({ ...posts, tagName, tagSlug })
+  return json({ ...posts, tagName, tagSlug, paginateNum })
 }

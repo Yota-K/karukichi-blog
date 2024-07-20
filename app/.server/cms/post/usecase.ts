@@ -57,6 +57,7 @@ export const cmsUseCase = {
       posts,
       tagName: findTag?.name,
       tagSlug: findTag?.id,
+      paginateNum: paginateNum.data,
     }
   },
 
