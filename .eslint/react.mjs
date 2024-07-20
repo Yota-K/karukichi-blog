@@ -1,9 +1,9 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
-import { FlatCompat } from '@eslint/eslintrc'
-import jsxA11YPlugin from 'eslint-plugin-jsx-a11y'
-import reactPlugin from 'eslint-plugin-react'
+import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import jsxA11YPlugin from 'eslint-plugin-jsx-a11y';
+import reactPlugin from 'eslint-plugin-react';
 
-const compat = new FlatCompat()
+const compat = new FlatCompat();
 
 /** @type { import("eslint").Linter.FlatConfig[] } */
 const config = [
@@ -12,8 +12,8 @@ const config = [
       'plugin:react/recommended',
       'plugin:react/jsx-runtime',
       'plugin:react-hooks/recommended',
-      'plugin:jsx-a11y/recommended'
-    )
+      'plugin:jsx-a11y/recommended',
+    ),
   ).map((config) => ({
     ...config,
     files: ['**/*.{ts,tsx}'],
@@ -47,12 +47,10 @@ const config = [
   },
 
   // storybookのESLintのルールは拡張子が.stories.tsxファイルのみに適用したいので別で定義
-  ...fixupConfigRules(compat.extends('plugin:storybook/recommended')).map(
-    (config) => ({
-      ...config,
-      files: ['**/*.stories.tsx'],
-    })
-  ),
-]
+  ...fixupConfigRules(compat.extends('plugin:storybook/recommended')).map((config) => ({
+    ...config,
+    files: ['**/*.stories.tsx'],
+  })),
+];
 
-export default config
+export default config;

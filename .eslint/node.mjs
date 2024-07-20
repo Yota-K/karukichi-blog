@@ -1,4 +1,4 @@
-import globals from 'globals'
+import globals from 'globals';
 
 /** @type { import("eslint").Linter.FlatConfig[] } */
 const config = [
@@ -10,6 +10,6 @@ const config = [
       },
     },
   },
-]
+];
 
-export default config
+export default config;

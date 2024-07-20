@@ -1,5 +1,5 @@
-import { Text, Footer as UiFooter } from '../../../components'
-import { Config } from '../../../config'
+import { Text, Footer as UiFooter } from '../../../components';
+import { Config } from '../../../config';
 
 export const AppFooter = () => {
   return (
@@ -8,5 +8,5 @@ export const AppFooter = () => {
         © 2020 〜{new Date().getFullYear()} {Config.siteTitle}
       </Text>
     </UiFooter>
-  )
-}
+  );
+};

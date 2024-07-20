@@ -1,20 +1,18 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
-import { FlatCompat } from '@eslint/eslintrc'
-import importPlugin from 'eslint-plugin-import'
-import tailwind from "eslint-plugin-tailwindcss";
+import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import importPlugin from 'eslint-plugin-import';
+import tailwind from 'eslint-plugin-tailwindcss';
 
-const compat = new FlatCompat()
+const compat = new FlatCompat();
 
 /** @type { import("eslint").Linter.FlatConfig[] } */
 const config = [
-  ...fixupConfigRules(compat.extends('plugin:import/recommended')).map(
-    (config) => ({
-      ...config,
-      files: ['**/*.{js,ts,tsx}'],
-    })
-  ),
+  ...fixupConfigRules(compat.extends('plugin:import/recommended')).map((config) => ({
+    ...config,
+    files: ['**/*.{js,ts,tsx}'],
+  })),
 
-  ...tailwind.configs["flat/recommended"],
+  ...tailwind.configs['flat/recommended'],
 
   {
     plugins: {
@@ -42,23 +40,11 @@ const config = [
           allow: ['warn', 'error'],
         },
       ],
-      'sort-imports': [
-        'error',
-        { ignoreCase: true, ignoreDeclarationSort: true },
-      ],
+      'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
           alphabetize: {
             order: 'asc',
             caseInsensitive: true,
@@ -71,16 +57,11 @@ const config = [
         'error',
         {
           // 許可しないとキツいものは追加していく。
-          allow: [
-            'react-dom/client',
-            'react-dom/server',
-            '**/.eslint/*.mjs',
-            '**/app/*.css',
-          ],
+          allow: ['react-dom/client', 'react-dom/server', '**/.eslint/*.mjs', '**/app/*.css'],
         },
       ],
     },
   },
-]
+];
 
-export default config
+export default config;

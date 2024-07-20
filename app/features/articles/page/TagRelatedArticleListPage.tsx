@@ -1,22 +1,17 @@
-import { Heading, Pagination } from '../../../components'
-import { PostList } from '../components'
+import { Heading, Pagination } from '../../../components';
+import { PostList } from '../components';
 
-import type { Content } from '../../../types'
-import type { ComponentProps } from 'react'
+import type { Content } from '../../../types';
+import type { ComponentProps } from 'react';
 
 type Props = {
-  contents: Content[]
-  tagName?: string
-  paginateNum: ComponentProps<typeof Pagination>['paginateNum']
-  totalCount: ComponentProps<typeof Pagination>['totalCount']
-}
+  contents: Content[];
+  tagName?: string;
+  paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
+  totalCount: ComponentProps<typeof Pagination>['totalCount'];
+};
 
-export const TagRelatedArticleListPage = ({
-  contents,
-  tagName,
-  paginateNum,
-  totalCount,
-}: Props) => {
+export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount }: Props) => {
   return (
     <>
       {tagName && (
@@ -32,5 +27,5 @@ export const TagRelatedArticleListPage = ({
       <PostList contents={contents} />
       <Pagination paginateNum={paginateNum} totalCount={totalCount} />
     </>
-  )
-}
+  );
+};

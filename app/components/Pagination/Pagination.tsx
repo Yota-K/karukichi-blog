@@ -1,10 +1,10 @@
-import { Config } from '../../config'
-import { Link } from '../Link'
+import { Config } from '../../config';
+import { Link } from '../Link';
 
 type PaginationItemProps = {
-  linkTo: number
-  type: 'prev' | 'next'
-}
+  linkTo: number;
+  type: 'prev' | 'next';
+};
 const PaginationItem = ({ linkTo, type }: PaginationItemProps) => {
   return (
     <Link
@@ -15,13 +15,13 @@ const PaginationItem = ({ linkTo, type }: PaginationItemProps) => {
     >
       {type === 'prev' ? '<< Prev' : 'Next >>'}
     </Link>
-  )
-}
+  );
+};
 
 type Props = {
-  paginateNum: number | undefined
-  totalCount: number
-}
+  paginateNum: number | undefined;
+  totalCount: number;
+};
 
 const InnerPagination = ({ paginateNum, totalCount }: Props) => {
   if (!paginateNum || paginateNum === 1) {
@@ -29,17 +29,17 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
       <div className="flex justify-end">
         <PaginationItem linkTo={2} type="next" />
       </div>
-    )
+    );
   }
 
-  const totalPaginateNum = Math.ceil(totalCount / Config.paginateLimit)
+  const totalPaginateNum = Math.ceil(totalCount / Config.paginateLimit);
 
   if (paginateNum === totalPaginateNum) {
     return (
       <div className="flex justify-start">
         <PaginationItem linkTo={paginateNum - 1} type="prev" />
       </div>
-    )
+    );
   }
 
   return (
@@ -47,13 +47,13 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
       <PaginationItem linkTo={paginateNum - 1} type="prev" />
       <PaginationItem linkTo={paginateNum + 1} type="next" />
     </div>
-  )
-}
+  );
+};
 
 export const Pagination = ({ paginateNum, totalCount }: Props) => {
   return (
     <div className="mt-8">
       <InnerPagination paginateNum={paginateNum} totalCount={totalCount} />
     </div>
-  )
-}
+  );
+};

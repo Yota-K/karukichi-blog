@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export const Header = ({ children }: Props) => {
-  return <header className="bg-blue-headerBlue p-4">{children}</header>
-}
+  return <header className="bg-blue-headerBlue p-4">{children}</header>;
+};

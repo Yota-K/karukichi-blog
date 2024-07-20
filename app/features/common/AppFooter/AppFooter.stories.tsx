@@ -1,6 +1,6 @@
-import { AppFooter } from '.'
+import { AppFooter } from '.';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'features/common/AppFooter',
@@ -8,9 +8,9 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof AppFooter>
+} satisfies Meta<typeof AppFooter>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};

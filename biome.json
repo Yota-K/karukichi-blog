@@ -6,5 +6,11 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "lineWidth": 120
+    }
   }
 }

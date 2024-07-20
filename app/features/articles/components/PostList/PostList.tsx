@@ -1,10 +1,10 @@
-import { PostItem } from '../PostItem'
+import { PostItem } from '../PostItem';
 
-import type { Content } from '../../../../types'
+import type { Content } from '../../../../types';
 
 type Props = {
-  contents: Content[]
-}
+  contents: Content[];
+};
 
 export const PostList = ({ contents }: Props) => {
   return (
@@ -13,5 +13,5 @@ export const PostList = ({ contents }: Props) => {
         <PostItem key={content.id} content={content} />
       ))}
     </div>
-  )
-}
+  );
+};

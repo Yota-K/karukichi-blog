@@ -1,11 +1,8 @@
 // Remix の開発サーバーを起動するとき、Node.jsランタイムではなく
 // Cloudflare ランタイムをシミュレートするプラグインを追加する。
-import {
-  vitePlugin as remix,
-  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
-} from '@remix-run/dev'
-import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import { vitePlugin as remix, cloudflareDevProxyVitePlugin as remixCloudflareDevProxy } from '@remix-run/dev';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
@@ -19,4 +16,4 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
-})
+});

@@ -1,8 +1,8 @@
-import { Heading } from '../Heading'
+import { Heading } from '../Heading';
 
-import { Header } from './Header'
+import { Header } from './Header';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'components/Header',
@@ -10,10 +10,10 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Header>
+} satisfies Meta<typeof Header>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -23,4 +23,4 @@ export const Default: Story = {
       </Heading>
     ),
   },
-}
+};

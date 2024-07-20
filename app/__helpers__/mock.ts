@@ -1,4 +1,4 @@
-import type { Content } from '../types'
+import type { Content } from '../types';
 
 export const contentsMock: Content[] = [
   {
@@ -229,6 +229,6 @@ export const contentsMock: Content[] = [
       },
     ],
   },
-]
+];
 
-export const contentMock = contentsMock[0]
+export const contentMock = contentsMock[0];
