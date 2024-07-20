@@ -1,4 +1,5 @@
 import { Heading } from '../../../components';
+import { ContentBody } from '../components';
 
 import type { Content } from '../../../types';
 import type { SerializeFrom } from '@remix-run/cloudflare';
@@ -10,8 +11,10 @@ type Props = {
 export const ArticleDetailPage = ({ content }: Props) => {
   return (
     <div>
-      <Heading as="h1">{content.title}</Heading>
-      <div dangerouslySetInnerHTML={{ __html: content.body }} />
+      <Heading as="h1" size="xl">
+        {content.title}
+      </Heading>
+      <ContentBody body={content.body} />
     </div>
   );
 };

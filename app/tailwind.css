@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 記事ページ用のcss */
+@layer components {
+  .content {
+    @apply break-all mt-6;
+  }
+  .content h1 {
+    @apply text-3xl font-bold;
+  }
+  .content h2 {
+    @apply text-2xl font-bold my-4;
+  }
+  .content h3 {
+    @apply text-xl font-bold my-4;
+  }
+  .content img {
+    @apply max-w-full h-auto my-4 shadow-md;
+  }
+  .content ul,
+  ol {
+    @apply list-disc list-inside py-4 border-solid border-2 border-pink-300 bg-yellow-50 p-2 my-4;
+  }
+  .content a {
+    @apply text-blue-secondary hover:underline;
+  }
+}

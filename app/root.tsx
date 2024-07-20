@@ -30,7 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <AppHeader />
-        <div className="my-8 md:container md:mx-auto">{children}</div>
+        <div className="my-8 px-4 md:container md:mx-auto">{children}</div>
         <AppFooter />
         <ScrollRestoration />
         <Scripts />
