@@ -1,24 +1,26 @@
 import { json } from '@remix-run/cloudflare'
 
-import { client, getPosts } from '../../cms'
+import { client, cmsUseCase } from '../../cms'
 
 import type { Content } from '../../../types'
 import type { MicroCMSListResponse } from '../../cms'
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare'
 
-type LoaderRespose = Promise<
+type LoaderResponse = Promise<
   TypedResponse<
     MicroCMSListResponse<Content> & {
       tagName: string | undefined
       tagSlug: string | undefined
+      paginateNum: number | undefined
     }
   >
 >
 
 export const tagLoader = async ({
+  request,
   params,
   context,
-}: LoaderFunctionArgs): LoaderRespose => {
+}: LoaderFunctionArgs): LoaderResponse => {
   if (!params.tagId) {
     throw new Response(null, {
       status: 404,
@@ -26,17 +28,16 @@ export const tagLoader = async ({
     })
   }
 
+  const url = new URL(request.url)
+  const pageQueryParams = url.searchParams.get('page')
+
   const { CMS_API_KEY } = context.cloudflare.env
-  const posts = await getPosts(client(CMS_API_KEY), {
-    filters: `tag_field[contains]${params.tagId}`,
-  })
+  const { posts, tagName, tagSlug, paginateNum } =
+    await cmsUseCase.getPostsByTag(
+      client(CMS_API_KEY),
+      params.tagId,
+      pageQueryParams
+    )
 
-  // TODO: ビジネスロジックなので、ページネーション実装する時に追加するサービス層に移動する
-  const findTag = posts.contents[0].tag_field.find(
-    (tag) => tag.id === params.tagId
-  )
-  const tagName = findTag?.name
-  const tagSlug = findTag?.id
-
-  return json({ ...posts, tagName, tagSlug })
+  return json({ ...posts, tagName, tagSlug, paginateNum })
 }

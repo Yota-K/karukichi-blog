@@ -1,6 +1,6 @@
 import { json } from '@remix-run/cloudflare'
 
-import { client, findPost } from '../../cms'
+import { client, cmsUseCase } from '../../cms'
 
 import type { Content } from '../../../types'
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare'
@@ -18,7 +18,7 @@ export const postDetailLoader = async ({
   }
 
   const { CMS_API_KEY } = context.cloudflare.env
-  const post = await findPost(client(CMS_API_KEY), params.contentId)
+  const post = await cmsUseCase.findPost(client(CMS_API_KEY), params.contentId)
 
   return json({ ...post })
 }
