@@ -4,7 +4,6 @@ import { PostList } from '../components'
 import type { Content } from '../../../types'
 import type { ComponentProps } from 'react'
 
-
 type Props = {
   contents: Content[]
   paginateNum: ComponentProps<typeof Pagination>['paginateNum']
