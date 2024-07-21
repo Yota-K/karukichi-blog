@@ -13,7 +13,7 @@ type Props = {
 
 export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount }: Props) => {
   return (
-    <>
+    <div>
       {tagName && (
         <div className="mb-8 flex justify-between">
           <Heading as="h1" size="lg">
@@ -26,6 +26,6 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
       )}
       <PostList contents={contents} />
       <Pagination paginateNum={paginateNum} totalCount={totalCount} />
-    </>
+    </div>
   );
 };
