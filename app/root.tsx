@@ -3,7 +3,7 @@ import './tailwind.css';
 
 import { rootLoader as loader } from './.server';
 import { Config } from './config';
-import { AppFooter, AppHeader } from './features';
+import { AppFooter, AppHeader } from './widgets';
 
 import type { MetaFunction } from '@remix-run/cloudflare';
 

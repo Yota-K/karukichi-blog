@@ -1,5 +1,5 @@
-import { Text, Footer as UiFooter } from '../../../components';
-import { Config } from '../../../config';
+import { Text, Footer as UiFooter } from '../../components';
+import { Config } from '../../config';
 
 export const AppFooter = () => {
   return (
