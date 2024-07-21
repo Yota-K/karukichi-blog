@@ -13,7 +13,7 @@ export const contentsMock: Content[] = [
       height: 360,
       width: 640,
     },
-    body: '<p>test</p>',
+    body: '<h2>heading</h2><p>テキストテキストテキストテキストテキストテキストテキストテキストテキスト。<br />テキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p><ul><li>テキストテキストテキスト</li><li>テキストテキストテキスト</li><li>テキストテキストテキスト</li></ul><p>テキストテキストテキストテキストテキストテキストテキストテキストテキスト</p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">職場の近くのハンバーガー屋さん美味しかった <a href="https://t.co/7wXHx5jtyG">pic.twitter.com/7wXHx5jtyG</a></p>&mdash; カルキチ 副島｜Karukichi Soejima (@karukichi_yah) <a href="https://twitter.com/karukichi_yah/status/1397426456771268608?ref_src=twsrc%5Etfw">May 26, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><h3>sub heading</h3><img src="https://placehold.jp/768x500.png" alt="image" /><p>test</p>',
     description: 'text text text text text text',
     category_field: {
       id: 'others',
@@ -34,25 +34,24 @@ export const contentsMock: Content[] = [
     },
     tag_field: [
       {
-        id: 'everyday',
+        id: 'javascript',
         createdAt: '2020-04-30T07:01:21.936Z',
         updatedAt: '2023-12-30T16:49:34.476Z',
-        name: '日常',
+        name: 'JavaScript',
         posts: [
           {
-            id: 'first-blog',
+            id: 'test',
           },
+        ],
+      },
+      {
+        id: 'react',
+        createdAt: '2020-04-30T07:01:21.936Z',
+        updatedAt: '2023-12-30T16:49:34.476Z',
+        name: 'React',
+        posts: [
           {
-            id: 'concentration',
-          },
-          {
-            id: '2021-look-back',
-          },
-          {
-            id: 'japan-it-week-autumn-2022',
-          },
-          {
-            id: 'looking-back-2023',
+            id: 'test',
           },
         ],
       },

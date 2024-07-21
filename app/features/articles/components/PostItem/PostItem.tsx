@@ -1,5 +1,6 @@
-import { Heading, Link, Tag } from '../../../../components';
+import { Heading, Link } from '../../../../components';
 import { dateFormat } from '../../../../utils';
+import { TagArea } from '../TagArea';
 
 import type { Content } from '../../../../types';
 
@@ -21,13 +22,7 @@ export const PostItem = ({ content }: Props) => {
           {content.title}
         </Heading>
       </Link>
-      <div className="mt-2 flex gap-2">
-        {content.tag_field.map((tag) => (
-          <Tag key={tag.id} to={`/tags/${tag.id}`}>
-            {tag.name}
-          </Tag>
-        ))}
-      </div>
+      <TagArea tagField={content.tag_field} />
     </div>
   );
 };

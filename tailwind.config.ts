@@ -5,7 +5,12 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '16px',
+      padding: {
+        md: '2rem',
+      },
+      screens: {
+        '2xl': '768px',
+      },
     },
     extend: {
       colors: {

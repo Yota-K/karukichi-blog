@@ -12,9 +12,9 @@ type Props = {
 
 export const ArticleListPage = ({ contents, paginateNum, totalCount }: Props) => {
   return (
-    <>
+    <div>
       <PostList contents={contents} />
       <Pagination paginateNum={paginateNum} totalCount={totalCount} />
-    </>
+    </div>
   );
 };
