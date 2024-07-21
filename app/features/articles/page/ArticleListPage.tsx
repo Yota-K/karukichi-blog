@@ -12,11 +12,14 @@ type Props = {
 };
 
 export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Props) => {
+  const isFirstPage = !paginateNum || paginateNum === 1;
   return (
     <div>
-      <div className="mb-8">
-        <TagArea tagField={tags} />
-      </div>
+      {isFirstPage && (
+        <div className="mb-8">
+          <TagArea tagField={tags} />
+        </div>
+      )}
       <PostList contents={contents} />
       <Pagination paginateNum={paginateNum} totalCount={totalCount} />
     </div>
