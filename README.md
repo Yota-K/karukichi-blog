@@ -1,3 +1,25 @@
-# カルキチブログ
+# karukichi blog
 
-技術ブログ
+This is my tech blog.
+
+## Directory
+
+```
+.
+├── .server
+│  ├── cms
+│  ├── env
+│  └── loaders
+├── __helpers__
+├── components
+├── config
+├── entry.client.tsx
+├── entry.server.tsx
+├── features
+├── root.tsx
+├── routes
+├── tailwind.css
+├── types
+├── utils
+└── widgets
+```
