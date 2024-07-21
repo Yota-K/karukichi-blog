@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react';
 
-import { tagLoader as loader } from '../.server';
+import { tagRelatedArticleLoader as loader } from '../.server';
 import { Config } from '../config';
 import { TagRelatedArticleListPage } from '../features';
 

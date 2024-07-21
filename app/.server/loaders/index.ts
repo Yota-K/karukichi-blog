@@ -1,4 +1,4 @@
+export * from './articleDetailLoader';
 export * from './indexLoader';
-export * from './postDetailLoader';
 export * from './rootLoader';
-export * from './tagLoader';
+export * from './tagRelatedArticleLoader';

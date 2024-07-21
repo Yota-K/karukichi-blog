@@ -5,7 +5,7 @@ import { client, cmsUseCase } from '../../cms';
 import type { Content } from '../../../types';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
-export const postDetailLoader = async ({ params, context }: LoaderFunctionArgs): Promise<TypedResponse<Content>> => {
+export const articleDetailLoader = async ({ params, context }: LoaderFunctionArgs): Promise<TypedResponse<Content>> => {
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
   if (!params.contentId) {
     throw new Response(null, {

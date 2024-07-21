@@ -16,7 +16,7 @@ type LoaderResponse = Promise<
   >
 >;
 
-export const tagLoader = async ({ request, params, context }: LoaderFunctionArgs): LoaderResponse => {
+export const tagRelatedArticleLoader = async ({ request, params, context }: LoaderFunctionArgs): LoaderResponse => {
   if (!params.tagId) {
     throw new Response(null, {
       status: 404,

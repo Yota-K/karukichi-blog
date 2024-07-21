@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react';
 
-import { postDetailLoader as loader } from '../.server';
+import { articleDetailLoader as loader } from '../.server';
 import { Config } from '../config';
 import { ArticleDetailPage } from '../features';
 
