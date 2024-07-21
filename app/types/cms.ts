@@ -6,7 +6,7 @@ export type Common<T> = {
   revisedAt: string;
 } & T;
 
-type TaxonomyField = {
+export type TaxonomyField = {
   id: string;
   createdAt: string;
   updatedAt: string;

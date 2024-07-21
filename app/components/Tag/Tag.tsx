@@ -10,7 +10,7 @@ export const Tag = ({ children, to }: Props) => {
   return (
     <Link
       to={to}
-      className="rounded-lg border border-blue-primary px-2 py-1 leading-none text-blue-primary transition-colors hover:bg-blue-primary hover:text-white"
+      className="inline-block rounded-lg border border-blue-primary px-2 py-1 leading-none text-blue-primary transition-colors hover:bg-blue-primary hover:text-white"
     >
       {children}
     </Link>

@@ -63,4 +63,11 @@ export const cmsUseCase = {
   findPost: async (client: ClientType, contentId: string) => {
     return cmsApi.findPost(client, contentId);
   },
+
+  /**
+   * タグ一覧を取得
+   */
+  getTags: async (client: ClientType) => {
+    return cmsApi.getTags(client);
+  },
 };

@@ -22,7 +22,9 @@ export const PostItem = ({ content }: Props) => {
           {content.title}
         </Heading>
       </Link>
-      <TagArea tagField={content.tag_field} />
+      <div className="mt-2">
+        <TagArea tagField={content.tag_field} />
+      </div>
     </div>
   );
 };
