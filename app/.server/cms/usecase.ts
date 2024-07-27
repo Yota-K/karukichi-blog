@@ -1,9 +1,9 @@
-import { Config } from '../../../config';
+import { Config } from '../../config';
 
 import { cmsApi } from './api';
 import { paginateSchema } from './schema';
 
-import type { ClientType } from '../client';
+import type { ClientType } from './client';
 
 const { paginateLimit } = Config;
 

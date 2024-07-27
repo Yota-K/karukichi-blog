@@ -1,9 +1,14 @@
-import { Config } from '../../../config';
-import { endpoints } from '../endpoints';
+import { Config } from '../../config';
 
-import type { Content, TaxonomyField } from '../../../types';
-import type { ClientType } from '../client';
+import type { ClientType } from './client';
+import type { Content, TaxonomyField } from '../../types';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
+
+export const endpoints = {
+  blogs: 'blogs',
+  category: 'category',
+  tags: 'tags',
+} as const;
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
 

@@ -1,2 +1,2 @@
-export * from './post';
+export * from './usecase';
 export * from './client';
