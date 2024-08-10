@@ -1,5 +1,3 @@
-// TODO: ignoreする
-// eslint-disable-next-line import/no-internal-modules
 import LogoImage from '../../../../public/icon.png';
 import { Heading, Text } from '../../../components';
 
