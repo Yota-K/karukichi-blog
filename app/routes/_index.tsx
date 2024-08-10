@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react';
 
 import { indexLoader as loader } from '../.server';
-import { ArticleListPage } from '../features';
+import { ArticleListPage } from '../page';
 
 import type { HeadersFunction } from '@remix-run/cloudflare';
 

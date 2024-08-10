@@ -1,7 +1,7 @@
-import { Heading, Pagination } from '../../../components';
-import { PostList } from '../components';
+import { Heading, Pagination } from '../components';
+import { PostList } from '../features';
 
-import type { Content } from '../../../types';
+import type { Content } from '../types';
 import type { ComponentProps } from 'react';
 
 type Props = {
@@ -15,7 +15,7 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
   return (
     <div>
       {tagName && (
-        <div className="mb-8 flex justify-between">
+        <div className="mb-4 flex justify-between">
           <Heading as="h1" size="lg">
             {tagName}
           </Heading>
@@ -24,8 +24,10 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
           </Heading>
         </div>
       )}
-      <PostList contents={contents} />
-      <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+      <section>
+        <PostList contents={contents} />
+        <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+      </section>
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import { contentsMock } from '../../../../__helpers__';
+import { contentsMock } from '../../../__helpers__';
 
 import { PostList } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'features/articles/components/PostList',
+  title: 'features/articles/PostList',
   component: PostList,
 } satisfies Meta<typeof PostList>;
 

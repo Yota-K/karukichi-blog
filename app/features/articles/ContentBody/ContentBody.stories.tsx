@@ -1,11 +1,11 @@
-import { contentMock } from '../../../../__helpers__';
+import { contentMock } from '../../../__helpers__';
 
 import { ContentBody } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'features/articles/components/ContentBody',
+  title: 'features/articles/ContentBody',
   component: ContentBody,
 } satisfies Meta<typeof ContentBody>;
 

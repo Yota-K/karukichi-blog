@@ -2,7 +2,7 @@ import { useLoaderData } from '@remix-run/react';
 
 import { articleDetailLoader as loader } from '../.server';
 import { Config } from '../config';
-import { ArticleDetailPage } from '../features';
+import { ArticleDetailPage } from '../page';
 
 import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
 

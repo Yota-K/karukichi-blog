@@ -2,7 +2,7 @@ import { useLoaderData } from '@remix-run/react';
 
 import { tagRelatedArticleLoader as loader } from '../.server';
 import { Config } from '../config';
-import { TagRelatedArticleListPage } from '../features';
+import { TagRelatedArticleListPage } from '../page';
 
 import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
 

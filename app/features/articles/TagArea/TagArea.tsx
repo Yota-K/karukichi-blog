@@ -1,6 +1,6 @@
-import { Tag } from '../../../../components';
+import { Tag } from '../../../components';
 
-import type { TaxonomyField } from '../../../../types';
+import type { TaxonomyField } from '../../../types';
 
 // idとnameのみ必須にする
 // TODO: 記事一覧を取得するときもidとnameのみ取得できるようにできれば、もっとシンプルに翔琉

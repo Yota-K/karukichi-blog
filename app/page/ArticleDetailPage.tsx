@@ -1,8 +1,8 @@
-import { Heading } from '../../../components';
-import { dateFormat } from '../../../utils';
-import { ContentBody, TagArea } from '../components';
+import { Heading } from '../components';
+import { ContentBody, TagArea } from '../features';
+import { dateFormat } from '../utils';
 
-import type { Content } from '../../../types';
+import type { Content } from '../types';
 import type { SerializeFrom } from '@remix-run/cloudflare';
 
 type Props = {

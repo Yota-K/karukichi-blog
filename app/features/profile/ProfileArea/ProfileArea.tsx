@@ -6,10 +6,10 @@ import { Heading, Text } from '../../../components';
 export const ProfileArea = () => {
   return (
     <section>
-      <Heading as="h1" size="lg">
+      <Heading as="h2" size="lg" className="mb-4">
         Profile
       </Heading>
-      <div className="mt-4 flex justify-between">
+      <div className="flex justify-between">
         <div>
           <Text>東京都で活動するウェブ開発者です。</Text>
         </div>
