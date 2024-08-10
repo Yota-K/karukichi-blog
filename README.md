@@ -16,6 +16,7 @@ This is my tech blog.
 ├── entry.client.tsx
 ├── entry.server.tsx
 ├── features
+├── page
 ├── root.tsx
 ├── routes
 ├── tailwind.css

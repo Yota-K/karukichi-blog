@@ -1,11 +1,11 @@
-import { contentsMock } from '../../../../__helpers__';
+import { contentsMock } from '../../../__helpers__';
 
 import { TagArea } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'features/articles/components/TagArea',
+  title: 'features/articles/TagArea',
   component: TagArea,
 } satisfies Meta<typeof TagArea>;
 

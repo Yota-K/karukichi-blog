@@ -57,7 +57,7 @@ const config = [
         'error',
         {
           // 許可しないとキツいものは追加していく。
-          allow: ['react-dom/client', 'react-dom/server', '**/.eslint/*.mjs', '**/app/*.css'],
+          allow: ['react-dom/client', 'react-dom/server', '**/.eslint/*.mjs', '**/app/*.css', '**/public/**'],
         },
       ],
     },
