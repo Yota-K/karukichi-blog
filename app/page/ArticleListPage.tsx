@@ -15,7 +15,7 @@ export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Pro
   const isFirstPage = !paginateNum || paginateNum === 1;
   return (
     <div>
-      <ProfileArea />
+      {isFirstPage && <ProfileArea />}
       <section>
         <Heading as="h2" size="lg" className="mb-4">
           Posts
