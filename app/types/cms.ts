@@ -24,6 +24,7 @@ export type Content = Common<{
     width: number;
   };
   body: string;
+  type: 'cms' | 'qiita';
   description: string;
   category_field: TaxonomyField;
   tag_field: TaxonomyField[];
