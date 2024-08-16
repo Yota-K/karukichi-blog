@@ -7,6 +7,7 @@ import { cmsApi } from './api';
 import { paginateSchema } from './schema';
 
 import type { ClientType } from './client';
+import type { Toc } from '../../types';
 
 const { paginateLimit } = Config;
 
@@ -74,9 +75,18 @@ export const cmsUseCase = {
       $(elm).addClass('hljs');
     });
 
+    // 目次の生成
+    const headings = $('h2, h3').toArray();
+    const toc: Toc[] = headings.map((data) => ({
+      id: data.attribs.id,
+      tagName: data.name,
+      text: $(data).text(),
+    }));
+
     return {
       ...post,
       body: $.html(),
+      toc,
     };
   },
 
