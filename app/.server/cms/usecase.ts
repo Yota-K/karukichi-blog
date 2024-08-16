@@ -1,3 +1,6 @@
+import * as cheerio from 'cheerio';
+import hljs from 'highlight.js';
+
 import { Config } from '../../config';
 
 import { cmsApi } from './api';
@@ -61,7 +64,20 @@ export const cmsUseCase = {
    * 特定の記事を取得
    */
   findPost: async (client: ClientType, contentId: string) => {
-    return cmsApi.findPost(client, contentId);
+    const post = await cmsApi.findPost(client, contentId);
+
+    // コードブロックのシンタックスハイライト
+    const $ = cheerio.load(post.body);
+    $('pre > code').each((_, elm) => {
+      const result = hljs.highlightAuto($(elm).text());
+      $(elm).html(result.value);
+      $(elm).addClass('hljs');
+    });
+
+    return {
+      ...post,
+      body: $.html(),
+    };
   },
 
   /**

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import 'highlight.js/styles/github-dark-dimmed.min.css';
 
 type Props = {
   body: string;
@@ -15,9 +16,10 @@ export const ContentBody = ({ body }: Props) => {
     document.body.appendChild(script);
   }, []);
 
+  // NOTE: prose-pre:bg-には、highlight.jsの背景色を指定している
   return (
     <div
-      className="prose mt-6 lg:prose-base prose-a:text-blue-primary prose-img:rounded-xl prose-img:shadow-md"
+      className="prose mt-6 lg:prose-base prose-a:text-blue-primary prose-pre:bg-[#22272e] prose-img:rounded-xl prose-img:shadow-md"
       dangerouslySetInnerHTML={{ __html: body }}
     />
   );
