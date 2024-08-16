@@ -57,7 +57,14 @@ const config = [
         'error',
         {
           // 許可しないとキツいものは追加していく。
-          allow: ['react-dom/client', 'react-dom/server', '**/.eslint/*.mjs', '**/app/*.css', '**/public/**'],
+          allow: [
+            'react-dom/client',
+            'react-dom/server',
+            'highlight.js/styles/*.css',
+            '**/.eslint/*.mjs',
+            '**/app/*.css',
+            '**/public/**',
+          ],
         },
       ],
     },
