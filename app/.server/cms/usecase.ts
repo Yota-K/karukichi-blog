@@ -1,13 +1,10 @@
-import * as cheerio from 'cheerio';
-import hljs from 'highlight.js';
-
 import { Config } from '../../config';
+import { htmlParser } from '../htmlParser';
 
 import { cmsApi } from './api';
 import { paginateSchema } from './schema';
 
 import type { ClientType } from './client';
-import type { Toc } from '../../types';
 
 const { paginateLimit } = Config;
 
@@ -66,26 +63,10 @@ export const cmsUseCase = {
    */
   findPost: async (client: ClientType, contentId: string) => {
     const post = await cmsApi.findPost(client, contentId);
-
-    // コードブロックのシンタックスハイライト
-    const $ = cheerio.load(post.body);
-    $('pre > code').each((_, elm) => {
-      const result = hljs.highlightAuto($(elm).text());
-      $(elm).html(result.value);
-      $(elm).addClass('hljs');
-    });
-
-    // 目次の生成
-    const headings = $('h2, h3').toArray();
-    const toc: Toc[] = headings.map((data) => ({
-      id: data.attribs.id,
-      tagName: data.name,
-      text: $(data).text(),
-    }));
-
+    const { body, toc } = htmlParser(post.body);
     return {
       ...post,
-      body: $.html(),
+      body,
       toc,
     };
   },
