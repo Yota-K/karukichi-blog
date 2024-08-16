@@ -15,5 +15,10 @@ export const ContentBody = ({ body }: Props) => {
     document.body.appendChild(script);
   }, []);
 
-  return <div dangerouslySetInnerHTML={{ __html: body }} className="content" />;
+  return (
+    <div
+      className="prose mt-6 lg:prose-base prose-a:text-blue-primary prose-img:rounded-xl prose-img:shadow-md"
+      dangerouslySetInnerHTML={{ __html: body }}
+    />
+  );
 };
