@@ -22,14 +22,14 @@ export const cmsUseCase = {
       });
 
       return {
-        posts,
+        ...posts,
         paginateNum: paginateNum.data,
       };
     }
 
     const posts = await cmsApi.getPosts(client);
     return {
-      posts,
+      ...posts,
       paginateNum: undefined,
     };
   },
@@ -56,7 +56,7 @@ export const cmsUseCase = {
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId);
 
     return {
-      posts,
+      ...posts,
       tagName: findTag?.name,
       tagSlug: findTag?.id,
       paginateNum: paginateNum.data,
