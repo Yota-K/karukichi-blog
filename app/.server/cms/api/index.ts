@@ -1,6 +1,6 @@
 import { Config } from '../../../config';
 
-import type { ClientType, CmsApi, Content, PickMicroCMSQueries, TagResponse } from './type';
+import type { ClientType, Content, MicroCMSListResponse, PickMicroCMSQueries, TagResponse } from './type';
 
 export const endpoints = {
   blogs: 'blogs',
@@ -8,11 +8,11 @@ export const endpoints = {
   tags: 'tags',
 } as const;
 
-export const cmsApi: CmsApi = {
+export const cmsApi = {
   /**
    * 記事一覧を取得
    */
-  getPosts: async (client: ClientType, queries?: PickMicroCMSQueries) => {
+  getPosts: async (client: ClientType, queries?: PickMicroCMSQueries): Promise<MicroCMSListResponse<Content>> => {
     const data = await client.getList<Content>({
       endpoint: endpoints.blogs,
       queries: {
@@ -28,7 +28,7 @@ export const cmsApi: CmsApi = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string) => {
+  findPost: async (client: ClientType, contentId: string): Promise<Content> => {
     const data = await client.get<Content>({
       endpoint: endpoints.blogs,
       contentId,
@@ -40,7 +40,7 @@ export const cmsApi: CmsApi = {
   /**
    * タグ一覧を取得
    */
-  getTags: async (client: ClientType) => {
+  getTags: async (client: ClientType): Promise<MicroCMSListResponse<TagResponse>> => {
     const data = await client.getList<TagResponse>({
       endpoint: endpoints.tags,
       queries: {

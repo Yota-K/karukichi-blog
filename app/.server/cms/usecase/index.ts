@@ -3,17 +3,16 @@ import { htmlParser } from '../../htmlParser';
 import { cmsApi } from '../api';
 import { paginateSchema } from '../schema';
 
-import type { CmsUseCase } from './type';
+import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
 import type { ClientType } from '../client';
-
 
 const { paginateLimit } = Config;
 
-export const cmsUseCase: CmsUseCase = {
+export const cmsUseCase = {
   /**
    * 記事一覧を取得
    */
-  getPosts: async (client: ClientType, pageQueryParams: string | null) => {
+  getPosts: async (client: ClientType, pageQueryParams: string | null): Promise<GetPostsDto> => {
     const paginateNum = paginateSchema.safeParse(pageQueryParams);
 
     if (paginateNum.success) {
@@ -38,7 +37,11 @@ export const cmsUseCase: CmsUseCase = {
   /**
    * タグに関連する記事一覧を取得
    */
-  getPostsByTag: async (client: ClientType, tagId: string, pageQueryParams: string | null) => {
+  getPostsByTag: async (
+    client: ClientType,
+    tagId: string,
+    pageQueryParams: string | null,
+  ): Promise<GetPostsByTagDto> => {
     const paginateNum = paginateSchema.safeParse(pageQueryParams);
 
     let offset: undefined | number = undefined;
@@ -63,7 +66,7 @@ export const cmsUseCase: CmsUseCase = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string) => {
+  findPost: async (client: ClientType, contentId: string): Promise<FindPostDto> => {
     const post = await cmsApi.findPost(client, contentId);
     const { body, toc } = htmlParser(post.body);
 
@@ -77,7 +80,12 @@ export const cmsUseCase: CmsUseCase = {
   /**
    * タグ一覧を取得
    */
-  getTags: async (client: ClientType) => {
-    return cmsApi.getTags(client);
+  getTags: async (client: ClientType): Promise<GetTagsDto> => {
+    const tags = await cmsApi.getTags(client);
+    return {
+      tags,
+    };
   },
 };
+
+export { GetPostsDto, GetPostsByTagDto, FindPostDto, GetTagsDto };

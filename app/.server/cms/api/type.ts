@@ -6,11 +6,6 @@ import type { MicroCMSQueries } from 'microcms-js-sdk';
 export type { Content };
 export type { ClientType };
 export type { TagResponse };
+export type { MicroCMSListResponse };
 
 export type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
-
-export type CmsApi = {
-  getPosts: (client: ClientType, queries?: PickMicroCMSQueries) => Promise<MicroCMSListResponse<Content>>;
-  findPost: (client: ClientType, contentId: string) => Promise<Content>;
-  getTags: (client: ClientType) => Promise<MicroCMSListResponse<TagResponse>>;
-};

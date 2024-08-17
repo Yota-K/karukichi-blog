@@ -17,4 +17,6 @@ export type FindPostDto = Content & {
   toc: Toc[];
 };
 
-export type GetTagsDto = MicroCMSListResponse<TagResponse>;
+export type GetTagsDto = {
+  tags: MicroCMSListResponse<TagResponse>;
+};
