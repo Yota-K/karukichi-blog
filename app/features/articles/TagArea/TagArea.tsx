@@ -3,7 +3,7 @@ import { Tag } from '../../../components';
 import type { TaxonomyField } from '../../../types';
 
 // idとnameのみ必須にする
-// TODO: 記事一覧を取得するときもidとnameのみ取得できるようにできれば、もっとシンプルに翔琉
+// TODO: 記事一覧を取得するときもidとnameのみ取得できるようにできれば、もっとシンプルにかける
 type PartialTaxonomyField = Partial<TaxonomyField>;
 type RequiredIdAndName = Required<Pick<PartialTaxonomyField, 'id' | 'name'>>;
 
