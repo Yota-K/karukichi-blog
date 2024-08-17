@@ -2,19 +2,12 @@ import { json } from '@remix-run/cloudflare';
 
 import { client, cmsUseCase } from '../../cms';
 
-import type { Content, Toc } from '../../../types';
+import type { FindPostDto } from '../../cms';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
-export const articleDetailLoader = async ({
-  params,
-  context,
-}: LoaderFunctionArgs): Promise<
-  TypedResponse<
-    Content & {
-      toc: Toc[];
-    }
-  >
-> => {
+type LoaderResponse = Promise<TypedResponse<FindPostDto>>;
+
+export const articleDetailLoader = async ({ params, context }: LoaderFunctionArgs): LoaderResponse => {
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
   if (!params.contentId) {
     throw new Response(null, {

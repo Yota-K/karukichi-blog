@@ -2,19 +2,10 @@ import { json } from '@remix-run/cloudflare';
 
 import { client, cmsUseCase } from '../../cms';
 
-import type { Content } from '../../../types';
-import type { MicroCMSListResponse } from '../../cms';
+import type { GetPostsByTagDto } from '../../cms';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
-type LoaderResponse = Promise<
-  TypedResponse<
-    MicroCMSListResponse<Content> & {
-      tagName: string | undefined;
-      tagSlug: string | undefined;
-      paginateNum: number | undefined;
-    }
-  >
->;
+type LoaderResponse = Promise<TypedResponse<GetPostsByTagDto['posts'] & Omit<GetPostsByTagDto, 'posts'>>>;
 
 export const tagRelatedArticleLoader = async ({ request, params, context }: LoaderFunctionArgs): LoaderResponse => {
   if (!params.tagId) {

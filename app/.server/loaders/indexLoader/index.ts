@@ -2,15 +2,15 @@ import { json } from '@remix-run/cloudflare';
 
 import { client, cmsUseCase } from '../../cms';
 
-import type { Content, TaxonomyField } from '../../../types';
-import type { MicroCMSListResponse } from '../../cms';
+import type { GetPostsDto, GetTagsDto } from '../../cms';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
+// postsはスプレッド構文で展開しているので、DTOの型定義からpostsだけ取り出して、paginateNumとtagsを追加する形でloaderの戻り値の型を定義している
 type LoaderResponse = Promise<
   TypedResponse<
-    MicroCMSListResponse<Content> & {
-      paginateNum: number | undefined;
-      tags: MicroCMSListResponse<Pick<TaxonomyField, 'id' | 'name'>>['contents'];
+    GetPostsDto['posts'] & {
+      paginateNum: GetPostsDto['paginateNum'];
+      tags: GetTagsDto['tags'];
     }
   >
 >;
@@ -21,7 +21,7 @@ export const indexLoader = async ({ request, context }: LoaderFunctionArgs): Loa
 
   const { CMS_API_KEY } = context.cloudflare.env;
   const { posts, paginateNum } = await cmsUseCase.getPosts(client(CMS_API_KEY), pageQueryParams);
-  const { contents } = await cmsUseCase.getTags(client(CMS_API_KEY));
+  const { tags } = await cmsUseCase.getTags(client(CMS_API_KEY));
 
-  return json({ ...posts, paginateNum, tags: contents });
+  return json({ ...posts, paginateNum, tags });
 };
