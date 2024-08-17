@@ -18,5 +18,5 @@ export { loader };
 
 export default function Page() {
   const { contents, totalCount, paginateNum, tags } = useLoaderData<typeof loader>();
-  return <ArticleListPage contents={contents} paginateNum={paginateNum} totalCount={totalCount} tags={tags} />;
+  return <ArticleListPage contents={contents} paginateNum={paginateNum} totalCount={totalCount} tags={tags.contents} />;
 }
