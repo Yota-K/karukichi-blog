@@ -1,14 +1,15 @@
-import { Config } from '../../config';
-import { htmlParser } from '../htmlParser';
+import { Config } from '../../../config';
+import { htmlParser } from '../../htmlParser';
+import { cmsApi } from '../api';
+import { paginateSchema } from '../schema';
 
-import { cmsApi } from './api';
-import { paginateSchema } from './schema';
+import type { CmsUseCase } from './type';
+import type { ClientType } from '../client';
 
-import type { ClientType } from './client';
 
 const { paginateLimit } = Config;
 
-export const cmsUseCase = {
+export const cmsUseCase: CmsUseCase = {
   /**
    * 記事一覧を取得
    */
@@ -39,6 +40,7 @@ export const cmsUseCase = {
    */
   getPostsByTag: async (client: ClientType, tagId: string, pageQueryParams: string | null) => {
     const paginateNum = paginateSchema.safeParse(pageQueryParams);
+
     let offset: undefined | number = undefined;
     if (paginateNum.success) {
       offset = paginateNum.data * paginateLimit - paginateLimit;
@@ -64,6 +66,7 @@ export const cmsUseCase = {
   findPost: async (client: ClientType, contentId: string) => {
     const post = await cmsApi.findPost(client, contentId);
     const { body, toc } = htmlParser(post.body);
+
     return {
       ...post,
       body,

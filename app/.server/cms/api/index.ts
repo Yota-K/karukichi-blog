@@ -1,8 +1,6 @@
-import { Config } from '../../config';
+import { Config } from '../../../config';
 
-import type { ClientType } from './client';
-import type { Content, TaxonomyField } from '../../types';
-import type { MicroCMSQueries } from 'microcms-js-sdk';
+import type { ClientType, CmsApi, Content, PickMicroCMSQueries, TagResponse } from './type';
 
 export const endpoints = {
   blogs: 'blogs',
@@ -10,9 +8,7 @@ export const endpoints = {
   tags: 'tags',
 } as const;
 
-type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
-
-export const cmsApi = {
+export const cmsApi: CmsApi = {
   /**
    * 記事一覧を取得
    */
@@ -45,7 +41,7 @@ export const cmsApi = {
    * タグ一覧を取得
    */
   getTags: async (client: ClientType) => {
-    const data = await client.getList<Pick<TaxonomyField, 'id' | 'name'>>({
+    const data = await client.getList<TagResponse>({
       endpoint: endpoints.tags,
       queries: {
         fields: 'id,name',
