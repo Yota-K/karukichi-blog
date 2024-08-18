@@ -1,5 +1,5 @@
-import type { Content, Toc } from '../../../types';
-import type { MicroCMSListResponse, TagResponse } from '../type';
+import type { Content, MicroCMSListResponse, Toc } from '../../../types';
+import type { TagResponse } from '../type';
 
 type Posts = MicroCMSListResponse<Content>;
 type PaginateNum = {
