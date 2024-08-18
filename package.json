@@ -14,7 +14,8 @@
     "start": "wrangler pages dev build/client",
     "type-check": "tsc --noEmit",
     "build-storybook": "storybook build",
-    "validate:dependency": "depcruise app"
+    "validate:dependency": "depcruise app",
+    "test": "vitest"
   },
   "dependencies": {
     "@remix-run/cloudflare": "2.10.2",
@@ -72,6 +73,7 @@
     "typescript": "5.5.4",
     "vite": "5.1.0",
     "vite-tsconfig-paths": "4.2.1",
+    "vitest": "2.0.5",
     "wrangler": "3.63.1"
   },
   "engines": {
