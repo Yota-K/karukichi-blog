@@ -16,6 +16,8 @@ export type TaxonomyField = {
   }[];
 };
 
+type ContentType = 'cms' | 'qiita';
+
 export type Content = Common<{
   title: string;
   thumbnail: {
@@ -24,7 +26,7 @@ export type Content = Common<{
     width: number;
   };
   body: string;
-  type: 'cms' | 'qiita';
+  type: ContentType[];
   description: string;
   category_field: TaxonomyField;
   tag_field: TaxonomyField[];

@@ -8,7 +8,7 @@ export const contentsMock: Content[] = [
     publishedAt: '2023-12-30T16:48:37.058Z',
     revisedAt: '2023-12-31T05:23:12.907Z',
     title: 'title1',
-    type: 'cms',
+    type: ['cms'],
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/hoge.png',
       height: 360,
@@ -65,7 +65,7 @@ export const contentsMock: Content[] = [
     publishedAt: '2023-12-30T16:48:37.058Z',
     revisedAt: '2023-12-31T05:23:12.907Z',
     title: 'title2',
-    type: 'cms',
+    type: ['cms'],
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/hoge.png',
       height: 360,
@@ -123,7 +123,7 @@ export const contentsMock: Content[] = [
     publishedAt: '2023-12-30T16:48:37.058Z',
     revisedAt: '2023-12-31T05:23:12.907Z',
     title: 'title3',
-    type: 'cms',
+    type: ['cms'],
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/hoge.png',
       height: 360,
@@ -181,7 +181,7 @@ export const contentsMock: Content[] = [
     publishedAt: '2023-12-30T16:48:37.058Z',
     revisedAt: '2023-12-31T05:23:12.907Z',
     title: 'title4',
-    type: 'cms',
+    type: ['cms'],
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/hoge.png',
       height: 360,
