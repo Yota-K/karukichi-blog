@@ -60,6 +60,7 @@ const config = [
           allow: [
             'react-dom/client',
             'react-dom/server',
+            'vitest/config',
             'highlight.js/styles/*.css',
             '**/.eslint/*.mjs',
             '**/app/*.css',

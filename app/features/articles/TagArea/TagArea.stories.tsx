@@ -1,4 +1,4 @@
-import { contentsMock } from '../../../__helpers__';
+import { contentMock } from '../../../__helpers__';
 
 import { TagArea } from '.';
 
@@ -14,6 +14,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    tagField: contentsMock[0].tag_field,
+    tagField: contentMock.tag_field,
   },
 };
