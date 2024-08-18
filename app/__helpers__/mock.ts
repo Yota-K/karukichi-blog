@@ -12,23 +12,6 @@ export const microCmsListResponseMock: MicroCMSListResponse<Content> = {
       type: ['cms'],
       body: '<h2>heading</h2><p>テキストテキストテキストテキストテキストテキストテキストテキストテキスト。<br />テキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p><ul><li>テキストテキストテキスト</li><li>テキストテキストテキスト</li><li>テキストテキストテキスト</li></ul><p>テキストテキストテキストテキストテキストテキストテキストテキストテキスト</p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">職場の近くのハンバーガー屋さん美味しかった <a href="https://t.co/7wXHx5jtyG">pic.twitter.com/7wXHx5jtyG</a></p>&mdash; カルキチ 副島｜Karukichi Soejima (@karukichi_yah) <a href="https://twitter.com/karukichi_yah/status/1397426456771268608?ref_src=twsrc%5Etfw">May 26, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><h3>sub heading</h3><img src="https://placehold.jp/768x500.png" alt="image" /><p>test</p>',
       description: 'text text text text text text',
-      category_field: {
-        id: 'others',
-        createdAt: '2020-05-19T13:33:13.468Z',
-        updatedAt: '2023-12-30T16:49:13.911Z',
-        name: 'その他もろもろ',
-        posts: [
-          {
-            id: 'first-blog',
-          },
-          {
-            id: 'concentration',
-          },
-          {
-            id: 'wordpress-level',
-          },
-        ],
-      },
       tag_field: [
         {
           id: 'javascript',
@@ -64,23 +47,6 @@ export const microCmsListResponseMock: MicroCMSListResponse<Content> = {
       type: ['cms'],
       body: '<p>test</p>',
       description: 'text text text text text text',
-      category_field: {
-        id: 'others',
-        createdAt: '2020-05-19T13:33:13.468Z',
-        updatedAt: '2023-12-30T16:49:13.911Z',
-        name: 'その他もろもろ',
-        posts: [
-          {
-            id: 'first-blog',
-          },
-          {
-            id: 'concentration',
-          },
-          {
-            id: 'wordpress-level',
-          },
-        ],
-      },
       tag_field: [
         {
           id: 'everyday',
@@ -117,23 +83,6 @@ export const microCmsListResponseMock: MicroCMSListResponse<Content> = {
       type: ['cms'],
       body: '<p>test</p>',
       description: 'text text text text text text',
-      category_field: {
-        id: 'others',
-        createdAt: '2020-05-19T13:33:13.468Z',
-        updatedAt: '2023-12-30T16:49:13.911Z',
-        name: 'その他もろもろ',
-        posts: [
-          {
-            id: 'first-blog',
-          },
-          {
-            id: 'concentration',
-          },
-          {
-            id: 'wordpress-level',
-          },
-        ],
-      },
       tag_field: [
         {
           id: 'everyday',
@@ -170,23 +119,6 @@ export const microCmsListResponseMock: MicroCMSListResponse<Content> = {
       type: ['cms'],
       body: '<p>test</p>',
       description: 'text text text text text text',
-      category_field: {
-        id: 'others',
-        createdAt: '2020-05-19T13:33:13.468Z',
-        updatedAt: '2023-12-30T16:49:13.911Z',
-        name: 'その他もろもろ',
-        posts: [
-          {
-            id: 'first-blog',
-          },
-          {
-            id: 'concentration',
-          },
-          {
-            id: 'wordpress-level',
-          },
-        ],
-      },
       tag_field: [
         {
           id: 'everyday',
