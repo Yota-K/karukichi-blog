@@ -17,3 +17,5 @@ export const paginateSchema = z
     );
   })
   .transform((val) => Number(val));
+
+export const urlSchema = z.string().url();

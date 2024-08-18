@@ -1,7 +1,9 @@
 import { Config } from '../../../config';
-import { htmlParser } from '../../htmlParser';
+import { contentBodyParser } from '../../htmlParser';
 import { cmsApi } from '../api';
 import { paginateSchema } from '../schema';
+
+import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToPosts';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
 import type { ClientType } from '../client';
@@ -21,15 +23,18 @@ export const cmsUseCase = {
         offset,
       });
 
+      const filterPosts = filterAndAssignServiceUrlToPosts(posts);
       return {
-        ...posts,
+        ...filterPosts,
         paginateNum: paginateNum.data,
       };
     }
 
     const posts = await cmsApi.getPosts(client);
+    const filterPosts = filterAndAssignServiceUrlToPosts(posts);
+
     return {
-      ...posts,
+      ...filterPosts,
       paginateNum: undefined,
     };
   },
@@ -53,10 +58,11 @@ export const cmsUseCase = {
       offset,
       filters: `tag_field[contains]${tagId}`,
     });
+    const filterPosts = filterAndAssignServiceUrlToPosts(posts);
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId);
 
     return {
-      ...posts,
+      ...filterPosts,
       tagName: findTag?.name,
       tagSlug: findTag?.id,
       paginateNum: paginateNum.data,
@@ -68,7 +74,7 @@ export const cmsUseCase = {
    */
   findPost: async (client: ClientType, contentId: string): Promise<FindPostDto> => {
     const post = await cmsApi.findPost(client, contentId);
-    const { body, toc } = htmlParser(post.body);
+    const { body, toc } = contentBodyParser(post.body);
 
     return {
       ...post,
