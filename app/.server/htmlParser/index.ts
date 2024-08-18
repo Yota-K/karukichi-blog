@@ -27,9 +27,17 @@ const generateToc = (_$: cheerio.CheerioAPI): Toc[] => {
 };
 
 /**
+ * htmlからaタグのhrefを取得する
+ */
+export const anchorTagParser = (body: string): string | undefined => {
+  const $ = cheerio.load(body);
+  return $('a').attr('href');
+};
+
+/**
  * htmlをパースする処理
  */
-export const htmlParser = (
+export const contentBodyParser = (
   body: string,
 ): {
   body: string;
