@@ -12,7 +12,9 @@ import type { MicroCMSListResponse } from '../type';
  * - cms: 自分のブログの記事
  * - qiita: Qiitaの記事
  */
-export const filterAndAssignServiceUrlToPosts = (posts: MicroCMSListResponse<Content>): MicroCMSListResponse<Content> => {
+export const filterAndAssignServiceUrlToPosts = (
+  posts: MicroCMSListResponse<Content>,
+): MicroCMSListResponse<Content> => {
   const filterPostsByContentType = posts.contents
     .filter((post) => {
       return post.type.includes('qiita');
@@ -27,13 +29,13 @@ export const filterAndAssignServiceUrlToPosts = (posts: MicroCMSListResponse<Con
       }
       return {
         ...post,
-        id: undefined,
       };
     });
 
   const filterPostsWithId = filterPostsByContentType.filter((post) => post.id !== undefined);
 
-  // 重複を削除
+  // 記事一覧で取得するデータ量が多いので、MAPで重複を削除している
+  // 一覧で取得する情報量をもっと限定できれば、filterの方が良いので、取得するデータを最低限に絞った時にfilterに書き換える
   const uniqueContents = Array.from(
     new Map([...posts.contents, ...filterPostsWithId].map((content) => [content.title, content])).values(),
   );
