@@ -1,8 +1,10 @@
-import { contentMock } from '../../../__helpers__';
+import { generateMockContent } from '../../../__helpers__';
 
 import { PostItem } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
+
+const mockContent = generateMockContent();
 
 const meta = {
   title: 'features/articles/PostItem',
@@ -14,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    content: contentMock,
+    content: mockContent,
   },
 };

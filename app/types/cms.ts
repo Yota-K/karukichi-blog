@@ -1,3 +1,7 @@
+import type { MicroCMSListResponse } from 'microcms-js-sdk';
+
+export type { MicroCMSListResponse };
+
 export type Common<T> = {
   id: string;
   createdAt: string;
@@ -20,14 +24,8 @@ type ContentType = 'cms' | 'qiita';
 
 export type Content = Common<{
   title: string;
-  thumbnail: {
-    url: string;
-    height: number;
-    width: number;
-  };
   body: string;
   type: ContentType[];
   description: string;
-  category_field: TaxonomyField;
   tag_field: TaxonomyField[];
 }>;

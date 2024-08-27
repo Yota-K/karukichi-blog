@@ -1,6 +1,6 @@
-import type { Content } from '../../../types';
+import type { Content, MicroCMSListResponse } from '../../../types';
 import type { ClientType } from '../client';
-import type { MicroCMSListResponse, TagResponse } from '../type';
+import type { TagResponse } from '../type';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 
 export type { Content };

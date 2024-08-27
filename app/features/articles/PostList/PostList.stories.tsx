@@ -1,4 +1,4 @@
-import { contentsMock } from '../../../__helpers__';
+import { mockContentListResponse } from '../../../__helpers__';
 
 import { PostList } from '.';
 
@@ -14,6 +14,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    contents: contentsMock,
+    contents: mockContentListResponse.contents,
   },
 };
