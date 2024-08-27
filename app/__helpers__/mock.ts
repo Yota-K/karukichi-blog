@@ -2,7 +2,7 @@ import type { Content, MicroCMSListResponse } from '../types';
 
 type ContentOverride = Partial<Content>;
 
-const generateMockContent = (override: ContentOverride = {}): Content => {
+export const generateMockContent = (override: ContentOverride = {}): Content => {
   return {
     id: 'test-1',
     createdAt: '2023-12-31T10:29:48.466Z',
