@@ -1,5 +1,5 @@
 import LogoImage from '../../../../public/icon.png';
-import { Heading, Text } from '../../../components';
+import { Heading, Link, Text } from '../../../components';
 
 export const ProfileArea = () => {
   return (
@@ -10,6 +10,15 @@ export const ProfileArea = () => {
       <div className="flex justify-between">
         <div>
           <Text>東京都で活動するウェブ開発者です。</Text>
+          <Text>ウェブ開発・ウェブ制作に関する情報を発信しています。</Text>
+          <Link
+            to="https://karukichi-portfolio.vercel.app/"
+            className="font-bold text-blue-secondary hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ✏️ Show Profile
+          </Link>
         </div>
         <img
           src={LogoImage}
