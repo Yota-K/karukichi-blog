@@ -55,3 +55,6 @@ jobs:
 
       - name: Run validate dependency
         run: pnpm validate:dependency
+
+      - name: Run test
+        run: pnpm test
