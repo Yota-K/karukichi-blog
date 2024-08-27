@@ -62,6 +62,8 @@ const config = [
             'react-dom/server',
             'vitest/config',
             'highlight.js/styles/*.css',
+            'react-icons/fa',
+            'react-icons/fa6',
             '**/.eslint/*.mjs',
             '**/app/*.css',
             '**/public/**',
