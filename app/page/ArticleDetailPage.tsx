@@ -25,8 +25,11 @@ export const ArticleDetailPage = ({ content }: Props) => {
         </time>
         <TagArea tagField={content.tag_field} />
       </div>
-      <Toc toc={content.toc} />
-      <ContentBody body={content.body} />
+      {/* gap-4 が gap: 1rem; になるので、calc(78%-1rem) を指定して、gapで指定した余白の幅を引いている */}
+      <div className="block gap-4 lg:grid lg:grid-cols-[calc(78%-1rem)_22%]">
+        <ContentBody body={content.body} />
+        <Toc toc={content.toc} />
+      </div>
     </div>
   );
 };

@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* 目次のCSS */
+  .toc-h3 {
+    @apply pl-2;
+  }
+  .toc-h4 {
+    @apply pl-3;
+  }
+}
