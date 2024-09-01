@@ -31,3 +31,10 @@ export const Last: Story = {
     totalCount: 100,
   },
 };
+
+export const None: Story = {
+  args: {
+    paginateNum: 1,
+    totalCount: 10,
+  },
+};

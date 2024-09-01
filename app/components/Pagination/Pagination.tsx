@@ -24,6 +24,10 @@ type Props = {
 };
 
 const InnerPagination = ({ paginateNum, totalCount }: Props) => {
+  const { paginateLimit } = config;
+
+  if (totalCount <= paginateLimit) return null;
+
   if (!paginateNum || paginateNum === 1) {
     return (
       <div className="flex justify-end">
@@ -32,7 +36,7 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
     );
   }
 
-  const totalPaginateNum = Math.ceil(totalCount / config.paginateLimit);
+  const totalPaginateNum = Math.ceil(totalCount / paginateLimit);
 
   if (paginateNum === totalPaginateNum) {
     return (
