@@ -1,9 +1,9 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 import './tailwind.css';
 
 import { rootLoader as loader } from './.server';
 import { config } from './config';
-import { AppFooter, AppHeader } from './widgets';
+import { AppFooter, AppHeader, DisplayErrorMessage, errorMessage } from './widgets';
 
 import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ReactNode } from 'react';
@@ -69,6 +69,32 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-12">{children}</div>
         <AppFooter />
         <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  const getStatusCode = () => {
+    if (isRouteErrorResponse(error)) {
+      return error.status;
+    }
+  };
+
+  const statusCode = getStatusCode();
+
+  return (
+    <html lang="ja">
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <DisplayErrorMessage statusCode={statusCode} />
         <Scripts />
       </body>
     </html>
