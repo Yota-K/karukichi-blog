@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react';
 
 import { tagRelatedArticleLoader as loader } from '../.server';
-import { Config } from '../config';
+import { config } from '../config';
 import { TagRelatedArticleListPage } from '../page';
 
 import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
@@ -15,7 +15,7 @@ export const headers: HeadersFunction = () => {
 export { loader };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return [{ title: `${data?.tagName} | ${Config.siteTitle}` }];
+  return [{ title: `${data?.tagName} | ${config.siteTitle}` }];
 };
 
 export default function Page() {

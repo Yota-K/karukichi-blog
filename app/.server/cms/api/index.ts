@@ -1,4 +1,4 @@
-import { Config } from '../../../config';
+import { config } from '../../../config';
 
 import type { ClientType, Content, MicroCMSListResponse, PickMicroCMSQueries, TagResponse } from './type';
 
@@ -17,7 +17,7 @@ export const cmsApi = {
       endpoint: endpoints.blogs,
       queries: {
         offset: queries?.offset ?? 0,
-        limit: queries?.limit ?? Config.paginateLimit,
+        limit: queries?.limit ?? config.paginateLimit,
         filters: queries?.filters ?? undefined,
       },
     });

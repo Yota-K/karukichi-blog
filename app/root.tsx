@@ -2,14 +2,14 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/reac
 import './tailwind.css';
 
 import { rootLoader as loader } from './.server';
-import { Config } from './config';
+import { config } from './config';
 import { AppFooter, AppHeader } from './widgets';
 
 import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ReactNode } from 'react';
 
 export const meta: MetaFunction = () => {
-  const title = Config.siteTitle;
+  const title = config.siteTitle;
   const description = 'カルキチ副島が運営するウェブ系の技術について執筆しているブログです';
   return [
     { title },
@@ -44,7 +44,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: 'og:image',
-      content: Config.ogImageUrl,
+      content: config.ogImageUrl,
     },
     {
       property: 'og:type',

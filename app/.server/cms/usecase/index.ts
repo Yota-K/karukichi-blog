@@ -1,4 +1,4 @@
-import { Config } from '../../../config';
+import { config } from '../../../config';
 import { contentBodyParser } from '../../htmlParser';
 import { cmsApi } from '../api';
 import { paginateSchema } from '../schema';
@@ -8,7 +8,7 @@ import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToP
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
 import type { ClientType } from '../client';
 
-const { paginateLimit } = Config;
+const { paginateLimit } = config;
 
 export const cmsUseCase = {
   /**

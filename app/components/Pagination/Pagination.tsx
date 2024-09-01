@@ -1,4 +1,4 @@
-import { Config } from '../../config';
+import { config } from '../../config';
 import { Link } from '../Link';
 
 type PaginationItemProps = {
@@ -32,7 +32,7 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
     );
   }
 
-  const totalPaginateNum = Math.ceil(totalCount / Config.paginateLimit);
+  const totalPaginateNum = Math.ceil(totalCount / config.paginateLimit);
 
   if (paginateNum === totalPaginateNum) {
     return (

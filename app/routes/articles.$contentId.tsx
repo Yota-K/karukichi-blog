@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react';
 
 import { articleDetailLoader as loader } from '../.server';
-import { Config } from '../config';
+import { config } from '../config';
 import { ArticleDetailPage } from '../page';
 
 import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
@@ -19,7 +19,7 @@ export const headers: HeadersFunction = () => {
 export { loader };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const title = `${data?.title} | ${Config.siteTitle}`;
+  const title = `${data?.title} | ${config.siteTitle}`;
   return [
     { title },
     {

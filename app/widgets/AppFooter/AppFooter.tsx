@@ -1,11 +1,11 @@
 import { Text, Footer as UiFooter } from '../../components';
-import { Config } from '../../config';
+import { config } from '../../config';
 
 export const AppFooter = () => {
   return (
     <UiFooter>
       <Text>
-        © 2020 〜{new Date().getFullYear()} {Config.siteTitle}
+        © 2020 〜{new Date().getFullYear()} {config.siteTitle}
       </Text>
     </UiFooter>
   );
