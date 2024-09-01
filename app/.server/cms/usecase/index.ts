@@ -59,6 +59,19 @@ export const cmsUseCase = {
       filters: `tag_field[contains]${tagId}`,
     });
     const filterPosts = filterAndAssignServiceUrlToPosts(posts);
+
+    if (posts.contents.length === 0) {
+      return {
+        contents: [],
+        totalCount: 0,
+        offset: 0,
+        limit: 0,
+        tagName: '',
+        tagSlug: '',
+        paginateNum: undefined,
+      };
+    }
+
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId);
 
     return {

@@ -21,6 +21,13 @@ export const tagRelatedArticleLoader = async ({ request, params, context }: Load
   const { CMS_API_KEY } = context.cloudflare.env;
   const posts = await cmsUseCase.getPostsByTag(client(CMS_API_KEY), params.tagId, pageQueryParams);
 
+  if (posts.contents.length === 0) {
+    throw new Response(null, {
+      status: 404,
+      statusText: 'Not Found',
+    });
+  }
+
   return json({
     ...posts,
     tagName: posts.tagName,
