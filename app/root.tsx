@@ -6,20 +6,56 @@ import { Config } from './config';
 import { AppFooter, AppHeader } from './widgets';
 
 import type { MetaFunction } from '@remix-run/cloudflare';
+import type { ReactNode } from 'react';
 
 export const meta: MetaFunction = () => {
+  const title = Config.siteTitle;
+  const description = 'カルキチ副島が運営するウェブ系の技術について執筆しているブログです';
   return [
-    { title: Config.siteTitle },
+    { title },
     {
       name: 'description',
-      content: 'カルキチ副島が運営するウェブ系の技術について執筆しているブログです',
+      content: description,
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:site',
+      content: '@karukichi_yah',
+    },
+    {
+      property: 'og:title',
+      content: title,
+    },
+    {
+      property: 'og:locale',
+      content: 'ja_JP',
+    },
+    {
+      // TODO: ドメインとったら変更する
+      property: 'og:url',
+      content: 'https://www.example.com',
+    },
+    {
+      property: 'og:description',
+      content: description,
+    },
+    {
+      property: 'og:image',
+      content: Config.ogImageUrl,
+    },
+    {
+      property: 'og:type',
+      content: 'website',
     },
   ];
 };
 
 export { loader };
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
       <head>
