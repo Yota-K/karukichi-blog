@@ -15,6 +15,7 @@ export type GetPostsByTagDto = Posts & {
 };
 
 export type FindPostDto = Content & {
+  status: number;
   toc: Toc[];
 };
 
