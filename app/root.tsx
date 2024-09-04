@@ -3,7 +3,7 @@ import './tailwind.css';
 
 import { rootLoader as loader } from './.server';
 import { config } from './config';
-import { AppFooter, AppHeader, DisplayErrorMessage, errorMessage } from './widgets';
+import { AppFooter, AppHeader, DisplayErrorMessage } from './widgets';
 
 import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ReactNode } from 'react';
@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 export const meta: MetaFunction = () => {
   const title = config.siteTitle;
   const description = 'カルキチ副島が運営するウェブ系の技術について執筆しているブログです';
+  const ogImageUrl = config.ogImageUrl();
   return [
     { title },
     {
@@ -44,7 +45,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: 'og:image',
-      content: config.ogImageUrl,
+      content: ogImageUrl,
     },
     {
       property: 'og:type',
@@ -86,19 +87,7 @@ export function ErrorBoundary() {
 
   const statusCode = getStatusCode();
 
-  return (
-    <html lang="ja">
-      <head>
-        <title>Oops!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <DisplayErrorMessage statusCode={statusCode} />
-        <Scripts />
-      </body>
-    </html>
-  );
+  return <DisplayErrorMessage statusCode={statusCode} />;
 }
 
 export default function App() {

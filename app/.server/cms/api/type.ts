@@ -8,4 +8,5 @@ export type { ClientType };
 export type { TagResponse };
 export type { MicroCMSListResponse };
 
+export type FindPostResponse = { content?: Content; status: number };
 export type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;

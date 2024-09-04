@@ -1,6 +1,14 @@
 import { config } from '../../../config';
+import { serviceDomain } from '../client';
 
-import type { ClientType, Content, MicroCMSListResponse, PickMicroCMSQueries, TagResponse } from './type';
+import type {
+  ClientType,
+  Content,
+  FindPostResponse,
+  MicroCMSListResponse,
+  PickMicroCMSQueries,
+  TagResponse,
+} from './type';
 
 export const endpoints = {
   blogs: 'blogs',
@@ -28,13 +36,31 @@ export const cmsApi = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string): Promise<Content> => {
-    const data = await client.get<Content>({
-      endpoint: endpoints.blogs,
-      contentId,
-    });
+  findPost: async (apiKey: string, contentId: string): Promise<FindPostResponse> => {
+    // microCMSのsdkだと、ステータスコードが取得できず、404エラーのハンドリングができないため、sdkではなくfetchを使用している
+    // https://github.com/microcmsio/microcms-js-sdk/issues/47
+    try {
+      const res = await fetch(`https://${serviceDomain}.microcms.io/api/v1/blogs/${contentId}`, {
+        headers: { 'X-API-KEY': apiKey },
+      });
 
-    return data;
+      if (!res.ok) {
+        return {
+          status: res.status,
+          content: undefined,
+        };
+      }
+
+      const data = (await res.json()) as Content;
+
+      return {
+        status: res.status,
+        content: data,
+      };
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to fetch data');
+    }
   },
 
   /**

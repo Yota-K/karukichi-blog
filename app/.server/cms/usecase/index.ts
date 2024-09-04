@@ -46,7 +46,7 @@ export const cmsUseCase = {
     client: ClientType,
     tagId: string,
     pageQueryParams: string | null,
-  ): Promise<GetPostsByTagDto> => {
+  ): Promise<GetPostsByTagDto | undefined> => {
     const paginateNum = paginateSchema.safeParse(pageQueryParams);
 
     let offset: undefined | number = undefined;
@@ -61,15 +61,7 @@ export const cmsUseCase = {
     const filterPosts = filterAndAssignServiceUrlToPosts(posts);
 
     if (posts.contents.length === 0) {
-      return {
-        contents: [],
-        totalCount: 0,
-        offset: 0,
-        limit: 0,
-        tagName: '',
-        tagSlug: '',
-        paginateNum: undefined,
-      };
+      return undefined;
     }
 
     const findTag = posts.contents[0].tag_field.find((tag) => tag.id === tagId);
@@ -85,13 +77,26 @@ export const cmsUseCase = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string): Promise<FindPostDto> => {
-    const post = await cmsApi.findPost(client, contentId);
-    const { body, toc } = contentBodyParser(post.body);
+  findPost: async (apiKey: string, contentId: string): Promise<FindPostDto> => {
+    const { content, status } = await cmsApi.findPost(apiKey, contentId);
+
+    if (!content) {
+      return {
+        status,
+        content: undefined,
+        toc: [],
+      };
+    }
+
+    const { body, toc } = contentBodyParser(content.body);
 
     return {
-      ...post,
-      body,
+      status,
+      // parseした記事の本文で上書きする
+      content: {
+        ...content,
+        body,
+      },
       toc,
     };
   },

@@ -7,6 +7,8 @@ import type { HeadersFunction } from '@remix-run/cloudflare';
 
 export const headers: HeadersFunction = () => {
   return {
+    // Cache-Controlの設定は全ページ共通
+    //
     // - レスポンスは7日間（604800 秒間）は新鮮。
     // - 7日間経過したら、そこから 360s は、古いキャッシュを参照するが、バックグラウンドでfetchを行い、キャッシュを更新して、サーバから新しいリソースを取得できたら、キャッシュを更新する。
     // - 7日を過ぎると古くなるが、サーバーがエラーでレスポンスを返した場合はさらに1日（86400 秒間）利用できる。
