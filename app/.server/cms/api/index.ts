@@ -1,18 +1,15 @@
 import { config } from '../../../config';
 import { serviceDomain } from '../client';
 
-import type {
-  ClientType,
-  Content,
-  FindPostResponse,
-  MicroCMSListResponse,
-  PickMicroCMSQueries,
-  TagResponse,
-} from './type';
+import type { Content, MicroCMSListResponse } from '../../../types';
+import type { ClientType } from '../client';
+import type { FindPostResponse, TagResponse } from '../type';
+import type { MicroCMSQueries } from 'microcms-js-sdk';
 
-export const endpoints = {
+type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
+
+const endpoints = {
   blogs: 'blogs',
-  category: 'category',
   tags: 'tags',
 } as const;
 
