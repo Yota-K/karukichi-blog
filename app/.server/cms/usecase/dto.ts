@@ -14,7 +14,8 @@ export type GetPostsByTagDto = Posts & {
   paginateNum: number | undefined;
 };
 
-export type FindPostDto = Content & {
+export type FindPostDto = {
+  content?: Content;
   status: number;
   toc: Toc[];
 };
