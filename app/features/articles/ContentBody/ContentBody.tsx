@@ -19,7 +19,7 @@ export const ContentBody = ({ body }: Props) => {
   // NOTE: prose-pre:bg-には、highlight.jsの背景色を指定している
   return (
     <div
-      className="prose lg:prose-base prose-a:text-blue-primary prose-pre:bg-[#22272e] prose-img:rounded-xl prose-img:shadow-md"
+      className="prose break-words lg:prose-base prose-a:text-blue-primary prose-pre:bg-[#22272e] prose-img:rounded-xl prose-img:shadow-md"
       dangerouslySetInnerHTML={{ __html: body }}
     />
   );
