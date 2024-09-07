@@ -1,12 +1,11 @@
 import { config } from '../../../config';
+import { cmsApi, paginateSchema } from '../../cms/';
 import { contentBodyParser } from '../../htmlParser';
-import { cmsApi } from '../api';
-import { paginateSchema } from '../schema';
 
 import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToPosts';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
-import type { ClientType } from '../client';
+import type { ClientType } from '../../cms';
 
 const { paginateLimit } = config;
 
