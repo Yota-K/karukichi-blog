@@ -1,5 +1,5 @@
 import { config } from '../../../config';
-import { contentBodyParser } from '../../htmlParser';
+// import { contentBodyParser } from '../../htmlParser';
 import { cmsApi } from '../api';
 import { paginateSchema } from '../schema';
 
@@ -89,16 +89,13 @@ export const cmsUseCase = {
       };
     }
 
-    const { body, toc } = contentBodyParser(content.body);
+    // const { body, toc } = contentBodyParser(content.body);
 
     return {
       status: 200,
       // parseした記事の本文で上書きする
-      content: {
-        ...content,
-        body,
-      },
-      toc,
+      content,
+      toc: [],
     };
   },
 
