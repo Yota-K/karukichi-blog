@@ -1,17 +1,13 @@
 import { json } from '@remix-run/cloudflare';
 import { z } from 'zod';
 
-import { config } from '../../../config';
+import { config } from '../../config';
 
 import { contentSchema } from './schema';
 
-import type { Content, MicroCMSListResponse } from '../../../types';
-import type { ClientType } from '../client';
-import type { TagResponse } from '../type';
-import type { MicroCMSQueries } from 'microcms-js-sdk';
-
-type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
-type CustomErrorResponse = { status: number; message: string };
+import type { ClientType } from './client';
+import type { CustomErrorResponse, PickMicroCMSQueries, TagResponse } from './type';
+import type { Content, MicroCMSListResponse } from '../../types';
 
 const endpoints = {
   blogs: 'blogs',

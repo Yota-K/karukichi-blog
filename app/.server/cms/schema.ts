@@ -1,21 +1,27 @@
 import { z } from 'zod';
 
-// 一覧には20件表示する仕様のため、?page=100でリクエストされた場合100 * 10 - 10 = 990件目から取得することになる。
-// 990件近く記事が増えることは当分ないと思うので、上限値を100にセットしている。
-const requestPaginateQueryParamsLimit = 100 as const;
-
-export const paginateSchema = z
-  .string()
-  .optional()
-  .refine((val) => {
-    const parsedNumber = Number(val);
-    return (
-      !isNaN(parsedNumber) && // 数字に変換できることを確認
-      Number.isInteger(parsedNumber) && // 整数かどうかチェック
-      parsedNumber > 0 && // 正の数かどうかチェック
-      parsedNumber <= requestPaginateQueryParamsLimit // 100以下かどうかチェック
-    );
-  })
-  .transform((val) => Number(val));
-
-export const urlSchema = z.string().url();
+// TODO: z.inferで、スキーマから型定義を生成するみたいな実装にできると良さそう
+export const contentSchema = z.object({
+  id: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  publishedAt: z.string(),
+  revisedAt: z.string(),
+  title: z.string(),
+  body: z.string(),
+  type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
+  description: z.string(),
+  tag_field: z.array(
+    z.object({
+      id: z.string(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
+      name: z.string(),
+      posts: z.array(
+        z.object({
+          id: z.string(),
+        }),
+      ),
+    }),
+  ),
+});

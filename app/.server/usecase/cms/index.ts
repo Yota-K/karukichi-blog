@@ -1,8 +1,9 @@
 import { config } from '../../../config';
-import { cmsApi, paginateSchema } from '../../cms/';
+import { cmsApi } from '../../cms/';
 import { contentBodyParser } from '../../htmlParser';
 
 import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToPosts';
+import { paginateSchema } from './schema';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
 import type { ClientType } from '../../cms';
