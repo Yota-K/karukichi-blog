@@ -1,6 +1,6 @@
 import { json } from '@remix-run/cloudflare';
 
-import { cmsUseCase } from '../../cms';
+import { client, cmsUseCase } from '../../cms';
 
 import type { FindPostDto } from '../../cms';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
@@ -17,7 +17,7 @@ export const articleDetailLoader = async ({ params, context }: LoaderFunctionArg
   }
 
   const { CMS_API_KEY } = context.cloudflare.env;
-  const { status, content, toc } = await cmsUseCase.findPost(CMS_API_KEY, params.contentId);
+  const { status, content, toc } = await cmsUseCase.findPost(client(CMS_API_KEY), params.contentId);
 
   if (status === 404) {
     throw new Response(null, {

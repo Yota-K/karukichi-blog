@@ -1,12 +1,17 @@
+import { json } from '@remix-run/cloudflare';
+import { z } from 'zod';
+
 import { config } from '../../../config';
-import { serviceDomain } from '../client';
+
+import { contentSchema } from './schema';
 
 import type { Content, MicroCMSListResponse } from '../../../types';
 import type { ClientType } from '../client';
-import type { FindPostResponse, TagResponse } from '../type';
+import type { TagResponse } from '../type';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 
 type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
+type CustomErrorResponse = { status: number; message: string };
 
 const endpoints = {
   blogs: 'blogs',
@@ -33,31 +38,31 @@ export const cmsApi = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (apiKey: string, contentId: string): Promise<FindPostResponse> => {
-    // microCMSのsdkだと、ステータスコードが取得できず、404エラーのハンドリングができないため、sdkではなくfetchを使用している
-    // https://github.com/microcmsio/microcms-js-sdk/issues/47
-    try {
-      const res = await fetch(`https://${serviceDomain}.microcms.io/api/v1/blogs/${contentId}`, {
-        headers: { 'X-API-KEY': apiKey },
-      });
+  findPost: async (client: ClientType, contentId: string): Promise<Content | CustomErrorResponse> => {
+    return await client
+      .get<Content>({
+        endpoint: endpoints.blogs,
+        contentId,
+      })
+      .then((res) => {
+        // zodを使ってバリデーションチェックを行うことで、型の安全性と、厳密なエラーハンドリングを実現できる
+        contentSchema.parse(res);
+        return res;
+      })
+      .catch((error: unknown) => {
+        // データの欠損など、zodのバリデーションエラーが発生した場合は500エラー扱いにする
+        if (error instanceof z.ZodError) {
+          throw json({
+            status: 500,
+            message: error.errors.map((e) => e.message).join(', '),
+          });
+        }
 
-      if (!res.ok) {
         return {
-          status: res.status,
-          content: undefined,
+          status: 404,
+          message: 'Content not found',
         };
-      }
-
-      const data = (await res.json()) as Content;
-
-      return {
-        status: res.status,
-        content: data,
-      };
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to fetch data');
-    }
+      });
   },
 
   /**

@@ -77,12 +77,13 @@ export const cmsUseCase = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (apiKey: string, contentId: string): Promise<FindPostDto> => {
-    const { content, status } = await cmsApi.findPost(apiKey, contentId);
+  findPost: async (client: ClientType, contentId: string): Promise<FindPostDto> => {
+    const content = await cmsApi.findPost(client, contentId);
 
-    if (!content) {
+    // エラーが発生した時しかstatusを返却しないようにしているので、statusがある場合はエラーとして扱う
+    if ('status' in content) {
       return {
-        status,
+        status: content.status,
         content: undefined,
         toc: [],
       };
@@ -91,7 +92,7 @@ export const cmsUseCase = {
     const { body, toc } = contentBodyParser(content.body);
 
     return {
-      status,
+      status: 200,
       // parseした記事の本文で上書きする
       content: {
         ...content,
