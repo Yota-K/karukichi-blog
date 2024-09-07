@@ -89,16 +89,13 @@ export const cmsUseCase = {
       };
     }
 
-    const { body, toc } = contentBodyParser(content.body);
+    contentBodyParser(content.body);
 
     return {
       status: 200,
       // parseした記事の本文で上書きする
-      content: {
-        ...content,
-        body,
-      },
-      toc,
+      content,
+      toc: [],
     };
   },
 
