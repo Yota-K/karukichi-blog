@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import 'highlight.js/styles/github-dark-dimmed.min.css';
+// import 'highlight.js/styles/github-dark-dimmed.min.css';
 
 type Props = {
   body: string;
