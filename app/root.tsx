@@ -1,5 +1,6 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 import './tailwind.css';
+import 'highlight.js/styles/github-dark-dimmed.min.css';
 
 import { rootLoader as loader } from './.server';
 import { config } from './config';
