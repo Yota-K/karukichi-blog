@@ -1,18 +1,6 @@
 import * as cheerio from 'cheerio';
-import hljs from 'highlight.js';
 
 import type { Toc } from '../../types';
-
-/**
- * シンタックスハイライトを付与する
- */
-const addSyntaxHighlight = (_$: cheerio.CheerioAPI) => {
-  _$('pre > code').each((_, elm) => {
-    const result = hljs.highlightAuto(_$(elm).text());
-    _$(elm).html(result.value);
-    _$(elm).addClass('hljs');
-  });
-};
 
 /**
  * 目次を生成する
@@ -45,7 +33,6 @@ export const contentBodyParser = (
 } => {
   const $ = cheerio.load(body);
 
-  addSyntaxHighlight($);
   const toc = generateToc($);
 
   return {
