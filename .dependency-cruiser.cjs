@@ -97,11 +97,11 @@ module.exports = {
       severity: 'error',
       // shikiをesm.shから取得しているため、無効にしている
       from: {
-        pathNot: ['https://esm.sh/shiki@1.16.0'],
+        pathNot: ['https://esm.sh/shiki@*'],
       },
       to: {
         couldNotResolve: true,
-        pathNot: ['https://esm.sh/shiki@1.16.0'],
+        pathNot: ['https://esm.sh/shiki@*'],
       },
     },
     {
