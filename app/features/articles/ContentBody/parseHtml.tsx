@@ -11,6 +11,9 @@ import { SyntaxHighlighter } from './SyntaxHighlighter';
 // eslint-disable-next-line import/namespace
 const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs };
 
+/**
+ * 記事本文のHTMLをパースする処理
+ */
 export const parseHtml = (content: string) => {
   return (
     unified()
@@ -22,14 +25,22 @@ export const parseHtml = (content: string) => {
         Fragment,
         createElement,
         components: {
+          pre: (props) => {
+            // preはshikiがシンタックスハイライトを適用するときに生成してくれるので、除去する
+            return <>{props.children}</>;
+          },
           code: (props) => {
             const { children, className, ...rest } = props;
             const match = /language-(\w+)/.exec(className || '');
             const matchLang = match ? match[1] : undefined;
-            return (
+
+            // コードブロックの時はシンタックスハイライトを適用する
+            return matchLang ? (
               <SyntaxHighlighter lang={matchLang} {...rest}>
                 {children}
               </SyntaxHighlighter>
+            ) : (
+              <code>{children}</code>
             );
           },
         },

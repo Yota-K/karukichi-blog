@@ -17,9 +17,8 @@ export const ContentBody = ({ body }: Props) => {
     document.body.appendChild(script);
   }, []);
 
-  // NOTE: prose-pre:bg-には、shikiの背景色を指定している
   return (
-    <div className="prose break-words lg:prose-base prose-a:text-blue-primary prose-pre:bg-[#24292e] prose-img:rounded-xl prose-img:shadow-md">
+    <div className="prose break-words lg:prose-base prose-a:text-blue-primary prose-img:rounded-xl prose-img:shadow-md">
       {parseHtml(body)}
     </div>
   );
