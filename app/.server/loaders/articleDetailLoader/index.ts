@@ -22,9 +22,10 @@ export const articleDetailLoader = async ({ params, context }: LoaderFunctionArg
   // TODO: 後でリファクタリングする
   const cacheKey = `post:${params.contentId}`;
   // TODO: as使わないようにしたいところ
-  const cachedResponse = (await RESPONSE_CACHE_KV.get(cacheKey)) as FindPostDto | null;
+  const cachedResponse = await RESPONSE_CACHE_KV.get(cacheKey);
+  const cachedResponseParsed = cachedResponse ? (JSON.parse(cachedResponse) as FindPostDto) : null;
 
-  if (!cachedResponse) {
+  if (!cachedResponseParsed) {
     const { status, content, toc } = await cmsUseCase.findPost(client(CMS_API_KEY), params.contentId);
 
     if (status === 404) {
@@ -39,5 +40,5 @@ export const articleDetailLoader = async ({ params, context }: LoaderFunctionArg
     return json({ status, content, toc });
   }
 
-  return json(cachedResponse);
+  return json(cachedResponseParsed);
 };
