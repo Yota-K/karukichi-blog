@@ -43,6 +43,10 @@ pages_build_output_dir = "./build/client"
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
+[[kv_namespaces]]
+binding = "RESPONSE_CACHE_KV"
+id = "537c7a505fbd460289cd92dfccd3184c"
+
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
