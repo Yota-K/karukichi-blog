@@ -2,15 +2,12 @@ import { json } from '@remix-run/cloudflare';
 
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
+import { checkHost } from '../../utils';
 
 import type { FindPostDto } from '../../usecase';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
 type LoaderResponse = Promise<TypedResponse<FindPostDto>>;
-
-const checkHost = (host: string | null) => {
-  return Boolean(host?.includes('localhost:5173'));
-};
 
 export const articleDetailLoader = async ({ params, context, request }: LoaderFunctionArgs): LoaderResponse => {
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
