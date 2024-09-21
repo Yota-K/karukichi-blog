@@ -1,8 +1,9 @@
 import { json } from '@remix-run/cloudflare';
 
-import { client, cmsUseCase } from '../../cms';
+import { client } from '../../cms';
+import { cmsUseCase } from '../../usecase';
 
-import type { GetPostsDto, GetTagsDto } from '../../cms';
+import type { GetPostsDto, GetTagsDto } from '../../usecase';
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
 type LoaderResponse = Promise<TypedResponse<GetPostsDto & GetTagsDto>>;

@@ -1,5 +1,6 @@
 import { anchorTagParser } from '../../htmlParser';
-import { urlSchema } from '../schema';
+
+import { urlSchema } from './schema';
 
 import type { Content, MicroCMSListResponse } from '../../../types';
 

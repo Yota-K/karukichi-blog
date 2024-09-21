@@ -7,8 +7,9 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "concurrently \"pnpm run dev:remix\" \"pnpm run dev:storybook\"",
-    "dev:remix": "remix vite:dev",
+    "dev:remix": "remix vite:dev ",
     "dev:storybook": "storybook dev -p 6006",
+    "dev:wrangler": "wrangler pages dev --local --persist-to worker-local",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "biome check --write .",
     "start": "wrangler pages dev build/client",

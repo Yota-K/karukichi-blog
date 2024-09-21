@@ -6,19 +6,14 @@ import { config } from '../../../config';
 import { contentSchema } from './schema';
 
 import type { Content, MicroCMSListResponse } from '../../../types';
-import type { ClientType } from '../client';
-import type { TagResponse } from '../type';
-import type { MicroCMSQueries } from 'microcms-js-sdk';
-
-type PickMicroCMSQueries = Pick<MicroCMSQueries, 'offset' | 'limit' | 'filters' | 'fields'>;
-type CustomErrorResponse = { status: number; message: string };
+import type { ClientType, CustomErrorResponse, PickMicroCMSQueries, TagResponse } from '../../cms';
 
 const endpoints = {
   blogs: 'blogs',
   tags: 'tags',
 } as const;
 
-export const cmsApi = {
+export const cmsRepository = {
   /**
    * 記事一覧を取得
    */
