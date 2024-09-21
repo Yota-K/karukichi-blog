@@ -35,9 +35,8 @@ export const meta: MetaFunction = () => {
       content: 'ja_JP',
     },
     {
-      // TODO: ドメインとったら変更する
       property: 'og:url',
-      content: 'https://www.example.com',
+      content: 'https://karukichi-blog.com',
     },
     {
       property: 'og:description',
