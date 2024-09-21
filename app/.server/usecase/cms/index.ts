@@ -1,11 +1,12 @@
 import { config } from '../../../config';
-import { cmsApi } from '../../cms/';
 import { contentBodyParser } from '../../htmlParser';
+import { cmsRepository, kvRepository } from '../../repository';
 
 import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToPosts';
 import { paginateSchema } from './schema';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
+import type { Content } from '../../../types';
 import type { ClientType } from '../../cms';
 
 const { paginateLimit } = config;
@@ -19,7 +20,7 @@ export const cmsUseCase = {
 
     if (paginateNum.success) {
       const offset = paginateNum.data * paginateLimit - paginateLimit;
-      const posts = await cmsApi.getPosts(client, {
+      const posts = await cmsRepository.getPosts(client, {
         offset,
       });
 
@@ -30,7 +31,7 @@ export const cmsUseCase = {
       };
     }
 
-    const posts = await cmsApi.getPosts(client);
+    const posts = await cmsRepository.getPosts(client);
     const filterPosts = filterAndAssignServiceUrlToPosts(posts);
 
     return {
@@ -54,7 +55,7 @@ export const cmsUseCase = {
       offset = paginateNum.data * paginateLimit - paginateLimit;
     }
 
-    const posts = await cmsApi.getPosts(client, {
+    const posts = await cmsRepository.getPosts(client, {
       offset,
       filters: `tag_field[contains]${tagId}`,
     });
@@ -77,25 +78,45 @@ export const cmsUseCase = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string): Promise<FindPostDto> => {
-    const content = await cmsApi.findPost(client, contentId);
+  findPost: async (
+    client: ClientType,
+    contentId: string,
+    kv: KVNamespace<string>,
+    isDev: boolean,
+  ): Promise<FindPostDto> => {
+    const cachedResponse = isDev ? null : await kvRepository.getPostDetailCache<Content>(kv, contentId);
 
-    // エラーが発生した時しかstatusを返却しないようにしているので、statusがある場合はエラーとして扱う
-    if ('status' in content) {
+    if (!cachedResponse) {
+      const content = await cmsRepository.findPost(client, contentId);
+      // エラーが発生した時しかstatusを返却しないようにしているので、statusがある場合はエラーとして扱う
+      if ('status' in content) {
+        return {
+          status: content.status,
+          content: undefined,
+          toc: [],
+        };
+      }
+
+      if (!isDev) await kvRepository.savePostDetailCache(kv, contentId, content);
+      const { body, toc } = contentBodyParser(content.body);
+
       return {
-        status: content.status,
-        content: undefined,
-        toc: [],
+        status: 200,
+        content: {
+          ...content,
+          body,
+        },
+        toc,
       };
     }
 
-    const { body, toc } = contentBodyParser(content.body);
+    const { body, toc } = contentBodyParser(cachedResponse.body);
 
     return {
       status: 200,
       // parseした記事の本文で上書きする
       content: {
-        ...content,
+        ...cachedResponse,
         body,
       },
       toc,
@@ -106,7 +127,7 @@ export const cmsUseCase = {
    * タグ一覧を取得
    */
   getTags: async (client: ClientType): Promise<GetTagsDto> => {
-    const tags = await cmsApi.getTags(client);
+    const tags = await cmsRepository.getTags(client);
     return {
       tags,
     };

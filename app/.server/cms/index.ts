@@ -1,5 +1,4 @@
-import type { TagResponse } from './type';
+import type { CustomErrorResponse, PickMicroCMSQueries, TagResponse } from './type';
 
-export type { TagResponse };
+export type { CustomErrorResponse, PickMicroCMSQueries, TagResponse };
 export * from './client';
-export * from './api';

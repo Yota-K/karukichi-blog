@@ -8,7 +8,11 @@ import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
 type LoaderResponse = Promise<TypedResponse<FindPostDto>>;
 
-export const articleDetailLoader = async ({ params, context }: LoaderFunctionArgs): LoaderResponse => {
+const checkHost = (host: string | null) => {
+  return Boolean(host?.includes('localhost:5173'));
+};
+
+export const articleDetailLoader = async ({ params, context, request }: LoaderFunctionArgs): LoaderResponse => {
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
   if (!params.contentId) {
     throw new Response(null, {
@@ -19,26 +23,21 @@ export const articleDetailLoader = async ({ params, context }: LoaderFunctionArg
 
   const { CMS_API_KEY, RESPONSE_CACHE_KV } = context.cloudflare.env;
 
-  // TODO: 後でリファクタリングする
-  const cacheKey = `post:${params.contentId}`;
-  // TODO: as使わないようにしたいところ
-  const cachedResponse = await RESPONSE_CACHE_KV.get(cacheKey);
-  const cachedResponseParsed = cachedResponse ? (JSON.parse(cachedResponse) as FindPostDto) : null;
+  // kvをremixのdevサーバで動かすと、kvからデータを取得するときにエラーで落ちるので、アクセスした URI とポートをみてローカル環境かどうか判断する
+  const isDev = checkHost(request.headers.get('host'));
+  const { status, content, toc } = await cmsUseCase.findPost(
+    client(CMS_API_KEY),
+    params.contentId,
+    RESPONSE_CACHE_KV,
+    isDev,
+  );
 
-  if (!cachedResponseParsed) {
-    const { status, content, toc } = await cmsUseCase.findPost(client(CMS_API_KEY), params.contentId);
-
-    if (status === 404) {
-      throw new Response(null, {
-        status: 404,
-        statusText: 'Not Found',
-      });
-    }
-
-    await RESPONSE_CACHE_KV.put(cacheKey, JSON.stringify({ status, content, toc }));
-
-    return json({ status, content, toc });
+  if (status === 404) {
+    throw new Response(null, {
+      status: 404,
+      statusText: 'Not Found',
+    });
   }
 
-  return json(cachedResponseParsed);
+  return json({ status, content, toc });
 };

@@ -1,20 +1,19 @@
 import { json } from '@remix-run/cloudflare';
 import { z } from 'zod';
 
-import { config } from '../../config';
+import { config } from '../../../config';
 
 import { contentSchema } from './schema';
 
-import type { ClientType } from './client';
-import type { CustomErrorResponse, PickMicroCMSQueries, TagResponse } from './type';
-import type { Content, MicroCMSListResponse } from '../../types';
+import type { Content, MicroCMSListResponse } from '../../../types';
+import type { ClientType, CustomErrorResponse, PickMicroCMSQueries, TagResponse } from '../../cms';
 
 const endpoints = {
   blogs: 'blogs',
   tags: 'tags',
 } as const;
 
-export const cmsApi = {
+export const cmsRepository = {
   /**
    * 記事一覧を取得
    */
