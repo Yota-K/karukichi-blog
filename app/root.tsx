@@ -66,7 +66,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <AppHeader />
-        <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-12">{children}</div>
+        <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-12">{children}</main>
         <AppFooter />
         <ScrollRestoration />
         <Scripts />
