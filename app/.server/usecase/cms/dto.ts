@@ -1,12 +1,9 @@
-import type { Content, MicroCMSListResponse, Toc } from '../../../types';
+import type { Content, ContentList, MicroCMSListResponse, PaginateNum, Toc } from '../../../types';
 import type { TagResponse } from '../../cms';
 
 type Posts = MicroCMSListResponse<Content>;
-type PaginateNum = {
-  paginateNum?: number;
-};
 
-export type GetPostsDto = Posts & PaginateNum;
+export type GetPostsDto = ContentList & PaginateNum;
 
 export type GetPostsByTagDto = Posts & {
   tagName: string | undefined;

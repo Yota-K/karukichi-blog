@@ -1,38 +1,52 @@
-import { Heading, Pagination } from '../components';
+import { Await } from '@remix-run/react';
+import { Suspense } from 'react';
+
+import { Heading, Pagination, Skeleton } from '../components';
 import { PostList, ProfileArea, TagArea } from '../features';
 
-import type { Content } from '../types';
+import type { ContentList, PaginateNum } from '../types';
+import type { SerializeFrom } from '@remix-run/cloudflare';
 import type { ComponentProps } from 'react';
 
 type Props = {
-  contents: Content[];
-  paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
-  totalCount: ComponentProps<typeof Pagination>['totalCount'];
+  posts: Promise<SerializeFrom<ContentList & PaginateNum>>;
   tags: ComponentProps<typeof TagArea>['tagField'];
 };
 
-export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Props) => {
-  const isFirstPage = !paginateNum || paginateNum === 1;
+const SkkeletonList = () => {
+  return Array.from({ length: 10 }, (_, i) => i + 1).map((e) => <Skeleton key={e} />);
+};
+
+export const ArticleListPage = ({ posts, tags }: Props) => {
   return (
-    <div>
-      {isFirstPage && <ProfileArea />}
-      <section>
-        <Heading as="h2" size="lg" className="mb-4">
-          Posts
-        </Heading>
-        <PostList contents={contents} />
-        <Pagination paginateNum={paginateNum} totalCount={totalCount} />
-      </section>
-      {isFirstPage && (
-        <section>
-          <Heading as="h2" size="lg">
-            Tags
-          </Heading>
-          <div className="mt-4">
-            <TagArea tagField={tags} />
-          </div>
-        </section>
-      )}
-    </div>
+    <Suspense fallback={<SkkeletonList />}>
+      <Await resolve={posts}>
+        {({ contents, paginateNum, totalCount }) => {
+          const isFirstPage = !paginateNum || paginateNum === 1;
+          return (
+            <>
+              {isFirstPage && <ProfileArea />}
+              <section>
+                <Heading as="h2" size="lg" className="mb-4">
+                  Posts
+                </Heading>
+                <PostList contents={contents} />
+                <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+              </section>
+              {isFirstPage && (
+                <section>
+                  <Heading as="h2" size="lg">
+                    Tags
+                  </Heading>
+                  <div className="mt-4">
+                    <TagArea tagField={tags} />
+                  </div>
+                </section>
+              )}
+            </>
+          );
+        }}
+      </Await>
+    </Suspense>
   );
 };

@@ -29,3 +29,9 @@ export type Content = Common<{
   description: string;
   tag_field: TaxonomyField[];
 }>;
+
+export type ContentList = MicroCMSListResponse<Content>;
+
+export type PaginateNum = {
+  paginateNum?: number;
+};
