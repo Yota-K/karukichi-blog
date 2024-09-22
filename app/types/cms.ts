@@ -31,7 +31,3 @@ export type Content = Common<{
 }>;
 
 export type ContentList = MicroCMSListResponse<Content>;
-
-export type PaginateNum = {
-  paginateNum?: number;
-};
