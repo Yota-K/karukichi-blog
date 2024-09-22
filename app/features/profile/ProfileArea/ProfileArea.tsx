@@ -37,6 +37,7 @@ export const ProfileArea = () => {
           alt="プロフィール画像"
           className="m-auto inline-block rounded-full border border-gray-500 bg-white"
           width={80}
+          height={80}
         />
       </div>
       <div className="my-4">
