@@ -19,6 +19,6 @@ export const headers: HeadersFunction = () => {
 export { loader };
 
 export default function Page() {
-  const { posts, tags } = useLoaderData<typeof loader>();
-  return <ArticleListPage tags={tags.contents} posts={posts} />;
+  const { contents, totalCount, paginateNum, tags } = useLoaderData<typeof loader>();
+  return <ArticleListPage contents={contents} paginateNum={paginateNum} totalCount={totalCount} tags={tags.contents} />;
 }
