@@ -1,14 +1,22 @@
-import { Heading, Pagination } from '../components';
+import { Await } from '@remix-run/react';
+import { Suspense } from 'react';
+
+import { Heading, Pagination, Skeleton } from '../components';
 import { PostList, ProfileArea, TagArea } from '../features';
 
-import type { Content } from '../types';
+import type { ContentList } from '../types';
+import type { SerializeFrom } from '@remix-run/cloudflare';
 import type { ComponentProps } from 'react';
 
 type Props = {
-  contents: Content[];
+  contents: Promise<SerializeFrom<ContentList['contents']>>;
   paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
   totalCount: ComponentProps<typeof Pagination>['totalCount'];
   tags: ComponentProps<typeof TagArea>['tagField'];
+};
+
+const SkkeletonList = () => {
+  return Array.from({ length: 10 }, (_, i) => i + 1).map((e) => <Skeleton key={e} />);
 };
 
 export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Props) => {
@@ -20,8 +28,16 @@ export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Pro
         <Heading as="h2" size="lg" className="mb-4">
           Posts
         </Heading>
-        <PostList contents={contents} />
-        <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+        <Suspense fallback={<SkkeletonList />}>
+          <Await resolve={contents}>
+            {(contents) => (
+              <>
+                <PostList contents={contents} />
+                <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+              </>
+            )}
+          </Await>
+        </Suspense>
       </section>
       {isFirstPage && (
         <section>

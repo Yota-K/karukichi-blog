@@ -1,12 +1,19 @@
-import { json } from '@remix-run/cloudflare';
+import { defer } from '@remix-run/cloudflare';
 
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 
 import type { GetPostsByTagDto } from '../../usecase';
-import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
+import type { LoaderFunctionArgs, TypedDeferredData } from '@remix-run/cloudflare';
 
-type LoaderResponse = Promise<TypedResponse<GetPostsByTagDto>>;
+type LoaderResponse = Promise<
+  TypedDeferredData<{
+    contents: Promise<GetPostsByTagDto['contents']>;
+    paginateNum: GetPostsByTagDto['paginateNum'];
+    tagName: GetPostsByTagDto['tagName'];
+    totalCount: GetPostsByTagDto['totalCount'];
+  }>
+>;
 
 export const tagRelatedArticleLoader = async ({ request, params, context }: LoaderFunctionArgs): LoaderResponse => {
   if (!params.tagId) {
@@ -29,10 +36,10 @@ export const tagRelatedArticleLoader = async ({ request, params, context }: Load
     });
   }
 
-  return json({
-    ...posts,
-    tagName: posts.tagName,
-    tagSlug: posts.tagSlug,
+  return defer({
+    contents: Promise.resolve(posts.contents),
     paginateNum: posts.paginateNum,
+    tagName: posts.tagName,
+    totalCount: posts.totalCount,
   });
 };
