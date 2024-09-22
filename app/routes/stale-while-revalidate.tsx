@@ -8,17 +8,17 @@ export async function loader() {
   const delay = (ms: number) =>
     new Promise<{ text: string }>((resolve) => {
       setTimeout(() => {
-        resolve({ text: 'Hello, World!' });
+        resolve({ text: new Date().toISOString() });
       }, ms);
     });
 
-  const res = delay(5000);
+  const res = delay(2000);
   return defer({ res });
 }
 
 export const headers: HeadersFunction = () => {
   return {
-    'Cache-Control': 'no-store, no-cache, max-age=0, s-maxage=0',
+    'Cache-Control': 'max-age=0, s-maxage=60, stale-while-revalidate=60',
   };
 };
 
