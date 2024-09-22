@@ -15,10 +15,6 @@ type Props = {
   totalCount: ComponentProps<typeof Pagination>['totalCount'];
 };
 
-const SkkeletonList = () => {
-  return Array.from({ length: 10 }, (_, i) => i + 1).map((e) => <Skeleton key={e} />);
-};
-
 export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount }: Props) => {
   return (
     <div>
@@ -33,12 +29,12 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
         </div>
       )}
       <section>
-        <Suspense fallback={<SkkeletonList />}>
+        <Suspense fallback={<Skeleton length={10} />}>
           <Await resolve={contents}>
             {(contents) => (
               <>
                 <PostList contents={contents} />
-                <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+                <Pagination {...{ paginateNum, totalCount }} />
               </>
             )}
           </Await>

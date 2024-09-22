@@ -15,10 +15,6 @@ type Props = {
   tags: ComponentProps<typeof TagArea>['tagField'];
 };
 
-const SkkeletonList = () => {
-  return Array.from({ length: 10 }, (_, i) => i + 1).map((e) => <Skeleton key={e} />);
-};
-
 export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Props) => {
   const isFirstPage = !paginateNum || paginateNum === 1;
   return (
@@ -28,12 +24,12 @@ export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Pro
         <Heading as="h2" size="lg" className="mb-4">
           Posts
         </Heading>
-        <Suspense fallback={<SkkeletonList />}>
+        <Suspense fallback={<Skeleton length={10} />}>
           <Await resolve={contents}>
             {(contents) => (
               <>
                 <PostList contents={contents} />
-                <Pagination paginateNum={paginateNum} totalCount={totalCount} />
+                <Pagination {...{ paginateNum, totalCount }} />
               </>
             )}
           </Await>
