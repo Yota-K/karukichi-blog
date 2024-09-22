@@ -9,7 +9,7 @@ export async function loader() {
 
 export const headers: HeadersFunction = () => {
   return {
-    'Cache-Control': 'max-age=60, s-maxage=60, stale-while-revalidate=60',
+    'Cache-Control': 'public, max-age=60, s-maxage=60, stale-while-revalidate=60',
   };
 };
 
