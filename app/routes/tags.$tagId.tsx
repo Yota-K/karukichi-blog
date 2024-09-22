@@ -8,7 +8,7 @@ import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
 
 export const headers: HeadersFunction = () => {
   return {
-    'Cache-Control': 'max-age=0, s-maxage=604800, stale-while-revalidate=360, stale-if-error=86400',
+    'Cache-Control': 'public, max-age=180, s-maxage=180, stale-while-revalidate=180, stale-if-error=180',
   };
 };
 
