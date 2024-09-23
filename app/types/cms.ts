@@ -26,7 +26,7 @@ export type Content = Common<{
   title: string;
   body: string;
   type: ContentType[];
-  description: string;
+  description?: string;
   tag_field: TaxonomyField[];
 }>;
 

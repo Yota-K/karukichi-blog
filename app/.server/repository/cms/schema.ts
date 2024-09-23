@@ -10,7 +10,7 @@ export const contentSchema = z.object({
   title: z.string(),
   body: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
-  description: z.string(),
+  description: z.string().optional(),
   tag_field: z.array(
     z.object({
       id: z.string(),

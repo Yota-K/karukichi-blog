@@ -6,10 +6,12 @@ import { ArticleDetailPage } from '../page';
 
 import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
 
-// TODO: draftKeyが設定されている場合は、キャッシュしないようにする
-export const headers: HeadersFunction = () => {
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
+  const cacheControl =
+    loaderHeaders.get('Cache-Control') ??
+    'public, max-age=180, s-maxage=180, stale-while-revalidate=180, stale-if-error=180';
   return {
-    'Cache-Control': 'public, max-age=180, s-maxage=180, stale-while-revalidate=180, stale-if-error=180',
+    'Cache-Control': cacheControl,
   };
 };
 

@@ -81,13 +81,14 @@ export const cmsUseCase = {
   findPost: async (
     client: ClientType,
     contentId: string,
+    draftKey: string | null,
     kv: KVNamespace<string>,
     isDev: boolean,
   ): Promise<FindPostDto> => {
     const cachedResponse = isDev ? null : await kvRepository.getPostDetailCache<Content>(kv, contentId);
 
-    if (!cachedResponse) {
-      const content = await cmsRepository.findPost(client, contentId);
+    if (!cachedResponse || draftKey !== null) {
+      const content = await cmsRepository.findPost(client, contentId, draftKey);
       // エラーが発生した時しかstatusを返却しないようにしているので、statusがある場合はエラーとして扱う
       if ('status' in content) {
         return {

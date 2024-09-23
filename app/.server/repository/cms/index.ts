@@ -33,11 +33,18 @@ export const cmsRepository = {
   /**
    * 特定の記事を取得
    */
-  findPost: async (client: ClientType, contentId: string): Promise<Content | CustomErrorResponse> => {
+  findPost: async (
+    client: ClientType,
+    contentId: string,
+    draftKey: string | null,
+  ): Promise<Content | CustomErrorResponse> => {
     return await client
       .get<Content>({
         endpoint: endpoints.blogs,
         contentId,
+        queries: {
+          draftKey: draftKey ?? undefined,
+        },
       })
       .then((res) => {
         // zodを使ってバリデーションチェックを行うことで、型の安全性と、厳密なエラーハンドリングを実現できる
