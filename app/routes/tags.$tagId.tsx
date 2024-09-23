@@ -19,13 +19,14 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export default function Page() {
-  const { contents, tagName, totalCount, paginateNum } = useLoaderData<typeof loader>();
+  const { contents, tagName, totalCount, paginateNum, tags } = useLoaderData<typeof loader>();
   return (
     <TagRelatedArticleListPage
       contents={contents}
       tagName={tagName}
       totalCount={totalCount}
       paginateNum={paginateNum}
+      tags={tags.contents}
     />
   );
 }
