@@ -98,7 +98,8 @@ export const cmsUseCase = {
         };
       }
 
-      if (!isDev) await kvRepository.savePostDetailCache(kv, contentId, content);
+      // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
+      if (!isDev && draftKey === null) await kvRepository.savePostDetailCache(kv, contentId, content);
       const { body, toc } = contentBodyParser(content.body);
 
       return {
