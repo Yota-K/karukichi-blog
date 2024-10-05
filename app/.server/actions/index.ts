@@ -1,1 +1,1 @@
-export * from './deleteCacheAction';
+export * from './revalidateCacheAction';
