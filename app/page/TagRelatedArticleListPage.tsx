@@ -2,7 +2,7 @@ import { Await } from '@remix-run/react';
 import { Suspense } from 'react';
 
 import { Heading, Pagination, Skeleton } from '../components';
-import { PostList } from '../features';
+import { PostList, TagArea } from '../features';
 
 import type { ContentList } from '../types';
 import type { SerializeFrom } from '@remix-run/cloudflare';
@@ -13,9 +13,10 @@ type Props = {
   tagName?: string;
   paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
   totalCount: ComponentProps<typeof Pagination>['totalCount'];
+  tags: ComponentProps<typeof TagArea>['tagField'];
 };
 
-export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount }: Props) => {
+export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount, tags }: Props) => {
   return (
     <div>
       {tagName && (
@@ -39,6 +40,14 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
             )}
           </Await>
         </Suspense>
+      </section>
+      <section>
+        <Heading as="h2" size="lg">
+          Tags
+        </Heading>
+        <div className="mt-4">
+          <TagArea tagField={tags} />
+        </div>
       </section>
     </div>
   );

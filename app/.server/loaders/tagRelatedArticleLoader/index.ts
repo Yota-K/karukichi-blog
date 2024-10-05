@@ -3,7 +3,7 @@ import { defer } from '@remix-run/cloudflare';
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 
-import type { GetPostsByTagDto } from '../../usecase';
+import type { GetPostsByTagDto, GetTagsDto } from '../../usecase';
 import type { LoaderFunctionArgs, TypedDeferredData } from '@remix-run/cloudflare';
 
 type LoaderResponse = Promise<
@@ -12,6 +12,7 @@ type LoaderResponse = Promise<
     paginateNum: GetPostsByTagDto['paginateNum'];
     tagName: GetPostsByTagDto['tagName'];
     totalCount: GetPostsByTagDto['totalCount'];
+    tags: GetTagsDto['tags'];
   }>
 >;
 
@@ -28,6 +29,7 @@ export const tagRelatedArticleLoader = async ({ request, params, context }: Load
 
   const { CMS_API_KEY } = context.cloudflare.env;
   const posts = await cmsUseCase.getPostsByTag(client(CMS_API_KEY), params.tagId, pageQueryParams);
+  const { tags } = await cmsUseCase.getTags(client(CMS_API_KEY));
 
   if (!posts) {
     throw new Response(null, {
@@ -41,5 +43,6 @@ export const tagRelatedArticleLoader = async ({ request, params, context }: Load
     paginateNum: posts.paginateNum,
     tagName: posts.tagName,
     totalCount: posts.totalCount,
+    tags,
   });
 };

@@ -22,4 +22,11 @@ export const kvRepository = {
   savePostDetailCache: async (kv: KVNamespace<string>, contentId: string, content: Content) => {
     return await kv.put(CACHE_KEYS.postDetail(contentId), JSON.stringify(content));
   },
+
+  /**
+   * 特定の記事のキャッシュを削除
+   */
+  deletePostDetailCache: async (kv: KVNamespace<string>, contentId: string) => {
+    return await kv.delete(CACHE_KEYS.postDetail(contentId));
+  },
 };
