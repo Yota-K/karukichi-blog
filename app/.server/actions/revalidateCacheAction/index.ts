@@ -1,3 +1,5 @@
+import { createHmac, timingSafeEqual } from 'crypto';
+
 import { json } from '@remix-run/cloudflare';
 import { z } from 'zod';
 
@@ -61,11 +63,22 @@ const blogEditSchema = z.object({
   contents: contentsSchema,
 });
 
-export const revalidateCacheAction = async ({ request }: ActionFunctionArgs) => {
+export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs) => {
   if (request.method !== 'POST') {
     return json({ message: 'Method Not Allowed' }, { status: 405 });
   }
 
+  // note: WebhookリクエストがmicroCMSからのものであることを検証する処理も実行したいが、
+  // うまくいかないので、api keyのチェックのみに留めている
+  // https://document.microcms.io/manual/webhook-setting#hb2d39bd6cc
+  const apiKey = context.cloudflare.env.REVALIDATE_CACHE_API_KEY;
+  if (apiKey !== request.headers.get('X-API-KEY')) {
+    return json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
+  // microCMSからのリクエストかどうか検証する
+
+  // TODO: この辺の処理はusecase層に移動する
   const bodyText = await request.text();
   const convertToObj = JSON.parse(bodyText);
   const parsedBody = blogEditSchema.safeParse(convertToObj);
@@ -75,15 +88,10 @@ export const revalidateCacheAction = async ({ request }: ActionFunctionArgs) => 
   }
 
   // eslint-disable-next-line no-console
-  console.log('parsedBody', parsedBody);
-
+  console.info('parsedBody', parsedBody);
   // const { id: oldPostId } = parsedBody.data.contents.old;
 
-  // console.log('oldPostId', oldPostId);
-
   // TODO: 処理の流れ
-  // 1. microCMSからのリクエストかどうか検証する
-  // 2. 正常な場合は、更新対象の記事情報をmicroCMSから取得する
   // 3. 取得した記事情報のcontentIdを使ってKVからキャッシュを削除する
 
   return json({ message: 'Cache deleted' });
