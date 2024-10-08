@@ -2,9 +2,11 @@ import { json } from '@remix-run/cloudflare';
 
 import { kvUseCase } from '../../usecase';
 
-import type { ActionFunctionArgs } from '@remix-run/cloudflare';
+import type { ActionFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
-export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs) => {
+type ActionResponse = Promise<TypedResponse<{ message: string }>>;
+
+export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs): ActionResponse => {
   if (request.method !== 'POST') {
     return json({ message: 'Method Not Allowed' }, { status: 405 });
   }
