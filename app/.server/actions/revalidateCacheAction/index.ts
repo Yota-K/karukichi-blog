@@ -13,6 +13,13 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
 
   const { REVALIDATE_CACHE_API_KEY, RESPONSE_CACHE_KV } = context.cloudflare.env;
 
+  // eslint-disable-next-line no-console
+  console.log('REVALIDATE_CACHE_API_KEY:', REVALIDATE_CACHE_API_KEY);
+  // eslint-disable-next-line no-console
+  console.log("request.headers.get('X-API-KEY'):", request.headers.get('X-API-KEY'));
+  // eslint-disable-next-line no-console
+  console.log('request body:', request.body);
+
   // note: WebhookリクエストがmicroCMSからのものであることを検証する処理も実行したいが、
   // うまくいかないので、api keyのチェックのみに留めている
   // https://document.microcms.io/manual/webhook-setting#hb2d39bd6cc
