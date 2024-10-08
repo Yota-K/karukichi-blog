@@ -15,9 +15,10 @@ export const kvUseCase = {
 
     if (!parsedBody.success) return undefined;
 
-    const { type, id: contentId } = parsedBody.data;
+    const { type, id: contentId, contents } = parsedBody.data;
 
-    if (type === 'edit' && contentId !== null) {
+    // 投稿タイプがcmsの場合のみ、キャッシュを削除する
+    if (type === 'edit' && contentId !== null && contents?.new?.publishValue.type === 'cms') {
       await kvRepository.deletePostDetailCache(kv, contentId);
       return contentId;
     }

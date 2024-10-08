@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// TODO: 後で移動
+// TODO: 後で共通化したい
 const tagFieldSchema = z.object({
   id: z.string(),
   createdAt: z.string(), // DateTime形式を使用している場合は、カスタムバリデーションを追加できます
@@ -34,7 +34,7 @@ const blogContentSchema = z.object({
   publishedAt: z.string(),
   revisedAt: z.string(),
   title: z.string(),
-  type: z.array(z.string()),
+  type: z.union([z.literal('cms'), z.literal('qiita')]),
   body: z.string(),
   category_field: categoryFieldSchema,
   tag_field: z.array(tagFieldSchema),
