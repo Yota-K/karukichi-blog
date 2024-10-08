@@ -3,4 +3,5 @@
 # https://developers.cloudflare.com/workers/configuration/secrets/#add-secrets-to-your-project
 
 CMS_API_KEY=
+REVALIDATE_CACHE_API_KEY=
 RECAPTCHA_KEY=

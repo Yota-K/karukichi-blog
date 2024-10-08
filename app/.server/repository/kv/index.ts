@@ -1,11 +1,10 @@
 import type { Content } from '../../../types';
 
+// TODO: 一旦は記事詳細のキャッシュのみkvに保存するようにしているが、microCMSに対するapiリクエストが増えてきたら、
+// 記事一覧やタグページなどのキャッシュをkvに保存することを検討する
 const CACHE_KEYS = {
   postDetail: (contentId: string) => `post:${contentId}`,
 };
-
-// TODO: 一旦は記事詳細のキャッシュのみkvに保存するようにしているが、microCMSに対するapiリクエストがが増えてきたら、
-// 記事一覧やタグページなどのキャッシュをkvに保存することを検討する
 
 export const kvRepository = {
   /**
