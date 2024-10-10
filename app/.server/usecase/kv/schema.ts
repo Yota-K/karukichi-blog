@@ -5,7 +5,7 @@ const tagFieldSchema = z.object({
   id: z.string(),
   createdAt: z.string(), // DateTime形式を使用している場合は、カスタムバリデーションを追加できます
   updatedAt: z.string(),
-  publishedAt: z.string(),
+  publishedAt: z.string().optional(),
   revisedAt: z.string().optional(),
   name: z.string(),
   posts: z.array(
