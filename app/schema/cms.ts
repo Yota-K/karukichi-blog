@@ -19,10 +19,10 @@ const taxonomySchema = z.object({
  */
 export const contentSchema = z.object({
   id: z.string(),
-  description: z.string().nullable(),
+  description: z.string().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
-  publishedAt: z.string(),
+  publishedAt: z.string().optional(),
   revisedAt: z.string(),
   title: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
@@ -36,11 +36,11 @@ const blogStatusSchema = z
   .object({
     id: z.string(),
     status: z.array(z.string()),
-    draftKey: z.string().nullable(),
+    draftKey: z.string().optional(),
     publishValue: contentSchema,
     draftValue: z.null(),
   })
-  .nullable();
+  .optional();
 
 /**
  * webhookの実行時のリクエストボディに含まれるコンテンツのスキーマ
@@ -48,14 +48,14 @@ const blogStatusSchema = z
 export const contentSchemaForWebhook = z.object({
   service: z.string(),
   api: z.string(),
-  id: z.string().nullable(),
+  id: z.string().optional(),
   type: z.union([z.literal('new'), z.literal('edit'), z.literal('delete')]),
   contents: z
     .object({
       old: blogStatusSchema,
       new: blogStatusSchema,
     })
-    .nullable(),
+    .optional(),
 });
 
 export type Content = z.infer<typeof contentSchema>;
