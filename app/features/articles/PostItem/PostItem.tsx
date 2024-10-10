@@ -2,7 +2,7 @@ import { Heading, Link } from '../../../components';
 import { dateFormat } from '../../../utils';
 import { TagArea } from '../TagArea';
 
-import type { Content } from '../../../types';
+import type { Content } from '../../../schema';
 import type { PropsWithChildren } from 'react';
 
 type LinkWrapperProps = PropsWithChildren<{

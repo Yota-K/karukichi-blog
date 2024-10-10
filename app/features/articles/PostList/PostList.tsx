@@ -1,6 +1,6 @@
 import { PostItem } from '../PostItem';
 
-import type { Content } from '../../../types';
+import type { Content } from '../../../schema';
 
 type Props = {
   contents: Content[];

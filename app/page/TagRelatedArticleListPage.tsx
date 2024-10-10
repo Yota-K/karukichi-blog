@@ -4,12 +4,12 @@ import { Suspense } from 'react';
 import { Heading, Pagination, Skeleton } from '../components';
 import { PostList, TagArea } from '../features';
 
-import type { ContentList } from '../types';
+import type { Content } from '../schema';
 import type { SerializeFrom } from '@remix-run/cloudflare';
 import type { ComponentProps } from 'react';
 
 type Props = {
-  contents: Promise<SerializeFrom<ContentList['contents']>>;
+  contents: Promise<SerializeFrom<Content[]>>;
   tagName?: string;
   paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
   totalCount: ComponentProps<typeof Pagination>['totalCount'];

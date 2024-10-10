@@ -1,4 +1,4 @@
-import type { Content, MicroCMSListResponse } from '../types';
+import type { Content } from '../schema';
 
 type ContentOverride = Partial<Content>;
 
@@ -51,7 +51,12 @@ export const generateMockContentListResponse = ({
   offset?: number;
   limit?: number;
   overrideContents?: ContentOverride[];
-}): MicroCMSListResponse<Content> => {
+}): {
+  contents: Content[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+} => {
   const defaultContents: Content[] = [generateMockContent()];
 
   const contents = overrideContents.map((override, index) =>

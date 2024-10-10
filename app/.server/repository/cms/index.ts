@@ -2,11 +2,11 @@ import { json } from '@remix-run/cloudflare';
 import { z } from 'zod';
 
 import { config } from '../../../config';
+import { contentSchema } from '../../../schema';
 
-import { contentSchema } from './schema';
-
-import type { Content, MicroCMSListResponse } from '../../../types';
+import type { Content } from '../../../schema';
 import type { ClientType, CustomErrorResponse, PickMicroCMSQueries, TagResponse } from '../../cms';
+import type { MicroCMSListResponse } from 'microcms-js-sdk';
 
 const endpoints = {
   blogs: 'blogs',

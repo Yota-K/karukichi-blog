@@ -1,9 +1,8 @@
 import { z } from 'zod';
 
-// TODO: 後で共通化したい
-const tagFieldSchema = z.object({
+const taxonomySchema = z.object({
   id: z.string(),
-  createdAt: z.string(), // DateTime形式を使用している場合は、カスタムバリデーションを追加できます
+  createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string().optional(),
   revisedAt: z.string().optional(),
@@ -15,20 +14,12 @@ const tagFieldSchema = z.object({
   ),
 });
 
-const categoryFieldSchema = z.object({
+/**
+ * コンテンツのスキーマ
+ */
+export const contentSchema = z.object({
   id: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  revisedAt: z.string(),
-  name: z.string(),
-  posts: z.array(
-    z.object({
-      id: z.string(),
-    }),
-  ),
-});
-const blogContentSchema = z.object({
-  id: z.string(),
+  description: z.string().nullable(),
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string(),
@@ -36,29 +27,35 @@ const blogContentSchema = z.object({
   title: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
   body: z.string(),
-  category_field: categoryFieldSchema,
-  tag_field: z.array(tagFieldSchema),
+  // caregoryは使用しないので不要になったタイミングで消す
+  // category_field: taxonomySchema,
+  tag_field: z.array(taxonomySchema),
 });
+
 const blogStatusSchema = z
   .object({
     id: z.string(),
     status: z.array(z.string()),
     draftKey: z.string().nullable(),
-    publishValue: blogContentSchema,
+    publishValue: contentSchema,
     draftValue: z.null(),
   })
   .nullable();
-const contentsSchema = z
-  .object({
-    old: blogStatusSchema,
-    new: blogStatusSchema,
-  })
-  .nullable();
 
-export const schema = z.object({
+/**
+ * webhookの実行時のリクエストボディに含まれるコンテンツのスキーマ
+ */
+export const contentSchemaForWebhook = z.object({
   service: z.string(),
   api: z.string(),
   id: z.string().nullable(),
   type: z.union([z.literal('new'), z.literal('edit'), z.literal('delete')]),
-  contents: contentsSchema,
+  contents: z
+    .object({
+      old: blogStatusSchema,
+      new: blogStatusSchema,
+    })
+    .nullable(),
 });
+
+export type Content = z.infer<typeof contentSchema>;
