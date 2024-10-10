@@ -2,7 +2,8 @@ import { anchorTagParser } from '../../htmlParser';
 
 import { urlSchema } from './schema';
 
-import type { Content, MicroCMSListResponse } from '../../../types';
+import type { Content } from '../../../schema';
+import type { MicroCMSListResponse } from 'microcms-js-sdk';
 
 /**
  * 投稿タイプによって記事をフィルタリングする処理

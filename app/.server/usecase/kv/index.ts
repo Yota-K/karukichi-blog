@@ -1,4 +1,4 @@
-import { contentSchemaForWebhook } from '../../cms';
+import { contentSchemaForWebhook } from '../../../schema';
 import { kvRepository } from '../../repository';
 
 export const kvUseCase = {

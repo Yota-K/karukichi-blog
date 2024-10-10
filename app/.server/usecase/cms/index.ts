@@ -6,7 +6,7 @@ import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToP
 import { paginateSchema } from './schema';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
-import type { Content } from '../../../types';
+import type { Content } from '../../../schema';
 import type { ClientType } from '../../cms';
 
 const { paginateLimit } = config;
