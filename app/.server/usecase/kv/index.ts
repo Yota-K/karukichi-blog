@@ -24,7 +24,7 @@ export const kvUseCase = {
     const { type, id: contentId, contents } = parsedBody.data;
 
     // 投稿タイプがcmsの場合のみ、キャッシュを削除する
-    if (type === 'edit' && contentId !== null && contents?.new?.publishValue.type === 'cms') {
+    if (type === 'edit' && contentId !== null && contents?.new?.publishValue?.type.includes('cms')) {
       await kvRepository.deletePostDetailCache(kv, contentId);
       return contentId;
     }
