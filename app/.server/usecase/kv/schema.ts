@@ -34,7 +34,7 @@ const blogContentSchema = z.object({
   publishedAt: z.string(),
   revisedAt: z.string(),
   title: z.string(),
-  type: z.union([z.literal('cms'), z.literal('qiita')]),
+  type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
   body: z.string(),
   category_field: categoryFieldSchema,
   tag_field: z.array(tagFieldSchema),
