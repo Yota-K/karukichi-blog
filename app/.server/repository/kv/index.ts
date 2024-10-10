@@ -1,4 +1,4 @@
-import type { Content } from '../../../types';
+import type { Content } from '../../../schema';
 
 // TODO: 一旦は記事詳細のキャッシュのみkvに保存するようにしているが、microCMSに対するapiリクエストが増えてきたら、
 // 記事一覧やタグページなどのキャッシュをkvに保存することを検討する

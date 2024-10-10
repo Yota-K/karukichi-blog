@@ -1,9 +1,10 @@
 import { Tag } from '../../../components';
 
-import type { TaxonomyField } from '../../../types';
+import type { Content } from '../../../schema';
 
 // idとnameのみ必須にする
 // TODO: 記事一覧を取得するときもidとnameのみ取得できるようにできれば、もっとシンプルにかける
+type TaxonomyField = Content['tag_field'][number];
 type PartialTaxonomyField = Partial<TaxonomyField>;
 type RequiredIdAndName = Required<Pick<PartialTaxonomyField, 'id' | 'name'>>;
 

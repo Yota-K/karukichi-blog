@@ -1,6 +1,5 @@
+import { contentSchemaForWebhook } from '../../cms';
 import { kvRepository } from '../../repository';
-
-import { schema } from './schema';
 
 export const kvUseCase = {
   /**
@@ -11,7 +10,7 @@ export const kvUseCase = {
 
     // microCMSのwebhookのリクエストには更新対象の記事データが含まれているので、リクエストボディに含まれるコンテンツ情報を取得して、パースする
     // - ref: https://document.microcms.io/manual/webhook-setting#h9f84bd737e
-    const parsedBody = schema.safeParse(convertToObj);
+    const parsedBody = contentSchemaForWebhook.safeParse(convertToObj);
 
     if (!parsedBody.success) return undefined;
 

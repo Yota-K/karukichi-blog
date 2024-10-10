@@ -2,7 +2,8 @@ import { Heading } from '../components';
 import { ContentBody, TagArea, Toc } from '../features';
 import { dateFormat } from '../utils';
 
-import type { Content, Toc as TocType } from '../types';
+import type { Content } from '../schema';
+import type { Toc as TocType } from '../types';
 import type { SerializeFrom } from '@remix-run/cloudflare';
 
 type Props = {
