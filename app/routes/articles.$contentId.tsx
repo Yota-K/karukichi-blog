@@ -23,7 +23,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!content) return [];
 
   const title = `${content.title} | ${config.siteTitle}`;
-  const ogImageUrl = config.ogImageUrl(title);
+  const ogImageUrl = config.ogImageUrl(content.title);
   return [
     { title },
     {
