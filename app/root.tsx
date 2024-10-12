@@ -60,6 +60,7 @@ export const meta: MetaFunction = () => {
 export { loader };
 
 export function Layout({ children }: { children: ReactNode }) {
+  const gaTrackingId = 'G-Y2MDQ3RC4V';
   return (
     <html lang="ja">
       <head>
@@ -67,6 +68,24 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        {
+          // <!-- Global site tag (gtag.js) - Google Analytics -->
+        }
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`} />
+        <script
+          async
+          id="gtag-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${gaTrackingId}', {
+          page_path: window.location.pathname,
+        });
+      `,
+          }}
+        />
       </head>
       <body>
         <AppHeader />
