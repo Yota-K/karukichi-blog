@@ -21,6 +21,9 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
   }
 
   const bodyText = await request.text();
+  //eslint-disable-next-line no-console
+  console.info('bodyText', bodyText);
+
   const postId = await kvUseCase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
 
   if (!postId) {

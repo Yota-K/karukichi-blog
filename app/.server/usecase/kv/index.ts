@@ -12,6 +12,9 @@ export const kvUseCase = {
     // - ref: https://document.microcms.io/manual/webhook-setting#h9f84bd737e
     const parsedBody = contentSchemaForWebhook.safeParse(convertToObj);
 
+    //eslint-disable-next-line no-console
+    console.info('parsedBody', parsedBody);
+
     if (!parsedBody.success) return undefined;
 
     const { type, id: contentId, contents } = parsedBody.data;
