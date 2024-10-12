@@ -16,8 +16,8 @@ export default {
       colors: {
         blue: {
           headerBlue: '#39394d',
-          primary: '#7180ea',
-          secondary: '#331cbf',
+          primary: '#331cbf',
+          secondary: '#7180ea',
           tertiary: '#dbeafe',
         },
       },

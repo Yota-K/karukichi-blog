@@ -45,7 +45,7 @@ export const ProfileArea = () => {
         <Text>ウェブ開発・ウェブ制作に関する情報を発信しています。</Text>
         <Link
           to="https://karukichi-portfolio.vercel.app/"
-          className="font-bold text-blue-secondary hover:underline"
+          className="font-bold text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
