@@ -8,7 +8,7 @@ type PaginationItemProps = {
 const PaginationItem = ({ linkTo, type }: PaginationItemProps) => {
   return (
     <Link
-      className="text-blue-secondary transition-all duration-300 hover:underline hover:opacity-70"
+      className="text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
       to={{
         search: `?page=${linkTo}`,
       }}
@@ -55,9 +55,5 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
 };
 
 export const Pagination = ({ paginateNum, totalCount }: Props) => {
-  return (
-    <div className="my-6">
-      <InnerPagination paginateNum={paginateNum} totalCount={totalCount} />
-    </div>
-  );
+  return <InnerPagination paginateNum={paginateNum} totalCount={totalCount} />;
 };

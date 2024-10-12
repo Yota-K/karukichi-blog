@@ -24,13 +24,13 @@ export const ProfileArea = () => {
   ];
 
   return (
-    <section className="mb-12">
+    <section>
       <Heading as="h2" size="lg">
         Profile
       </Heading>
       <div className="my-4">
         <Heading as="h3" size="md">
-          Karukichi Soejima
+          Karukichi Soejima (カルキチ 副島)
         </Heading>
         <img
           src={LogoImage}
@@ -45,7 +45,7 @@ export const ProfileArea = () => {
         <Text>ウェブ開発・ウェブ制作に関する情報を発信しています。</Text>
         <Link
           to="https://karukichi-portfolio.vercel.app/"
-          className="font-bold text-blue-secondary hover:underline"
+          className="font-bold text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >

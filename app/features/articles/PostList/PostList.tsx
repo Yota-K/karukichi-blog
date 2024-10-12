@@ -8,7 +8,7 @@ type Props = {
 
 export const PostList = ({ contents }: Props) => {
   return (
-    <div className="flex flex-col flex-wrap gap-6">
+    <div className="mb-4 flex flex-col flex-wrap gap-6">
       {contents.map((content) => (
         <PostItem key={content.id} content={content} />
       ))}
