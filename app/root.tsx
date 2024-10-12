@@ -19,14 +19,6 @@ export const meta: MetaFunction = () => {
       content: description,
     },
     {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:site',
-      content: '@karukichi_yah',
-    },
-    {
       property: 'og:title',
       content: title,
     },
@@ -49,6 +41,14 @@ export const meta: MetaFunction = () => {
     {
       property: 'og:type',
       content: 'website',
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:site',
+      content: '@karukichi_yah',
     },
   ];
 };

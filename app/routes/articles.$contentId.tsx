@@ -46,6 +46,14 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       property: 'og:type',
       content: 'article',
     },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:site',
+      content: '@karukichi_yah',
+    },
   ];
 };
 
