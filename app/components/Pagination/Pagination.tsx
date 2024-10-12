@@ -55,9 +55,5 @@ const InnerPagination = ({ paginateNum, totalCount }: Props) => {
 };
 
 export const Pagination = ({ paginateNum, totalCount }: Props) => {
-  return (
-    <div className="my-6">
-      <InnerPagination paginateNum={paginateNum} totalCount={totalCount} />
-    </div>
-  );
+  return <InnerPagination paginateNum={paginateNum} totalCount={totalCount} />;
 };

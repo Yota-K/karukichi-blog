@@ -1,7 +1,7 @@
 import { Await } from '@remix-run/react';
 import { Suspense } from 'react';
 
-import { Heading, Pagination, Skeleton } from '../components';
+import { Heading, MainLayout, Pagination, Skeleton } from '../components';
 import { PostList, TagArea } from '../features';
 
 import type { Content } from '../schema';
@@ -18,7 +18,7 @@ type Props = {
 
 export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, totalCount, tags }: Props) => {
   return (
-    <div>
+    <MainLayout>
       {tagName && (
         <div className="mb-4 flex justify-between">
           <Heading as="h1" size="lg">
@@ -49,6 +49,6 @@ export const TagRelatedArticleListPage = ({ contents, tagName, paginateNum, tota
           <TagArea tagField={tags} />
         </div>
       </section>
-    </div>
+    </MainLayout>
   );
 };

@@ -1,7 +1,7 @@
 import { Await } from '@remix-run/react';
 import { Suspense } from 'react';
 
-import { Heading, Pagination, Skeleton } from '../components';
+import { Heading, MainLayout, Pagination, Skeleton } from '../components';
 import { PostList, ProfileArea, TagArea } from '../features';
 
 import type { Content } from '../schema';
@@ -18,7 +18,7 @@ type Props = {
 export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Props) => {
   const isFirstPage = !paginateNum || paginateNum === 1;
   return (
-    <div>
+    <MainLayout>
       {isFirstPage && <ProfileArea />}
       <section>
         <Heading as="h2" size="lg" className="mb-4">
@@ -35,16 +35,14 @@ export const ArticleListPage = ({ contents, paginateNum, totalCount, tags }: Pro
           </Await>
         </Suspense>
       </section>
-      {isFirstPage && (
-        <section>
-          <Heading as="h2" size="lg">
-            Tags
-          </Heading>
-          <div className="mt-4">
-            <TagArea tagField={tags} />
-          </div>
-        </section>
-      )}
-    </div>
+      <section>
+        <Heading as="h2" size="lg">
+          Tags
+        </Heading>
+        <div className="mt-4">
+          <TagArea tagField={tags} />
+        </div>
+      </section>
+    </MainLayout>
   );
 };

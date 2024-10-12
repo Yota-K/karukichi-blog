@@ -1,4 +1,4 @@
-import { Heading } from '../components';
+import { Heading, MainLayout } from '../components';
 import { ContentBody, TagArea, Toc } from '../features';
 import { dateFormat } from '../utils';
 
@@ -16,7 +16,7 @@ type Props = {
 
 export const ArticleDetailPage = ({ content }: Props) => {
   return (
-    <div>
+    <MainLayout>
       <Heading as="h1" size="xl">
         {content.title}
       </Heading>
@@ -31,6 +31,6 @@ export const ArticleDetailPage = ({ content }: Props) => {
         <ContentBody body={content.body} />
         <Toc toc={content.toc} />
       </div>
-    </div>
+    </MainLayout>
   );
 };

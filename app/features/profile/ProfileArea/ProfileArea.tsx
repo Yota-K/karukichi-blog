@@ -24,13 +24,13 @@ export const ProfileArea = () => {
   ];
 
   return (
-    <section className="mb-12">
+    <section>
       <Heading as="h2" size="lg">
         Profile
       </Heading>
       <div className="my-4">
         <Heading as="h3" size="md">
-          Karukichi Soejima
+          Karukichi Soejima (カルキチ 副島)
         </Heading>
         <img
           src={LogoImage}
