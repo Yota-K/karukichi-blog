@@ -39,6 +39,10 @@ export const meta: MetaFunction = () => {
       content: ogImageUrl,
     },
     {
+      property: 'og:url',
+      url: config.url,
+    },
+    {
       property: 'og:type',
       content: 'website',
     },

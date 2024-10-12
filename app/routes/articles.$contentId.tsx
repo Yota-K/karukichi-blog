@@ -47,6 +47,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       content: 'article',
     },
     {
+      property: 'og:url',
+      content: `${config.url}/articles/${content.id}`,
+    },
+    {
       name: 'twitter:card',
       content: 'summary_large_image',
     },
