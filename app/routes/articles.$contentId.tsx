@@ -23,6 +23,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!content) return [];
 
   const title = `${content.title} | ${config.siteTitle}`;
+  const ogImageUrl = config.ogImageUrl(title);
   return [
     { title },
     {
@@ -39,7 +40,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       property: 'og:image',
-      content: `https://images.microcms-assets.io/assets/a1b0a00f12674fdaaf05fbe85c44b8be/01e7a8dd5df94ffea06b66b6808af7d9/ogp.png?usm=20&fit=crop&blend-mode=normal&blend-alpha=100&?blend-align=middle.center&blend-w=1.0&blend=https%3A%2F%2Fassets.imgix.net%2F~text%3Ftxt%3D+${content?.title}+%26txt-color%3D000000%26width%3D1000%26txt-align%3Dcenter%26txtfont=Hiragino%20Sans%20W6%26txt-size%3D32`,
+      content: ogImageUrl,
     },
     {
       property: 'og:type',
