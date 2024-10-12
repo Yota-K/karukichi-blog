@@ -36,7 +36,7 @@ const blogStatusSchema = z
   .object({
     id: z.string(),
     status: z.array(z.string()),
-    draftKey: z.string().optional(),
+    draftKey: z.string().nullable(),
     publishValue: contentSchema,
     draftValue: z.null(),
   })
