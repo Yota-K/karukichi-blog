@@ -1,6 +1,6 @@
 import { generateMockContent } from '../../../__helpers__';
 
-import { TagSection, TagArea} from '.';
+import { TagArea } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    tags: tag_field,
+    tagField: tag_field,
   },
 };
