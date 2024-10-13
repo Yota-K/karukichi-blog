@@ -8,7 +8,7 @@ type PaginationItemProps = {
 const PaginationItem = ({ linkTo, type }: PaginationItemProps) => {
   return (
     <Link
-      className="text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
+      className="inline-block text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
       to={{
         search: `?page=${linkTo}`,
       }}
