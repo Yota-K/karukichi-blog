@@ -64,6 +64,7 @@ const config = [
             'highlight.js/styles/*.css',
             'react-icons/fa',
             'react-icons/fa6',
+            'react-icons/md',
             '**/.eslint/*.mjs',
             '**/app/*.css',
             '**/public/**',

@@ -1,3 +1,5 @@
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+
 import { config } from '../../config';
 import { Link } from '../Link';
 
@@ -8,12 +10,13 @@ type PaginationItemProps = {
 const PaginationItem = ({ linkTo, type }: PaginationItemProps) => {
   return (
     <Link
-      className="inline-block text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
+      className="inline-block text-3xl text-blue-primary transition-all duration-300 hover:text-blue-secondary hover:underline"
       to={{
         search: `?page=${linkTo}`,
       }}
+      aria-label={type === 'prev' ? '戻る' : '進む'}
     >
-      {type === 'prev' ? '<< Prev' : 'Next >>'}
+      {type === 'prev' ? <MdNavigateBefore /> : <MdNavigateNext />}
     </Link>
   );
 };
