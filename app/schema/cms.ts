@@ -26,9 +26,6 @@ export const contentSchema = z.object({
   revisedAt: z.string(),
   title: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
-  body: z.string(),
-  // caregoryは使用しないので不要になったタイミングで消す
-  // category_field: taxonomySchema,
   tag_field: z.array(taxonomySchema),
 });
 
