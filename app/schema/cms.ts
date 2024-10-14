@@ -23,7 +23,7 @@ export const contentSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string().optional(),
-  revisedAt: z.string(),
+  revisedAt: z.string().optional(),
   title: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
   tag_field: z.array(taxonomySchema),
