@@ -10,5 +10,7 @@ import { createPagesFunctionHandler } from '@remix-run/cloudflare-pages';
 import * as build from '../build/server';
 
 // Pages Functions では onRequest 関数を named-export する必要がある。
+// サーバーのビルドファイルは `remix vite:build` によって生成されるので、tsconfig.jsonでも型チェックを無効にしている。
+//
 // ref: https://developers.cloudflare.com/pages/functions/get-started/#create-a-function
 export const onRequest = createPagesFunctionHandler({ build });
