@@ -9,7 +9,7 @@ import tsEslintConfig from './.eslint/typescript.mjs';
 /** @type { import("eslint").Linter.FlatConfig[] } */
 export default [
   {
-    ignores: ['!**/.server', '!**/.client', '**/node_modules/', '**/*.md', '!.storybook', 'build'],
+    ignores: ['!**/.server', '!**/.client', '**/node_modules/', '**/*.md', '!.storybook', 'build', "functions"],
   },
 
   js.configs.recommended,
