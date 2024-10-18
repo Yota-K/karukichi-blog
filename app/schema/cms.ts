@@ -19,13 +19,14 @@ const taxonomySchema = z.object({
  */
 export const contentSchema = z.object({
   id: z.string(),
-  description: z.string().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string().optional(),
   revisedAt: z.string().optional(),
   title: z.string(),
+  body: z.string(),
   type: z.array(z.union([z.literal('cms'), z.literal('qiita')])),
+  description: z.string().optional(),
   tag_field: z.array(taxonomySchema),
 });
 
