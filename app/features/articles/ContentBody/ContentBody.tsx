@@ -18,7 +18,7 @@ export const ContentBody = ({ body }: Props) => {
   }, []);
 
   return (
-    <div className="prose break-words lg:prose-base prose-a:text-blue-primary prose-img:rounded-xl prose-img:shadow-md">
+    <div className="prose break-words lg:prose-base prose-a:text-blue-primary prose-code:rounded-sm prose-code:bg-gray-200 prose-code:p-1 prose-img:rounded-xl prose-img:shadow-md">
       {parseHtml(body)}
     </div>
   );

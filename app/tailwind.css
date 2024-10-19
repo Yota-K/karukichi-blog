@@ -11,3 +11,33 @@
     @apply pl-3;
   }
 }
+
+/* 記事内のcodeタグの ` を消す */
+.prose
+  :where(code):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::before,
+.prose
+  :where(code):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::after {
+  content: none;
+}
+
+/* 記事内のblockquoteの最初と最後のpタグの ` を消す */
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::before,
+.prose
+  :where(blockquote p:last-of-type):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::after {
+  content: none;
+}
+
+/* シンタックスハイライトのcodeタグ */
+.prose pre > code {
+  background: transparent;
+  border-radius: 0;
+}
