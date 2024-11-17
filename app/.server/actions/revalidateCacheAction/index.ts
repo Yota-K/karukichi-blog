@@ -1,6 +1,6 @@
 import { json } from '@remix-run/cloudflare';
 
-import { cloudFlareCacheUseCase, kvUseCase } from '../../usecase';
+import { cloudFlareCacheUseCase, cloudFlareKvUseCase } from '../../usecase';
 
 import type { ActionFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
@@ -28,7 +28,7 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
   //eslint-disable-next-line no-console
   console.info('bodyText', bodyText);
 
-  const postId = await kvUseCase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
+  const postId = await cloudFlareKvUseCase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
 
   if (!postId) {
     return json(

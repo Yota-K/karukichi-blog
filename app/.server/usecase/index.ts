@@ -1,3 +1,3 @@
 export * from './cloudFlareCache';
+export * from './cloudFlareKv';
 export * from './cms';
-export * from './kv';
