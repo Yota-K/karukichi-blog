@@ -35,6 +35,9 @@ export const cloudFlareCacheRepository = {
 
       const data = (await response.json()) as PurgeCacheResponse;
 
+      //eslint-disable-next-line no-console
+      console.info('Purge CDN cache response:', data);
+
       return data;
     } catch (error) {
       console.error('Failed to purge cache:', error);
