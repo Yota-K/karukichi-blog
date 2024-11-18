@@ -1,7 +1,7 @@
 import { contentSchemaForWebhook } from '../../../schema';
-import { kvRepository } from '../../repository';
+import { cloudFlareKvRepository } from '../../repository';
 
-export const kvUseCase = {
+export const cloudFlareKvUseCase = {
   /**
    * kvのキャッシュを削除する
    */
@@ -21,7 +21,7 @@ export const kvUseCase = {
 
     // 投稿タイプがcmsの場合のみ、キャッシュを削除する
     if (type === 'edit' && contentId && contents?.new?.publishValue?.type.includes('cms')) {
-      await kvRepository.deletePostDetailCache(kv, contentId);
+      await cloudFlareKvRepository.deletePostDetailCache(kv, contentId);
       return contentId;
     }
 

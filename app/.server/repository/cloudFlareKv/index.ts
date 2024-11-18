@@ -6,7 +6,7 @@ const CACHE_KEYS = {
   postDetail: (contentId: string) => `post:${contentId}`,
 };
 
-export const kvRepository = {
+export const cloudFlareKvRepository = {
   /**
    * 特定の記事のキャッシュをKVから取得
    */

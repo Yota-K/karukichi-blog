@@ -1,6 +1,6 @@
 import { config } from '../../../config';
 import { contentBodyParser } from '../../htmlParser';
-import { cmsRepository, kvRepository } from '../../repository';
+import { cloudFlareKvRepository, cmsRepository } from '../../repository';
 
 import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToPosts';
 import { paginateSchema } from './schema';
@@ -85,7 +85,7 @@ export const cmsUseCase = {
     kv: KVNamespace<string>,
     isDev: boolean,
   ): Promise<FindPostDto> => {
-    const cachedResponse = isDev ? null : await kvRepository.getPostDetailCache<Content>(kv, contentId);
+    const cachedResponse = isDev ? null : await cloudFlareKvRepository.getPostDetailCache<Content>(kv, contentId);
 
     if (!cachedResponse || draftKey !== null) {
       const content = await cmsRepository.findPost(client, contentId, draftKey);
@@ -99,7 +99,7 @@ export const cmsUseCase = {
       }
 
       // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
-      if (!isDev && draftKey === null) await kvRepository.savePostDetailCache(kv, contentId, content);
+      if (!isDev && draftKey === null) await cloudFlareKvRepository.savePostDetailCache(kv, contentId, content);
       const { body, toc } = contentBodyParser(content.body);
 
       return {
