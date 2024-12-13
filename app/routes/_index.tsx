@@ -1,9 +1,9 @@
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData } from 'react-router';
 
 import { indexLoader as loader } from '../.server';
 import { ArticleListPage } from '../page';
 
-import type { HeadersFunction } from '@remix-run/cloudflare';
+import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = () => {
   return {

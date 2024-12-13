@@ -1,10 +1,10 @@
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData } from 'react-router';
 
 import { articleDetailLoader as loader } from '../.server';
 import { config } from '../config';
 import { ArticleDetailPage } from '../page';
 
-import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
+import type { HeadersFunction, MetaFunction } from 'react-router';
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   const cacheControl =

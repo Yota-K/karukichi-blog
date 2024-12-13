@@ -60,6 +60,11 @@ const config = [
           allow: [
             'react-dom/client',
             'react-dom/server',
+            'react/router/dom',
+            'react-dom/server.browser',
+            '@react-router/dev/vite',
+            '@react-router/dev/routes',
+            '@react-router/dev/vite/cloudflare',
             'vitest/config',
             'highlight.js/styles/*.css',
             'react-icons/fa',
