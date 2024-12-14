@@ -14,6 +14,9 @@ importers:
       '@react-router/dev':
         specifier: 7.0.0
         version: 7.0.0(@types/node@20.14.10)(react-router@7.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@5.5.4)(vite@5.1.0(@types/node@20.14.10))(wrangler@3.63.1(@cloudflare/workers-types@4.20240620.0))
+      '@react-router/fs-routes':
+        specifier: 7.0.2
+        version: 7.0.2(@react-router/dev@7.0.0(@types/node@20.14.10)(react-router@7.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@5.5.4)(vite@5.1.0(@types/node@20.14.10))(wrangler@3.63.1(@cloudflare/workers-types@4.20240620.0)))(typescript@5.5.4)
       '@remix-run/cloudflare':
         specifier: 2.10.2
         version: 2.10.2(@cloudflare/workers-types@4.20240620.0)(typescript@5.5.4)
@@ -1826,6 +1829,16 @@ packages:
       typescript:
         optional: true
       wrangler:
+        optional: true
+
+  '@react-router/fs-routes@7.0.2':
+    resolution: {integrity: sha512-XD1ag24/pLVZnmAWy7KzH2Bp8JxT4TzgdgM8WPkDXLhAzjn4bI51yr2NUQA8p70TND1Wph1O+kHH2D1tyc8v2Q==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      '@react-router/dev': ^7.0.2
+      typescript: ^5.1.0
+    peerDependenciesMeta:
+      typescript:
         optional: true
 
   '@react-router/node@7.0.0':
@@ -7877,6 +7890,13 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  '@react-router/fs-routes@7.0.2(@react-router/dev@7.0.0(@types/node@20.14.10)(react-router@7.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@5.5.4)(vite@5.1.0(@types/node@20.14.10))(wrangler@3.63.1(@cloudflare/workers-types@4.20240620.0)))(typescript@5.5.4)':
+    dependencies:
+      '@react-router/dev': 7.0.0(@types/node@20.14.10)(react-router@7.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@5.5.4)(vite@5.1.0(@types/node@20.14.10))(wrangler@3.63.1(@cloudflare/workers-types@4.20240620.0))
+      minimatch: 9.0.5
+    optionalDependencies:
+      typescript: 5.5.4
 
   '@react-router/node@7.0.0(react-router@7.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@5.5.4)':
     dependencies:
