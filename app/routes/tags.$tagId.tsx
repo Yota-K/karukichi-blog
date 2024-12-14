@@ -4,7 +4,8 @@ import { tagRelatedArticleLoader as loader } from '../.server';
 import { config } from '../config';
 import { TagRelatedArticleListPage } from '../page';
 
-import type { HeadersFunction, MetaFunction } from 'react-router';
+import type { Route } from './+types/tags.$tagId';
+import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = () => {
   return {
@@ -14,7 +15,7 @@ export const headers: HeadersFunction = () => {
 
 export { loader };
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: Route.MetaFunction = ({ data }) => {
   return [{ title: `${data?.tagName} | ${config.siteTitle}` }];
 };
 
