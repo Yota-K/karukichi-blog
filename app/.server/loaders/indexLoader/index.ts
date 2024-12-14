@@ -1,8 +1,8 @@
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 
+import type { Route } from '../../../../.react-router/types/app/routes/+types/_index';
 import type { GetPostsDto, GetTagsDto } from '../../usecase';
-import type { LoaderFunctionArgs } from 'react-router';
 
 type LoaderResponse = Promise<{
   contents: Promise<GetPostsDto['contents']>;
@@ -11,7 +11,7 @@ type LoaderResponse = Promise<{
   tags: GetTagsDto['tags'];
 }>;
 
-export const indexLoader = async ({ request, context }: LoaderFunctionArgs): LoaderResponse => {
+export const indexLoader = async ({ request, context }: Route.LoaderArgs): LoaderResponse => {
   const url = new URL(request.url);
   const pageQueryParams = url.searchParams.get('page');
 
