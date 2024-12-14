@@ -58,9 +58,9 @@ const config = [
         {
           // 許可しないとキツいものは追加していく。
           allow: [
+            'react-router/dom',
             'react-dom/client',
             'react-dom/server',
-            'react/router/dom',
             'react-dom/server.browser',
             '@react-router/dev/vite',
             '@react-router/dev/routes',
