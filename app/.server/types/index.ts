@@ -5,5 +5,3 @@ import type { data } from 'react-router';
 //
 // https://github.com/remix-run/remix/discussions/10244
 export type DataWithResponseInit<T> = ReturnType<typeof data<T>>;
-
-export * from './toc';
