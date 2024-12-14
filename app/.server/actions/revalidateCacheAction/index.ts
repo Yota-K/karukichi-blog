@@ -2,14 +2,15 @@ import { data } from 'react-router';
 
 import { cloudFlareCacheUseCase, cloudFlareKvUseCase } from '../../usecase';
 
+import type { DataWithResponseInit } from '../../types';
 import type { ActionFunctionArgs } from 'react-router';
 
-// type ActionResponse = Promise<{ success: boolean; message: string }>;
+type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: string }>>;
 
 // NOTE: kvとCloudFlareのCDNキャッシュを削除する処理を実行しているが、それぞれの関連性はないため、
 // KVのキャッシュは削除できたが、CloudFlareのCDNキャッシュが削除できなかったみたいなケースは許容する
 
-export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs) => {
+export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs): ActionResponse => {
   if (request.method !== 'POST') {
     // return ({ success: false, message: 'Method Not Allowed' }, { status: 405 });
     return data({ success: false, message: 'Method Not Allowed' }, { status: 405 });

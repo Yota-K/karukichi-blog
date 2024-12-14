@@ -1,19 +1,17 @@
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 
-// import type { GetPostsDto, GetTagsDto } from '../../usecase';
+import type { GetPostsDto, GetTagsDto } from '../../usecase';
 import type { LoaderFunctionArgs } from 'react-router';
 
-// type LoaderResponse = Promise<
-//   TypedDeferredData<{
-//     contents: Promise<GetPostsDto['contents']>;
-//     totalCount: GetPostsDto['totalCount'];
-//     paginateNum: GetPostsDto['paginateNum'];
-//     tags: GetTagsDto['tags'];
-//   }>
-// >;
+type LoaderResponse = Promise<{
+  contents: Promise<GetPostsDto['contents']>;
+  totalCount: GetPostsDto['totalCount'];
+  paginateNum: GetPostsDto['paginateNum'];
+  tags: GetTagsDto['tags'];
+}>;
 
-export const indexLoader = async ({ request, context }: LoaderFunctionArgs) => {
+export const indexLoader = async ({ request, context }: LoaderFunctionArgs): LoaderResponse => {
   const url = new URL(request.url);
   const pageQueryParams = url.searchParams.get('page');
 

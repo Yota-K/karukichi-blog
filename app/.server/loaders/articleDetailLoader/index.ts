@@ -4,10 +4,13 @@ import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 import { checkHost } from '../../utils';
 
-// import type { FindPostDto } from '../../usecase';
+import type { DataWithResponseInit } from '../../types';
+import type { FindPostDto } from '../../usecase';
 import type { LoaderFunctionArgs } from 'react-router';
 
-export const articleDetailLoader = async ({ params, context, request }: LoaderFunctionArgs) => {
+type LoaderResponse = Promise<DataWithResponseInit<FindPostDto>>;
+
+export const articleDetailLoader = async ({ params, context, request }: LoaderFunctionArgs): LoaderResponse => {
   const contentId = params.contentId;
 
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
@@ -43,15 +46,8 @@ export const articleDetailLoader = async ({ params, context, request }: LoaderFu
   return data(
     { status, content, toc },
     {
+      // draftKeyがクエリパラメータに指定されている場合はキャッシュを無効化する
       headers: draftKey ? { 'Cache-Control': 'no-store, max-age=0, s-maxage=0' } : undefined,
     },
   );
-
-  // return json(
-  //   { status, content, toc },
-  //   {
-  //     // draftKeyがクエリパラメータに指定されている場合はキャッシュを無効化する
-  //     headers: draftKey ? { 'Cache-Control': 'no-store, max-age=0, s-maxage=0' } : undefined,
-  //   },
-  // );
 };
