@@ -12,8 +12,9 @@
     "dev:wrangler": "wrangler pages dev --local --persist-to worker-local",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "biome check --write .",
+    "format:eslint": "eslint --fix .",
     "start": "wrangler pages dev build/client",
-    "type-check": "tsc --noEmit",
+    "type-check": "react-router typegen && tsc --noEmit",
     "build-storybook": "storybook build",
     "validate:dependency": "depcruise app",
     "test": "vitest"
