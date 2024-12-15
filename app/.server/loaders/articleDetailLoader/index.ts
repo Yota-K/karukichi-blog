@@ -1,15 +1,16 @@
-import { json } from '@remix-run/cloudflare';
+import { data } from 'react-router';
 
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 import { checkHost } from '../../utils';
 
+import type { Route } from '../../../../.react-router/types/app/routes/+types/articles.$contentId';
+import type { DataWithResponseInit } from '../../types';
 import type { FindPostDto } from '../../usecase';
-import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
 
-type LoaderResponse = Promise<TypedResponse<FindPostDto>>;
+type LoaderResponse = Promise<DataWithResponseInit<FindPostDto>>;
 
-export const articleDetailLoader = async ({ params, context, request }: LoaderFunctionArgs): LoaderResponse => {
+export const articleDetailLoader = async ({ params, context, request }: Route.LoaderArgs): LoaderResponse => {
   const contentId = params.contentId;
 
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404
@@ -42,7 +43,7 @@ export const articleDetailLoader = async ({ params, context, request }: LoaderFu
     });
   }
 
-  return json(
+  return data(
     { status, content, toc },
     {
       // draftKeyがクエリパラメータに指定されている場合はキャッシュを無効化する

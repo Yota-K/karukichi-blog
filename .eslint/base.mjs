@@ -58,16 +58,16 @@ const config = [
         {
           // 許可しないとキツいものは追加していく。
           allow: [
-            'react-dom/client',
-            'react-dom/server',
-            'vitest/config',
             'highlight.js/styles/*.css',
-            'react-icons/fa',
-            'react-icons/fa6',
-            'react-icons/md',
+            'react-router/dom',
+            'react-dom/*',
+            'react-icons/*',
+            'vitest/config',
+            '@react-router/**',
             '**/.eslint/*.mjs',
             '**/app/*.css',
             '**/public/**',
+            '**/.react-router/**',
           ],
         },
       ],

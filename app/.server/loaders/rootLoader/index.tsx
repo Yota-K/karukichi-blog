@@ -1,6 +1,6 @@
 import { validateEnv } from '../../env';
 
-import type { LoaderFunctionArgs } from '@remix-run/cloudflare';
+import type { LoaderFunctionArgs } from 'react-router';
 
 type LoaderResponse = Promise<null>;
 

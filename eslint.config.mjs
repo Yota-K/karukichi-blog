@@ -9,7 +9,16 @@ import tsEslintConfig from './.eslint/typescript.mjs';
 /** @type { import("eslint").Linter.FlatConfig[] } */
 export default [
   {
-    ignores: ['!**/.server', '!**/.client', '**/node_modules/', '**/*.md', '!.storybook', 'build', "functions"],
+    ignores: [
+      '!**/.server',
+      '!**/.client',
+      '**/node_modules/',
+      '**/*.md',
+      '!.storybook',
+      'build',
+      'functions',
+      '.react-router/**/*',
+    ],
   },
 
   js.configs.recommended,

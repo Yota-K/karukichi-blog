@@ -1,10 +1,11 @@
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData } from 'react-router';
 
 import { articleDetailLoader as loader } from '../.server';
 import { config } from '../config';
 import { ArticleDetailPage } from '../page';
 
-import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
+import type { Route } from './+types/articles.$contentId';
+import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   const cacheControl =
@@ -17,7 +18,7 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => {
 
 export { loader };
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: Route.MetaFunction = ({ data }) => {
   const content = data?.content;
 
   if (!content) return [];

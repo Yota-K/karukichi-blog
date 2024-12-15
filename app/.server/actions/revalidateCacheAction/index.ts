@@ -1,17 +1,19 @@
-import { json } from '@remix-run/cloudflare';
+import { data } from 'react-router';
 
 import { cloudFlareCacheUseCase, cloudFlareKvUseCase } from '../../usecase';
 
-import type { ActionFunctionArgs, TypedResponse } from '@remix-run/cloudflare';
+import type { Route } from '../../../../.react-router/types/app/routes/+types/api.revalidate-cache';
+import type { DataWithResponseInit } from '../../types';
 
-type ActionResponse = Promise<TypedResponse<{ success: boolean; message: string }>>;
+type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: string }>>;
 
 // NOTE: kvとCloudFlareのCDNキャッシュを削除する処理を実行しているが、それぞれの関連性はないため、
 // KVのキャッシュは削除できたが、CloudFlareのCDNキャッシュが削除できなかったみたいなケースは許容する
 
-export const revalidateCacheAction = async ({ request, context }: ActionFunctionArgs): ActionResponse => {
+export const revalidateCacheAction = async ({ request, context }: Route.ActionArgs): ActionResponse => {
   if (request.method !== 'POST') {
-    return json({ success: false, message: 'Method Not Allowed' }, { status: 405 });
+    // return ({ success: false, message: 'Method Not Allowed' }, { status: 405 });
+    return data({ success: false, message: 'Method Not Allowed' }, { status: 405 });
   }
 
   const { REVALIDATE_CACHE_API_KEY, RESPONSE_CACHE_KV, CLOUD_FLARE_ZONE_ID, CLOUD_FLARE_API_TOKEN } =
@@ -21,7 +23,7 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
   // うまくいかないので、api keyのチェックのみに留めている
   // https://document.microcms.io/manual/webhook-setting#hb2d39bd6cc
   if (REVALIDATE_CACHE_API_KEY !== request.headers.get('X-API-KEY')) {
-    return json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    return data({ success: false, message: 'Unauthorized' }, { status: 401 });
   }
 
   const bodyText = await request.text();
@@ -31,7 +33,7 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
   const postId = await cloudFlareKvUseCase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
 
   if (!postId) {
-    return json(
+    return data(
       {
         success: false,
         message: 'Failed delete kv cache.',
@@ -46,7 +48,7 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
     `articles/${postId}`,
   );
   if (!purgeCacheResult) {
-    return json(
+    return data(
       {
         success: false,
         message: 'Failed purge CDN cache.',
@@ -55,5 +57,5 @@ export const revalidateCacheAction = async ({ request, context }: ActionFunction
     );
   }
 
-  return json({ success: true, message: 'Cache deleted' }, { status: 200 });
+  return data({ success: true, message: 'Cache deleted' }, { status: 200 });
 };

@@ -1,22 +1,18 @@
-import { defer } from '@remix-run/cloudflare';
-
 import { client } from '../../cms';
 import { cmsUseCase } from '../../usecase';
 
+import type { Route } from '../../../../.react-router/types/app/routes/+types/tags.$tagId';
 import type { GetPostsByTagDto, GetTagsDto } from '../../usecase';
-import type { LoaderFunctionArgs, TypedDeferredData } from '@remix-run/cloudflare';
 
-type LoaderResponse = Promise<
-  TypedDeferredData<{
-    contents: Promise<GetPostsByTagDto['contents']>;
-    paginateNum: GetPostsByTagDto['paginateNum'];
-    tagName: GetPostsByTagDto['tagName'];
-    totalCount: GetPostsByTagDto['totalCount'];
-    tags: GetTagsDto['tags'];
-  }>
->;
+type LoaderResponse = Promise<{
+  contents: Promise<GetPostsByTagDto['contents']>;
+  paginateNum: GetPostsByTagDto['paginateNum'];
+  tagName: GetPostsByTagDto['tagName'];
+  totalCount: GetPostsByTagDto['totalCount'];
+  tags: GetTagsDto['tags'];
+}>;
 
-export const tagRelatedArticleLoader = async ({ request, params, context }: LoaderFunctionArgs): LoaderResponse => {
+export const tagRelatedArticleLoader = async ({ request, params, context }: Route.LoaderArgs): LoaderResponse => {
   if (!params.tagId) {
     throw new Response(null, {
       status: 404,
@@ -38,11 +34,11 @@ export const tagRelatedArticleLoader = async ({ request, params, context }: Load
     });
   }
 
-  return defer({
+  return {
     contents: Promise.resolve(posts.contents),
     paginateNum: posts.paginateNum,
     tagName: posts.tagName,
     totalCount: posts.totalCount,
     tags,
-  });
+  };
 };
