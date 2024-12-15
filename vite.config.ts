@@ -6,6 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     cloudflareDevProxy({
+      // 型エラーを解決する方法がわからないので、tsの型チェック無視してる
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       getLoadContext({ context }) {
