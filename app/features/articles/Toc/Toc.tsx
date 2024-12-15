@@ -1,5 +1,5 @@
+import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { Link } from 'react-scroll';
 
 import type { Toc as TocType } from '../../../types';

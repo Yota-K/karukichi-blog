@@ -1,11 +1,10 @@
-import { useLoaderData } from 'react-router';
+import { useLoaderData } from '@remix-run/react';
 
 import { tagRelatedArticleLoader as loader } from '../.server';
 import { config } from '../config';
 import { TagRelatedArticleListPage } from '../page';
 
-import type { Route } from './+types/tags.$tagId';
-import type { HeadersFunction } from 'react-router';
+import type { HeadersFunction, MetaFunction } from '@remix-run/cloudflare';
 
 export const headers: HeadersFunction = () => {
   return {
@@ -15,7 +14,7 @@ export const headers: HeadersFunction = () => {
 
 export { loader };
 
-export const meta: Route.MetaFunction = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [{ title: `${data?.tagName} | ${config.siteTitle}` }];
 };
 

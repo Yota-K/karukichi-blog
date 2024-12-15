@@ -1,4 +1,4 @@
-import { Link as RemixLink } from 'react-router';
+import { Link as RemixLink } from '@remix-run/react';
 
 import type { ComponentProps } from 'react';
 

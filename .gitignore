@@ -9,5 +9,3 @@ node_modules
 
 .wrangler
 worker-local
-
-.react-router

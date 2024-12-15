@@ -28,7 +28,6 @@ module.exports = {
           '[.]d[.]ts$', // TypeScript declaration files
           '(^|/)tsconfig[.]json$', // TypeScript config
           '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$', // other configs
-          'env.ts',
         ],
       },
       to: {},
@@ -97,9 +96,8 @@ module.exports = {
         'module: add it to your package.json. In all other cases you likely already know what to do.',
       severity: 'error',
       // shikiをesm.shから取得しているため、無効にしている
-      // .react-router と app/routes は .gitignoreに追加した React Routerが生成した型定義のため、無効にしている
       from: {
-        pathNot: ['https://esm.sh/shiki@*', '.react-router/', 'app/routes/'],
+        pathNot: ['https://esm.sh/shiki@*'],
       },
       to: {
         couldNotResolve: true,

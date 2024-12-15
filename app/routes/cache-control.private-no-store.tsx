@@ -1,6 +1,7 @@
-import { data, useLoaderData } from 'react-router';
+import { json } from '@remix-run/cloudflare';
+import { useLoaderData } from '@remix-run/react';
 
-import type { HeadersFunction, MetaFunction } from 'react-router';
+import type { HeadersFunction, MetaFunction, TypedResponse } from '@remix-run/cloudflare';
 
 export const headers: HeadersFunction = () => {
   return {
@@ -17,9 +18,9 @@ export const meta: MetaFunction<typeof loader> = () => {
   ];
 };
 
-export const loader = () => {
+export const loader = (): TypedResponse<{ now: string }> => {
   const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-  return data({ now });
+  return json({ now });
 };
 
 export default function Page() {

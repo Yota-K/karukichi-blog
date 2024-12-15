@@ -1,14 +1,15 @@
+import { Await } from '@remix-run/react';
 import { Suspense } from 'react';
-import { Await } from 'react-router';
 
 import { Heading, MainLayout, Pagination, Skeleton } from '../components';
 import { PostList, ProfileArea, TagArea } from '../features';
 
 import type { Content } from '../schema';
+import type { SerializeFrom } from '@remix-run/cloudflare';
 import type { ComponentProps } from 'react';
 
 type Props = {
-  contents: Promise<Content[]>;
+  contents: Promise<SerializeFrom<Content[]>>;
   paginateNum: ComponentProps<typeof Pagination>['paginateNum'];
   totalCount: ComponentProps<typeof Pagination>['totalCount'];
   tags: ComponentProps<typeof TagArea>['tagField'];

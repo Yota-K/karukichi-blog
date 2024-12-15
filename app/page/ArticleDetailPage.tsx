@@ -4,11 +4,14 @@ import { dateFormat } from '../utils';
 
 import type { Content } from '../schema';
 import type { Toc as TocType } from '../types';
+import type { SerializeFrom } from '@remix-run/cloudflare';
 
 type Props = {
-  content: Content & {
-    toc: TocType[];
-  };
+  content: SerializeFrom<
+    Content & {
+      toc: TocType[];
+    }
+  >;
 };
 
 export const ArticleDetailPage = ({ content }: Props) => {

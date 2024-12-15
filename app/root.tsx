@@ -1,12 +1,12 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from 'react-router';
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 import './tailwind.css';
 
 import { rootLoader as loader } from './.server';
 import { config } from './config';
 import { AppFooter, AppHeader, DisplayErrorMessage } from './widgets';
 
+import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ReactNode } from 'react';
-import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = () => {
   const title = config.siteTitle;

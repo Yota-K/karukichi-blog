@@ -1,4 +1,4 @@
-import { data } from 'react-router';
+import { json } from '@remix-run/cloudflare';
 import { z } from 'zod';
 
 import { config } from '../../../config';
@@ -54,7 +54,7 @@ export const cmsRepository = {
       .catch((error: unknown) => {
         // データの欠損など、zodのバリデーションエラーが発生した場合は500エラー扱いにする
         if (error instanceof z.ZodError) {
-          throw data({
+          throw json({
             status: 500,
             message: error.errors.map((e) => e.message).join(', '),
           });
