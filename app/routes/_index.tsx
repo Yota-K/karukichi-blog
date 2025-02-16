@@ -7,7 +7,7 @@ import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = () => {
   return {
-    'Cache-Control': 'public, max-age=180, s-maxage=180, stale-while-revalidate=180, stale-if-error=180',
+    'Cache-Control': 'public, max-age=0, s-maxage=604800, stale-if-error=604800',
   };
 };
 
