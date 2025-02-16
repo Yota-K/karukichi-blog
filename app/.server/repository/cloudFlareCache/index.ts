@@ -15,8 +15,10 @@ type PurgeCacheResponse = {
 export const cloudFlareCacheRepository = {
   purgeCdnCache: async (apiToken: string, zoneId: string, path: string): Promise<PurgeCacheResponse | undefined> => {
     const endpoint = `https://api.cloudflare.com/client/v4/zones/${zoneId}/purge_cache`;
+    // .dataファイルもキャッシュ削除対象にする
+    // おそらくだが、loaderの実行結果をキャッシュしていると思われる
     const payload = {
-      files: [`${config.url}/${path}`],
+      files: [`${config.url}/${path}`, `${config.url}/${path}.data`],
     };
 
     try {
