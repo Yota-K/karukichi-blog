@@ -91,7 +91,3 @@ preview_id = "97487c19591f45b79b7a82d1a211c97c"
 # [[env.production.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "<PRODUCTION_NAMESPACE_ID>"
-
-# ログを出力する
-[observability]
-enabled = true
