@@ -1,8 +1,7 @@
 import { useLoaderData } from 'react-router';
 
-import { ArticleListPage } from '../../page';
-
 import { loader } from './loader';
+import { ArticleListPage } from './page';
 
 import type { HeadersFunction } from 'react-router';
 

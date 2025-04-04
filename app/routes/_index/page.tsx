@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { Await } from 'react-router';
 
-import { Heading, MainLayout, Pagination, Skeleton } from '../components';
-import { PostList, ProfileArea, TagArea } from '../features';
+import { Heading, MainLayout, Pagination, Skeleton } from '../../components';
+import { PostList, ProfileArea, TagArea } from '../../features';
 
-import type { Content } from '../schema';
+import type { Content } from '../../schema';
 import type { ComponentProps } from 'react';
 
 type Props = {

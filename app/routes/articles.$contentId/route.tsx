@@ -1,9 +1,9 @@
 import { useLoaderData } from 'react-router';
 
 import { config } from '../../config';
-import { ArticleDetailPage } from '../../page';
 
 import { loader } from './loader';
+import { ArticleDetailPage } from './page';
 
 import type { Route } from '../articles.$contentId/+types/route';
 import type { HeadersFunction } from 'react-router';

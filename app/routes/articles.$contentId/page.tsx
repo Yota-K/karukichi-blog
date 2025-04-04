@@ -1,9 +1,9 @@
-import { Heading, MainLayout } from '../components';
-import { ContentBody, TagArea, Toc } from '../features';
-import { dateFormat } from '../utils';
+import { Heading, MainLayout } from '../../components';
+import { ContentBody, TagArea, Toc } from '../../features';
+import { dateFormat } from '../../utils';
 
-import type { Content } from '../schema';
-import type { Toc as TocType } from '../types';
+import type { Content } from '../../schema';
+import type { Toc as TocType } from '../../types';
 
 type Props = {
   content: Content & {

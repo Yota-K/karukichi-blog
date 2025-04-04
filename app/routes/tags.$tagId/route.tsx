@@ -1,9 +1,9 @@
 import { useLoaderData } from 'react-router';
 
 import { config } from '../../config';
-import { TagRelatedArticleListPage } from '../../page';
 
 import { loader } from './loader';
+import { TagRelatedArticleListPage } from './page';
 
 import type { Route } from '../tags.$tagId/+types/route';
 import type { HeadersFunction } from 'react-router';
