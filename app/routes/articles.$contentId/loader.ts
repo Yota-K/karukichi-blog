@@ -1,6 +1,6 @@
 import { data } from 'react-router';
 
-import { checkHost, client, cmsUseCase } from '../../.server';
+import { checkHost, client, cmsUsecase } from '../../.server';
 
 import type { DataWithResponseInit, FindPostDto } from '../../.server';
 import type { Route } from '../articles.$contentId/+types/route';
@@ -25,7 +25,7 @@ export const loader = async ({ params, context, request }: Route.LoaderArgs): Lo
 
   // kvをremixのdevサーバで動かすと、kvからデータを取得するときにエラーで落ちるので、アクセスした URI とポートをみてローカル環境かどうか判断する
   const isDev = checkHost(request.headers.get('host'));
-  const { status, content, toc } = await cmsUseCase.findPost(
+  const { status, content, toc } = await cmsUsecase.findPost(
     client(CMS_API_KEY),
     contentId,
     draftKey,

@@ -1,7 +1,7 @@
 import { contentSchemaForWebhook } from '../../../schema';
 import { cloudFlareKvRepository } from '../../repository';
 
-export const cloudFlareKvUseCase = {
+export const cloudFlareKvUsecase = {
   /**
    * kvのキャッシュを削除する
    */

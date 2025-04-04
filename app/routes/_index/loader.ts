@@ -1,4 +1,4 @@
-import { client, cmsUseCase } from '../../.server';
+import { client, cmsUsecase } from '../../.server';
 
 import type { GetPostsDto, GetTagsDto } from '../../.server';
 import type { Route } from '../_index/+types/route';
@@ -15,8 +15,8 @@ export const loader = async ({ request, context }: Route.LoaderArgs): LoaderResp
   const pageQueryParams = url.searchParams.get('page');
 
   const { CMS_API_KEY } = context.cloudflare.env;
-  const { contents, totalCount, paginateNum } = await cmsUseCase.getPosts(client(CMS_API_KEY), pageQueryParams);
-  const { tags } = await cmsUseCase.getTags(client(CMS_API_KEY));
+  const { contents, totalCount, paginateNum } = await cmsUsecase.getPosts(client(CMS_API_KEY), pageQueryParams);
+  const { tags } = await cmsUsecase.getTags(client(CMS_API_KEY));
 
   return {
     contents: Promise.resolve(contents),

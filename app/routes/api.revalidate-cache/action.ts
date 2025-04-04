@@ -1,6 +1,6 @@
 import { data } from 'react-router';
 
-import { cloudFlareCacheUseCase, cloudFlareKvUseCase } from '../../.server';
+import { cloudFlareCacheUsecase, cloudFlareKvUsecase } from '../../.server';
 
 import type { DataWithResponseInit } from '../../.server';
 import type { Route } from '../api.revalidate-cache/+types/route';
@@ -12,7 +12,6 @@ type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: 
 
 export const action = async ({ request, context }: Route.ActionArgs): ActionResponse => {
   if (request.method !== 'POST') {
-    // return ({ success: false, message: 'Method Not Allowed' }, { status: 405 });
     return data({ success: false, message: 'Method Not Allowed' }, { status: 405 });
   }
 
@@ -30,7 +29,7 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
   //eslint-disable-next-line no-console
   console.info('bodyText', bodyText);
 
-  const postId = await cloudFlareKvUseCase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
+  const postId = await cloudFlareKvUsecase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
 
   if (!postId) {
     return data(
@@ -42,11 +41,12 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
     );
   }
 
-  const purgeCacheResult = await cloudFlareCacheUseCase.purgeCdnCache(
+  const purgeCacheResult = await cloudFlareCacheUsecase.purgeCdnCache(
     CLOUD_FLARE_API_TOKEN,
     CLOUD_FLARE_ZONE_ID,
     `articles/${postId}`,
   );
+
   if (!purgeCacheResult) {
     return data(
       {

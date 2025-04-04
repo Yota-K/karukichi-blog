@@ -1,4 +1,4 @@
-import { client, cmsUseCase } from '../../.server';
+import { client, cmsUsecase } from '../../.server';
 
 import type { GetPostsByTagDto, GetTagsDto } from '../../.server';
 import type { Route } from '../tags.$tagId/+types/route';
@@ -23,8 +23,8 @@ export const loader = async ({ request, params, context }: Route.LoaderArgs): Lo
   const pageQueryParams = url.searchParams.get('page');
 
   const { CMS_API_KEY } = context.cloudflare.env;
-  const posts = await cmsUseCase.getPostsByTag(client(CMS_API_KEY), params.tagId, pageQueryParams);
-  const { tags } = await cmsUseCase.getTags(client(CMS_API_KEY));
+  const posts = await cmsUsecase.getPostsByTag(client(CMS_API_KEY), params.tagId, pageQueryParams);
+  const { tags } = await cmsUsecase.getTags(client(CMS_API_KEY));
 
   if (!posts) {
     throw new Response(null, {

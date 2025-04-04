@@ -11,7 +11,7 @@ import type { ClientType } from '../../cms';
 
 const { paginateLimit } = config;
 
-export const cmsUseCase = {
+export const cmsUsecase = {
   /**
    * 記事一覧を取得
    */

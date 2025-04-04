@@ -1,6 +1,6 @@
 import { cloudFlareCacheRepository } from '../../repository';
 
-export const cloudFlareCacheUseCase = {
+export const cloudFlareCacheUsecase = {
   /**
    * CloudFlareのCDN上のキャッシュを削除する
    */
