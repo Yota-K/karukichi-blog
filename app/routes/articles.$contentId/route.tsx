@@ -1,10 +1,11 @@
 import { useLoaderData } from 'react-router';
 
-import { articleDetailLoader as loader } from '../.server';
-import { config } from '../config';
-import { ArticleDetailPage } from '../page';
+import { config } from '../../config';
+import { ArticleDetailPage } from '../../page';
 
-import type { Route } from './+types/articles.$contentId';
+import { loader } from './loader';
+
+import type { Route } from '../articles.$contentId/+types/route';
 import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {

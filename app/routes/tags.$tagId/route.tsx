@@ -1,10 +1,11 @@
 import { useLoaderData } from 'react-router';
 
-import { tagRelatedArticleLoader as loader } from '../.server';
-import { config } from '../config';
-import { TagRelatedArticleListPage } from '../page';
+import { config } from '../../config';
+import { TagRelatedArticleListPage } from '../../page';
 
-import type { Route } from './+types/tags.$tagId';
+import { loader } from './loader';
+
+import type { Route } from '../tags.$tagId/+types/route';
 import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = () => {

@@ -1,8 +1,7 @@
-import { client } from '../../cms';
-import { cmsUseCase } from '../../usecase';
+import { client, cmsUseCase } from '../../.server';
 
-import type { Route } from '../../../../.react-router/types/app/routes/+types/tags.$tagId';
-import type { GetPostsByTagDto, GetTagsDto } from '../../usecase';
+import type { GetPostsByTagDto, GetTagsDto } from '../../.server';
+import type { Route } from '../tags.$tagId/+types/route';
 
 type LoaderResponse = Promise<{
   contents: Promise<GetPostsByTagDto['contents']>;
@@ -12,7 +11,7 @@ type LoaderResponse = Promise<{
   tags: GetTagsDto['tags'];
 }>;
 
-export const tagRelatedArticleLoader = async ({ request, params, context }: Route.LoaderArgs): LoaderResponse => {
+export const loader = async ({ request, params, context }: Route.LoaderArgs): LoaderResponse => {
   if (!params.tagId) {
     throw new Response(null, {
       status: 404,

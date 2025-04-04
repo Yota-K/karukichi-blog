@@ -1,6 +1,6 @@
 import { data } from 'react-router';
 
-import { revalidateCacheAction as action } from '../.server';
+import { action } from './action';
 
 export { action };
 

@@ -1,16 +1,13 @@
 import { data } from 'react-router';
 
-import { client } from '../../cms';
-import { cmsUseCase } from '../../usecase';
-import { checkHost } from '../../utils';
+import { checkHost, client, cmsUseCase } from '../../.server';
 
-import type { Route } from '../../../../.react-router/types/app/routes/+types/articles.$contentId';
-import type { DataWithResponseInit } from '../../types';
-import type { FindPostDto } from '../../usecase';
+import type { DataWithResponseInit, FindPostDto } from '../../.server';
+import type { Route } from '../articles.$contentId/+types/route';
 
 type LoaderResponse = Promise<DataWithResponseInit<FindPostDto>>;
 
-export const articleDetailLoader = async ({ params, context, request }: Route.LoaderArgs): LoaderResponse => {
+export const loader = async ({ params, context, request }: Route.LoaderArgs): LoaderResponse => {
   const contentId = params.contentId;
 
   // https://remix.run/docs/en/main/guides/not-found#how-to-send-a-404

@@ -1,7 +1,8 @@
 import { useLoaderData } from 'react-router';
 
-import { indexLoader as loader } from '../.server';
-import { ArticleListPage } from '../page';
+import { ArticleListPage } from '../../page';
+
+import { loader } from './loader';
 
 import type { HeadersFunction } from 'react-router';
 

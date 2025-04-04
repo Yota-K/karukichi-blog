@@ -1,7 +1,6 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from 'react-router';
 import './tailwind.css';
 
-import { rootLoader as loader } from './.server';
 import { config } from './config';
 import { AppFooter, AppHeader, DisplayErrorMessage } from './widgets';
 
@@ -56,8 +55,6 @@ export const meta: MetaFunction = () => {
     },
   ];
 };
-
-export { loader };
 
 export function Layout({ children }: { children: ReactNode }) {
   const gaTrackingId = 'G-Y2MDQ3RC4V';
