@@ -34,6 +34,16 @@ const mockContentList = generateMockContentListResponse({
       body: '<p><a href="https://qiita.com/username/items/1234567890abcdef">https://qiita.com/username/items/1234567890abcdef</a></p>',
       type: ['qiita'],
     },
+    {
+      id: 'test-4',
+      createdAt: '2023-12-29T10:29:48.466Z',
+      updatedAt: '2023-12-31T05:23:12.907Z',
+      publishedAt: '2023-12-30T16:48:37.058Z',
+      revisedAt: '2023-12-31T05:23:12.907Z',
+      title: 'title-4',
+      body: '<p><a href="https://note.com/username/n/1234567890abcdef">https://note.com/username/n/1234567890abcdef</a></p>',
+      type: ['note'],
+    },
   ],
 });
 
@@ -46,5 +56,10 @@ describe(filterAndAssignServiceUrlToPosts, () => {
 
   it('投稿タイプがcmsの場合はidが上書きされない', () => {
     expect(filteredPosts.contents[1].id).toBe('test-2');
+  });
+
+  it('投稿タイプがnoteの場合はサービスのURLをbodyから取得してidに設定できる', () => {
+    const notePost = filteredPosts.contents.find((content) => content.title === 'title-4');
+    expect(notePost?.id).toBe('https://note.com/username/n/1234567890abcdef');
   });
 });

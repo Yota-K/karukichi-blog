@@ -12,13 +12,14 @@ import type { MicroCMSListResponse } from 'microcms-js-sdk';
  * 投稿タイプ: type
  * - cms: 自分のブログの記事
  * - qiita: Qiitaの記事
+ * - note: noteの記事
  */
 export const filterAndAssignServiceUrlToPosts = (
   posts: MicroCMSListResponse<Content>,
 ): MicroCMSListResponse<Content> => {
   const filterPostsByContentType = posts.contents
     .filter((post) => {
-      return post.type.includes('qiita');
+      return post.type.some((type) => type === 'qiita' || type === 'note');
     })
     .map((post) => {
       const serviceUrl = urlSchema.safeParse(anchorTagParser(post.body));
