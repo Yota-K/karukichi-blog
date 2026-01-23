@@ -85,42 +85,38 @@ export const cmsUsecase = {
     kv: KVNamespace<string>,
     isDev: boolean,
   ): Promise<FindPostDto> => {
-    const cachedResponse = isDev ? null : await cloudFlareKvRepository.getPostDetailCache<Content>(kv, contentId);
+    const cachedResponse = isDev ? null : await cloudFlareKvRepository.getPostDetailCache(kv, contentId);
 
-    if (!cachedResponse || draftKey !== null) {
-      const content = await cmsRepository.findPost(client, contentId, draftKey);
-      // エラーが発生した時しかstatusを返却しないようにしているので、statusがある場合はエラーとして扱う
-      if ('status' in content) {
-        return {
-          status: content.status,
-          content: undefined,
-          toc: [],
-        };
-      }
-
-      // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
-      if (!isDev && draftKey === null) await cloudFlareKvRepository.savePostDetailCache(kv, contentId, content);
-      const { body, toc } = contentBodyParser(content.body);
-
+    // キャッシュヒット時はパース処理をスキップ
+    if (cachedResponse && draftKey === null) {
       return {
         status: 200,
-        content: {
-          ...content,
-          body,
-        },
-        toc,
+        content: cachedResponse.content,
+        toc: cachedResponse.toc,
       };
     }
 
-    const { body, toc } = contentBodyParser(cachedResponse.body);
+    // キャッシュミス or 下書きプレビュー時
+    const content = await cmsRepository.findPost(client, contentId, draftKey);
+    if ('status' in content) {
+      return {
+        status: content.status,
+        content: undefined,
+        toc: [],
+      };
+    }
+
+    const { body, toc } = contentBodyParser(content.body);
+    const parsedContent = { ...content, body };
+
+    // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
+    if (!isDev && draftKey === null) {
+      await cloudFlareKvRepository.savePostDetailCache(kv, contentId, parsedContent, toc);
+    }
 
     return {
       status: 200,
-      // parseした記事の本文で上書きする
-      content: {
-        ...cachedResponse,
-        body,
-      },
+      content: parsedContent,
       toc,
     };
   },

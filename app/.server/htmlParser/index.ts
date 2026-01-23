@@ -1,21 +1,30 @@
-import * as cheerio from "cheerio";
-
-import type { Toc } from "../../types";
+import type { Toc } from '../../types';
 
 /**
- * 目次を生成する
+ * 正規表現でh2, h3タグから目次を生成する
+ * cheerioを使わず軽量に処理する
  */
-const generateToc = (_$: cheerio.CheerioAPI): Toc[] => {
-  const headings = _$("h2, h3").toArray();
-  return headings.map((data) => ({
-    id: data.attribs.id,
-    tagName: data.name,
-    text: _$(data).text(),
-  }));
+const generateToc = (body: string): Toc[] => {
+  const toc: Toc[] = [];
+  // <h2 id="xxx">text</h2> または <h3 id="xxx">text</h3> を抽出
+  const headingRegex = /<(h[23])[^>]*id\s*=\s*["']([^"']*)["'][^>]*>([\s\S]*?)<\/\1>/gi;
+
+  let match: RegExpExecArray | null;
+  while ((match = headingRegex.exec(body)) !== null) {
+    const tagName = match[1].toLowerCase();
+    const id = match[2];
+    // HTMLタグを除去してテキストのみ抽出
+    const text = match[3].replace(/<[^>]*>/g, '').trim();
+
+    toc.push({ id, tagName, text });
+  }
+
+  return toc;
 };
 
 /**
- * htmlをパースする処理
+ * htmlをパースして目次を生成する
+ * NOTE: bodyはそのまま返す（変換不要）
  */
 export const contentBodyParser = (
   body: string,
@@ -23,12 +32,10 @@ export const contentBodyParser = (
   body: string;
   toc: Toc[];
 } => {
-  const $ = cheerio.load(body);
-
-  const toc = generateToc($);
+  const toc = generateToc(body);
 
   return {
-    body: $.html(),
+    body,
     toc,
   };
 };

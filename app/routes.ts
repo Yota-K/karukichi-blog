@@ -9,8 +9,8 @@
 //   route('/api/revalidate-cache', './routes/api.revalidate-cache.tsx'),
 // ] satisfies RouteConfig;
 //
-import { flatRoutes } from "@react-router/fs-routes";
+import { flatRoutes } from '@react-router/fs-routes';
 
-import type { RouteConfig } from "@react-router/dev/routes";
+import type { RouteConfig } from '@react-router/dev/routes';
 
 export default flatRoutes() satisfies RouteConfig;

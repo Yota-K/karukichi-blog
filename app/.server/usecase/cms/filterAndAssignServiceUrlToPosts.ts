@@ -1,7 +1,7 @@
-import { urlSchema } from "./schema";
+import { urlSchema } from './schema';
 
-import type { Content } from "../../../schema";
-import type { MicroCMSListResponse } from "microcms-js-sdk";
+import type { Content } from '../../../schema';
+import type { MicroCMSListResponse } from 'microcms-js-sdk';
 
 /**
  * htmlからaタグのhrefを取得する
@@ -35,7 +35,7 @@ export const filterAndAssignServiceUrlToPosts = (
 ): MicroCMSListResponse<Content> => {
   const filterPostsByContentType = posts.contents
     .filter((post) => {
-      return post.type.some((type) => type === "qiita" || type === "note");
+      return post.type.some((type) => type === 'qiita' || type === 'note');
     })
     .map((post) => {
       const serviceUrl = urlSchema.safeParse(anchorTagParser(post.body));
@@ -50,19 +50,12 @@ export const filterAndAssignServiceUrlToPosts = (
       };
     });
 
-  const filterPostsWithId = filterPostsByContentType.filter(
-    (post) => post.id !== undefined,
-  );
+  const filterPostsWithId = filterPostsByContentType.filter((post) => post.id !== undefined);
 
   // 記事一覧で取得するデータ量が多いので、MAPで重複を削除している
   // 一覧で取得する情報量をもっと限定できれば、filterの方が良いので、取得するデータを最低限に絞った時にfilterに書き換える
   const uniqueContents = Array.from(
-    new Map(
-      [...posts.contents, ...filterPostsWithId].map((content) => [
-        content.title,
-        content,
-      ]),
-    ).values(),
+    new Map([...posts.contents, ...filterPostsWithId].map((content) => [content.title, content])).values(),
   );
 
   return {
