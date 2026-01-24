@@ -1,4 +1,4 @@
-import { data } from 'react-router';
+import { data, redirect } from 'react-router';
 
 import { checkHost, client, cmsUsecase } from '../../.server';
 
@@ -38,6 +38,11 @@ export const loader = async ({ params, context, request }: Route.LoaderArgs): Lo
       status: 404,
       statusText: 'Not Found',
     });
+  }
+
+  // 外部サービス(note, qiitaなど)の記事は詳細ページを持たないためトップにリダイレクト
+  if (!content?.type.includes('cms')) {
+    throw redirect('/');
   }
 
   return data(
