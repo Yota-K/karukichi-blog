@@ -1,4 +1,4 @@
-import type { Content } from '../../../schema';
+import type { Content, ContentListItem } from '../../../schema';
 import type { Toc } from '../../../types';
 import type { TagResponse } from '../../cms';
 import type { MicroCMSListResponse } from 'microcms-js-sdk';
@@ -7,7 +7,7 @@ type PaginateNum = {
   paginateNum?: number;
 };
 
-type ContentList = MicroCMSListResponse<Content>;
+type ContentList = MicroCMSListResponse<ContentListItem>;
 export type GetPostsDto = ContentList & PaginateNum;
 
 export type GetPostsByTagDto = ContentList & {

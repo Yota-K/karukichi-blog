@@ -14,20 +14,29 @@ const taxonomySchema = z.object({
   ),
 });
 
+const contentType = z.array(z.union([z.literal('cms'), z.literal('qiita'), z.literal('note')]));
+
 /**
- * コンテンツのスキーマ
+ * 記事一覧用のスキーマ（body, descriptionを含まない）
  */
-export const contentSchema = z.object({
+export const contentListItemSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string().optional(),
   revisedAt: z.string().optional(),
   title: z.string(),
-  body: z.string(),
-  type: z.array(z.union([z.literal('cms'), z.literal('qiita'), z.literal('note')])),
-  description: z.string().optional(),
+  type: contentType,
   tag_field: z.array(taxonomySchema),
+  external_url: z.string().optional(),
+});
+
+/**
+ * 記事詳細用のスキーマ（body, descriptionを含む）
+ */
+export const contentSchema = contentListItemSchema.extend({
+  body: z.string().optional(),
+  description: z.string().optional(),
 });
 
 const blogStatusSchema = z
@@ -56,4 +65,5 @@ export const contentSchemaForWebhook = z.object({
     .optional(),
 });
 
+export type ContentListItem = z.infer<typeof contentListItemSchema>;
 export type Content = z.infer<typeof contentSchema>;

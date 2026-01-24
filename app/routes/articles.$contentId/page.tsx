@@ -25,7 +25,7 @@ export const ArticleDetailPage = ({ content }: Props) => {
       </div>
       {/* gap-4 が gap: 1rem; になるので、calc(78%-1rem) を指定して、gapで指定した余白の幅を引いている */}
       <div className="block gap-4 lg:grid lg:grid-cols-[calc(78%-1rem)_22%]">
-        <ContentBody body={content.body} />
+        <ContentBody body={content.body ?? ''} />
         <Toc toc={content.toc} />
       </div>
     </MainLayout>

@@ -6,7 +6,6 @@ import { filterAndAssignServiceUrlToPosts } from './filterAndAssignServiceUrlToP
 import { paginateSchema } from './schema';
 
 import type { FindPostDto, GetPostsByTagDto, GetPostsDto, GetTagsDto } from './dto';
-import type { Content } from '../../../schema';
 import type { ClientType } from '../../cms';
 
 const { paginateLimit } = config;
@@ -106,7 +105,7 @@ export const cmsUsecase = {
       };
     }
 
-    const { body, toc } = contentBodyParser(content.body);
+    const { body, toc } = contentBodyParser(content.body ?? '');
     const parsedContent = { ...content, body };
 
     // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
