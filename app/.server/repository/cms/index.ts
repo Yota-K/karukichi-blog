@@ -27,7 +27,7 @@ export const cmsRepository = {
         offset: queries?.offset ?? 0,
         limit: queries?.limit ?? config.paginateLimit,
         filters: queries?.filters ?? undefined,
-        fields: 'id,createdAt,updatedAt,publishedAt,revisedAt,title,type,description,tag_field,external_url',
+        fields: 'id,createdAt,updatedAt,publishedAt,revisedAt,title,type,tag_field,external_url',
       },
     });
 

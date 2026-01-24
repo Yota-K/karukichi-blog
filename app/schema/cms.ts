@@ -17,9 +17,9 @@ const taxonomySchema = z.object({
 const contentType = z.array(z.union([z.literal('cms'), z.literal('qiita'), z.literal('note')]));
 
 /**
- * コンテンツ共通フィールドのスキーマ
+ * 記事一覧用のスキーマ（body, descriptionを含まない）
  */
-const contentBaseSchema = z.object({
+export const contentListItemSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -27,21 +27,16 @@ const contentBaseSchema = z.object({
   revisedAt: z.string().optional(),
   title: z.string(),
   type: contentType,
-  description: z.string().optional(),
   tag_field: z.array(taxonomySchema),
   external_url: z.string().optional(),
 });
 
 /**
- * 記事一覧用のスキーマ（bodyを含まない）
+ * 記事詳細用のスキーマ（body, descriptionを含む）
  */
-export const contentListItemSchema = contentBaseSchema;
-
-/**
- * 記事詳細用のスキーマ（bodyを含む）
- */
-export const contentSchema = contentBaseSchema.extend({
+export const contentSchema = contentListItemSchema.extend({
   body: z.string().optional(),
+  description: z.string().optional(),
 });
 
 const blogStatusSchema = z
