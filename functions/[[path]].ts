@@ -37,33 +37,34 @@ export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => 
     return remixHandler(context);
   }
 
-  // @ts-expect-error - caches.default is Cloudflare Workers specific API
-  const cache = caches.default as Cache;
-  const cacheKey = new Request(url.toString(), { method: 'GET' });
+  try {
+    // @ts-expect-error - caches.default is Cloudflare Workers specific API
+    const cache = caches.default as Cache;
+    const cacheKey = new Request(url.toString(), { method: 'GET' });
 
-  // キャッシュヒット → Worker処理をスキップして即返却
-  const cachedResponse = await cache.match(cacheKey);
-  if (cachedResponse) {
-    return cachedResponse;
+    // キャッシュヒット → Worker処理をスキップして即返却
+    const cachedResponse = await cache.match(cacheKey);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    // キャッシュミス → Remix処理を実行
+    const response = await remixHandler(context);
+
+    // 成功レスポンスをキャッシュに保存
+    if (response.status === 200) {
+      const responseToCache = new Response(response.clone().body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: new Headers(response.headers),
+      });
+      responseToCache.headers.set('Cache-Control', `public, s-maxage=${CACHE_TTL_SECONDS}`);
+      context.waitUntil(cache.put(cacheKey, responseToCache));
+    }
+
+    return response;
+  } catch {
+    // Cache API失敗時は通常のRemix処理にフォールバック
+    return remixHandler(context);
   }
-
-  // キャッシュミス → Remix処理を実行
-  const response = await remixHandler(context);
-
-  // 成功レスポンスをキャッシュに保存
-  if (response.status === 200) {
-    const clonedResponse = response.clone();
-    const responseToCache = new Response(clonedResponse.body, {
-      status: clonedResponse.status,
-      statusText: clonedResponse.statusText,
-      headers: new Headers(clonedResponse.headers),
-    });
-    responseToCache.headers.set(
-      'Cache-Control',
-      `public, s-maxage=${CACHE_TTL_SECONDS}, stale-while-revalidate=${CACHE_TTL_SECONDS}`,
-    );
-    context.waitUntil(cache.put(cacheKey, responseToCache));
-  }
-
-  return response;
 };
