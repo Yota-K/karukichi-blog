@@ -5,7 +5,7 @@ import type { MicroCMSListResponse } from 'microcms-js-sdk';
 
 /**
  * htmlからaタグのhrefを取得する
- * NOTE: 正規表現を使用して高速に抽出する（cheerioを使わない）
+ * NOTE: 元々、html parserとして、cheerioを使っていたが、パフォマンスの問題が発生したため、正規表現を使用する方法に変えた。
  */
 export const anchorTagParser = (body: string): string | undefined => {
   // <a>タグのhref属性を抽出する正規表現

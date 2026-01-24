@@ -2,7 +2,6 @@ import type { Toc } from '../../types';
 
 /**
  * 正規表現でh2, h3タグから目次を生成する
- * cheerioを使わず軽量に処理する
  */
 const generateToc = (body: string): Toc[] => {
   const toc: Toc[] = [];
