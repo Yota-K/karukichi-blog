@@ -106,7 +106,7 @@ export const cmsUsecase = {
       };
     }
 
-    const { body, toc } = contentBodyParser(content.body);
+    const { body, toc } = contentBodyParser(content.body ?? '');
     const parsedContent = { ...content, body };
 
     // dev環境でなく、draftKeyがnull（下書きではない時）の場合はキャッシュに保存する
