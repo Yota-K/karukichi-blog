@@ -12,8 +12,8 @@ const mockContentList = generateMockContentListResponse({
       publishedAt: '2023-12-30T16:48:37.058Z',
       revisedAt: '2023-12-31T05:23:12.907Z',
       title: 'title-1',
-      body: '<p><a href="https://qiita.com/username/items/1234567890abcdef">https://qiita.com/username/items/1234567890abcdef</a></p>',
       type: ['qiita'],
+      external_url: 'https://qiita.com/username/items/1234567890abcdef',
     },
     {
       id: 'test-2',
@@ -31,8 +31,8 @@ const mockContentList = generateMockContentListResponse({
       publishedAt: '2023-12-30T16:48:37.058Z',
       revisedAt: '2023-12-31T05:23:12.907Z',
       title: 'title-3',
-      body: '<p><a href="https://qiita.com/username/items/1234567890abcdef">https://qiita.com/username/items/1234567890abcdef</a></p>',
       type: ['qiita'],
+      external_url: 'https://qiita.com/username/items/abcdef1234567890',
     },
     {
       id: 'test-4',
@@ -41,8 +41,8 @@ const mockContentList = generateMockContentListResponse({
       publishedAt: '2023-12-30T16:48:37.058Z',
       revisedAt: '2023-12-31T05:23:12.907Z',
       title: 'title-4',
-      body: '<p><a href="https://note.com/username/n/1234567890abcdef">https://note.com/username/n/1234567890abcdef</a></p>',
       type: ['note'],
+      external_url: 'https://note.com/username/n/1234567890abcdef',
     },
   ],
 });
@@ -50,7 +50,7 @@ const mockContentList = generateMockContentListResponse({
 describe(filterAndAssignServiceUrlToPosts, () => {
   const filteredPosts = filterAndAssignServiceUrlToPosts(mockContentList);
 
-  it('投稿タイプがcms以外の場合はサービスのURLをbodyから取得してidに設定できる', () => {
+  it('投稿タイプがqiitaの場合はexternal_urlをidに設定できる', () => {
     expect(filteredPosts.contents[0].id).toBe('https://qiita.com/username/items/1234567890abcdef');
   });
 
@@ -58,7 +58,7 @@ describe(filterAndAssignServiceUrlToPosts, () => {
     expect(filteredPosts.contents[1].id).toBe('test-2');
   });
 
-  it('投稿タイプがnoteの場合はサービスのURLをbodyから取得してidに設定できる', () => {
+  it('投稿タイプがnoteの場合はexternal_urlをidに設定できる', () => {
     const notePost = filteredPosts.contents.find((content) => content.title === 'title-4');
     expect(notePost?.id).toBe('https://note.com/username/n/1234567890abcdef');
   });
