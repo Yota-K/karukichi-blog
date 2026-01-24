@@ -11,4 +11,59 @@ import * as build from '../build/server';
 // サーバーのビルドファイルは `remix vite:build` によって生成されるので、tsconfig.jsonでも型チェックを無効にしている。
 //
 // ref: https://developers.cloudflare.com/pages/functions/get-started/#create-a-function
-export const onRequest = createPagesFunctionHandler({ build });
+const remixHandler = createPagesFunctionHandler({ build });
+
+// Cache APIによるCDNキャッシュ
+//
+// Cloudflare Pages FunctionsはデフォルトでCDNキャッシュの対象外のため、
+// Cache APIを使って明示的にCDNエッジにキャッシュを保存する。
+// キャッシュヒット時はWorker処理がスキップされ、CPU時間制限（無料プラン10ms）を回避できる。
+
+const CACHE_TTL_SECONDS = 60;
+const CACHEABLE_PATHS = ['/', '/tags'];
+
+const isCacheableRequest = (url: URL, method: string): boolean => {
+  if (method !== 'GET') return false;
+  return CACHEABLE_PATHS.some(
+    (path) => url.pathname === path || url.pathname.startsWith(`${path}/`),
+  );
+};
+
+export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => {
+  const request = context.request;
+  const url = new URL(request.url);
+
+  if (!isCacheableRequest(url, request.method)) {
+    return remixHandler(context);
+  }
+
+  // @ts-expect-error - caches.default is Cloudflare Workers specific API
+  const cache = caches.default as Cache;
+  const cacheKey = new Request(url.toString(), { method: 'GET' });
+
+  // キャッシュヒット → Worker処理をスキップして即返却
+  const cachedResponse = await cache.match(cacheKey);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  // キャッシュミス → Remix処理を実行
+  const response = await remixHandler(context);
+
+  // 成功レスポンスをキャッシュに保存
+  if (response.status === 200) {
+    const clonedResponse = response.clone();
+    const responseToCache = new Response(clonedResponse.body, {
+      status: clonedResponse.status,
+      statusText: clonedResponse.statusText,
+      headers: new Headers(clonedResponse.headers),
+    });
+    responseToCache.headers.set(
+      'Cache-Control',
+      `public, s-maxage=${CACHE_TTL_SECONDS}, stale-while-revalidate=${CACHE_TTL_SECONDS}`,
+    );
+    context.waitUntil(cache.put(cacheKey, responseToCache));
+  }
+
+  return response;
+};
