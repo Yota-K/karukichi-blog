@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { config } from '../../../config';
 import { contentSchema } from '../../../schema';
 
-import type { Content } from '../../../schema';
+import type { Content, ContentListItem } from '../../../schema';
 import type { ClientType, CustomErrorResponse, PickMicroCMSQueries, TagResponse } from '../../cms';
 import type { MicroCMSListResponse } from 'microcms-js-sdk';
 
@@ -17,13 +17,17 @@ export const cmsRepository = {
   /**
    * 記事一覧を取得
    */
-  getPosts: async (client: ClientType, queries?: PickMicroCMSQueries): Promise<MicroCMSListResponse<Content>> => {
-    const data = await client.getList<Content>({
+  getPosts: async (
+    client: ClientType,
+    queries?: PickMicroCMSQueries,
+  ): Promise<MicroCMSListResponse<ContentListItem>> => {
+    const data = await client.getList<ContentListItem>({
       endpoint: endpoints.blogs,
       queries: {
         offset: queries?.offset ?? 0,
         limit: queries?.limit ?? config.paginateLimit,
         filters: queries?.filters ?? undefined,
+        fields: 'id,createdAt,updatedAt,publishedAt,revisedAt,title,type,description,tag_field,external_url',
       },
     });
 

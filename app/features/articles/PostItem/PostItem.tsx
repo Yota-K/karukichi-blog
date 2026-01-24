@@ -2,12 +2,12 @@ import { Heading, Link } from '../../../components';
 import { dateFormat } from '../../../utils';
 import { TagArea } from '../TagArea';
 
-import type { Content } from '../../../schema';
+import type { ContentListItem } from '../../../schema';
 import type { PropsWithChildren } from 'react';
 
 type LinkWrapperProps = PropsWithChildren<{
-  type: Content['type'];
-  id: Content['id'];
+  type: ContentListItem['type'];
+  id: ContentListItem['id'];
 }>;
 
 const LinkWrapper = ({ type, id, children }: LinkWrapperProps) => {
@@ -25,7 +25,7 @@ const LinkWrapper = ({ type, id, children }: LinkWrapperProps) => {
 };
 
 type Props = {
-  content: Content;
+  content: ContentListItem;
 };
 
 export const PostItem = ({ content }: Props) => {
