@@ -15,13 +15,17 @@ export const loader = async ({ request, context }: Route.LoaderArgs): LoaderResp
   const pageQueryParams = url.searchParams.get('page');
 
   const { CMS_API_KEY } = context.cloudflare.env;
-  const { contents, totalCount, paginateNum } = await cmsUsecase.getPosts(client(CMS_API_KEY), pageQueryParams);
-  const { tags } = await cmsUsecase.getTags(client(CMS_API_KEY));
+  const cmsClient = client(CMS_API_KEY);
+
+  const [postsResult, tagsResult] = await Promise.all([
+    cmsUsecase.getPosts(cmsClient, pageQueryParams),
+    cmsUsecase.getTags(cmsClient),
+  ]);
 
   return {
-    contents: Promise.resolve(contents),
-    totalCount,
-    paginateNum,
-    tags,
+    contents: Promise.resolve(postsResult.contents),
+    totalCount: postsResult.totalCount,
+    paginateNum: postsResult.paginateNum,
+    tags: tagsResult.tags,
   };
 };

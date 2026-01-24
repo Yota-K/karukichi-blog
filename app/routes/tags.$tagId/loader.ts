@@ -23,8 +23,12 @@ export const loader = async ({ request, params, context }: Route.LoaderArgs): Lo
   const pageQueryParams = url.searchParams.get('page');
 
   const { CMS_API_KEY } = context.cloudflare.env;
-  const posts = await cmsUsecase.getPostsByTag(client(CMS_API_KEY), params.tagId, pageQueryParams);
-  const { tags } = await cmsUsecase.getTags(client(CMS_API_KEY));
+  const cmsClient = client(CMS_API_KEY);
+
+  const [posts, tagsResult] = await Promise.all([
+    cmsUsecase.getPostsByTag(cmsClient, params.tagId, pageQueryParams),
+    cmsUsecase.getTags(cmsClient),
+  ]);
 
   if (!posts) {
     throw new Response(null, {
@@ -38,6 +42,6 @@ export const loader = async ({ request, params, context }: Route.LoaderArgs): Lo
     paginateNum: posts.paginateNum,
     tagName: posts.tagName,
     totalCount: posts.totalCount,
-    tags,
+    tags: tagsResult.tags,
   };
 };
