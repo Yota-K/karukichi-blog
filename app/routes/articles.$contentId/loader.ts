@@ -2,10 +2,11 @@ import { data, redirect } from 'react-router';
 
 import { checkHost, client, cmsUsecase } from '../../.server';
 
-import type { DataWithResponseInit, FindPostDto } from '../../.server';
+import type { FindPostDto } from '../../.server';
 import type { Route } from '../articles.$contentId/+types/route';
+import type { UNSAFE_DataWithResponseInit } from 'react-router';
 
-type LoaderResponse = Promise<DataWithResponseInit<FindPostDto>>;
+type LoaderResponse = Promise<UNSAFE_DataWithResponseInit<FindPostDto>>;
 
 export const loader = async ({ params, context, request }: Route.LoaderArgs): LoaderResponse => {
   const contentId = params.contentId;
