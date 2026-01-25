@@ -21,15 +21,56 @@ const remixHandler = createPagesFunctionHandler({ build });
 
 const CACHE_TTL_SECONDS = 900;
 const CACHEABLE_PATHS = ['/', '/tags', '/articles'];
+const SITE_ORIGIN = 'https://karukichi-blog.com';
 
 const isCacheableRequest = (url: URL, method: string): boolean => {
   if (method !== 'GET') return false;
   return CACHEABLE_PATHS.some((path) => url.pathname === path || url.pathname.startsWith(`${path}/`));
 };
 
+const isRevalidateCacheRequest = (url: URL, method: string): boolean => {
+  return method === 'POST' && url.pathname === '/api/revalidate-cache';
+};
+
+const purgeArticleCache = async (
+  cache: Cache,
+  postId: string,
+  waitUntil: (promise: Promise<unknown>) => void,
+): Promise<void> => {
+  const urls = [`${SITE_ORIGIN}/articles/${postId}`, `${SITE_ORIGIN}/articles/${postId}.data`];
+
+  waitUntil(
+    Promise.all(urls.map((url) => cache.delete(new Request(url)))).then((results) => {
+      //eslint-disable-next-line no-console
+      console.info('Purge Workers Cache API:', urls, results);
+    }),
+  );
+};
+
 export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => {
   const request = context.request;
   const url = new URL(request.url);
+
+  // revalidate-cache APIの場合、Workers Cache APIも削除する
+  if (isRevalidateCacheRequest(url, request.method)) {
+    const clonedRequest = request.clone();
+    const response = await remixHandler(context);
+
+    if (response.status === 200) {
+      try {
+        const body = await clonedRequest.json<{ id?: string }>();
+        if (body.id) {
+          // @ts-expect-error - caches.default is Cloudflare Workers specific API
+          const cache = caches.default as Cache;
+          await purgeArticleCache(cache, body.id, context.waitUntil);
+        }
+      } catch {
+        console.error('Failed to parse revalidate-cache request body');
+      }
+    }
+
+    return response;
+  }
 
   if (!isCacheableRequest(url, request.method)) {
     return remixHandler(context);
