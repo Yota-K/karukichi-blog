@@ -44,13 +44,17 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
     );
   }
 
-  const purgeCacheResult = await cloudFlareCacheUsecase.purgeCdnCache(
-    CLOUD_FLARE_API_TOKEN,
-    CLOUD_FLARE_ZONE_ID,
-    `articles/${postId}`,
-  );
+  const path = `articles/${postId}`;
 
-  if (!purgeCacheResult) {
+  const [purgeCdnResult, purgeWorkersCacheResult] = await Promise.all([
+    cloudFlareCacheUsecase.purgeCdnCache(CLOUD_FLARE_API_TOKEN, CLOUD_FLARE_ZONE_ID, path),
+    cloudFlareCacheUsecase.purgeWorkersCacheApi(path),
+  ]);
+
+  //eslint-disable-next-line no-console
+  console.info('Purge results:', { purgeCdnResult, purgeWorkersCacheResult });
+
+  if (!purgeCdnResult) {
     return data(
       {
         success: false,

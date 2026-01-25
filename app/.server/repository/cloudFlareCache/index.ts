@@ -13,6 +13,25 @@ type PurgeCacheResponse = {
 };
 
 export const cloudFlareCacheRepository = {
+  purgeWorkersCacheApi: async (path: string): Promise<boolean> => {
+    const urls = [`${config.url}/${path}`, `${config.url}/${path}.data`];
+
+    try {
+      // @ts-expect-error - caches.default is Cloudflare Workers specific API
+      const cache = caches.default as Cache;
+
+      const results = await Promise.all(urls.map((url) => cache.delete(new Request(url))));
+
+      //eslint-disable-next-line no-console
+      console.info('Purge Workers Cache API:', urls, results);
+
+      return results.every(Boolean);
+    } catch (error) {
+      console.error('Failed to purge Workers Cache API:', error);
+      return false;
+    }
+  },
+
   purgeCdnCache: async (apiToken: string, zoneId: string, path: string): Promise<PurgeCacheResponse | undefined> => {
     const endpoint = `https://api.cloudflare.com/client/v4/zones/${zoneId}/purge_cache`;
     // .dataファイルもキャッシュ削除対象にする
