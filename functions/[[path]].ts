@@ -20,7 +20,7 @@ const remixHandler = createPagesFunctionHandler({ build });
 // キャッシュヒット時はWorker処理がスキップされ、CPU時間制限（無料プラン10ms）を回避できる。
 
 const CACHE_TTL_SECONDS = 60;
-const CACHEABLE_PATHS = ['/', '/tags'];
+const CACHEABLE_PATHS = ['/', '/tags', '/articles'];
 
 const isCacheableRequest = (url: URL, method: string): boolean => {
   if (method !== 'GET') return false;
@@ -49,7 +49,6 @@ export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => 
     // キャッシュミス → Remix処理を実行
     const response = await remixHandler(context);
 
-    // 成功レスポンスをキャッシュに保存
     if (response.status === 200) {
       const responseToCache = new Response(response.clone().body, {
         status: response.status,
