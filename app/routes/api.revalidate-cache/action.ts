@@ -7,9 +7,12 @@ import type { Route } from '../api.revalidate-cache/+types/route';
 
 type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: string }>>;
 
-// NOTE: kvとCloudFlareのCDNキャッシュを削除する処理を実行しているが、それぞれの関連性はないため、
-// KVのキャッシュは削除できたが、CloudFlareのCDNキャッシュが削除できなかったみたいなケースは許容する
-
+/**
+ * CloudFlare Workers KV と CloudFlare CDN キャッシュを削除するAPI
+ *
+ * NOTE: kvとCloudFlareのCDNキャッシュを削除する処理を実行しているが、それぞれの関連性はないため、
+ * KVのキャッシュは削除できたが、CloudFlareのCDNキャッシュが削除できなかったみたいなケースは許容する
+ **/
 export const action = async ({ request, context }: Route.ActionArgs): ActionResponse => {
   if (request.method !== 'POST') {
     return data({ success: false, message: 'Method Not Allowed' }, { status: 405 });

@@ -19,7 +19,7 @@ const remixHandler = createPagesFunctionHandler({ build });
 // Cache APIを使って明示的にCDNエッジにキャッシュを保存する。
 // キャッシュヒット時はWorker処理がスキップされ、CPU時間制限（無料プラン10ms）を回避できる。
 
-const CACHE_TTL_SECONDS = 60;
+const CACHE_TTL_SECONDS = 900;
 const CACHEABLE_PATHS = ['/', '/tags', '/articles'];
 
 const isCacheableRequest = (url: URL, method: string): boolean => {

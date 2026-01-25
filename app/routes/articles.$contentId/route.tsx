@@ -10,7 +10,7 @@ import type { HeadersFunction } from 'react-router';
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   const cacheControl =
-    loaderHeaders.get('Cache-Control') ?? 'public, max-age=0, s-maxage=60, stale-while-revalidate=3600';
+    loaderHeaders.get('Cache-Control') ?? 'public, max-age=0, s-maxage=900, stale-while-revalidate=60';
   return {
     'Cache-Control': cacheControl,
   };
