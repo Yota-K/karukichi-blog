@@ -1,11 +1,6 @@
-import { data } from 'react-router';
-
 import { cloudFlareCacheUsecase, cloudFlareKvUsecase } from '../../.server';
 
-import type { DataWithResponseInit } from '../../.server';
 import type { Route } from '../api.revalidate-cache/+types/route';
-
-type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: string }>>;
 
 /**
  * CloudFlare Workers KV と CloudFlare CDN キャッシュを削除するAPI
@@ -13,9 +8,9 @@ type ActionResponse = Promise<DataWithResponseInit<{ success: boolean; message: 
  * NOTE: kvとCloudFlareのCDNキャッシュを削除する処理を実行しているが、それぞれの関連性はないため、
  * KVのキャッシュは削除できたが、CloudFlareのCDNキャッシュが削除できなかったみたいなケースは許容する
  **/
-export const action = async ({ request, context }: Route.ActionArgs): ActionResponse => {
+export const action = async ({ request, context }: Route.ActionArgs): Promise<Response> => {
   if (request.method !== 'POST') {
-    return data({ success: false, message: 'Method Not Allowed' }, { status: 405 });
+    return Response.json({ success: false, message: 'Method Not Allowed' }, { status: 405 });
   }
 
   const { REVALIDATE_CACHE_API_KEY, RESPONSE_CACHE_KV, CLOUD_FLARE_ZONE_ID, CLOUD_FLARE_API_TOKEN } =
@@ -25,7 +20,7 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
   // うまくいかないので、api keyのチェックのみに留めている
   // https://document.microcms.io/manual/webhook-setting#hb2d39bd6cc
   if (REVALIDATE_CACHE_API_KEY !== request.headers.get('X-API-KEY')) {
-    return data({ success: false, message: 'Unauthorized' }, { status: 401 });
+    return Response.json({ success: false, message: 'Unauthorized' }, { status: 401 });
   }
 
   const bodyText = await request.text();
@@ -35,7 +30,7 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
   const postId = await cloudFlareKvUsecase.revalidateCache(RESPONSE_CACHE_KV, bodyText);
 
   if (!postId) {
-    return data(
+    return Response.json(
       {
         success: false,
         message: 'Failed delete kv cache.',
@@ -51,7 +46,7 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
   );
 
   if (!purgeCdnResult) {
-    return data(
+    return Response.json(
       {
         success: false,
         message: 'Failed purge CDN cache.',
@@ -60,5 +55,5 @@ export const action = async ({ request, context }: Route.ActionArgs): ActionResp
     );
   }
 
-  return data({ success: true, message: 'Cache deleted' }, { status: 200 });
+  return Response.json({ success: true, message: 'Cache deleted' }, { status: 200 });
 };

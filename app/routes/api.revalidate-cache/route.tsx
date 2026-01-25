@@ -1,5 +1,3 @@
-import { data } from 'react-router';
-
 import { action } from './action';
 
 export { action };
@@ -11,5 +9,5 @@ export { action };
  * ref: https://remix.run/docs/en/main/route/action#action
  **/
 export const loader = async () => {
-  return data({ message: 'Method Not Allowed' }, { status: 405 });
+  return Response.json({ message: 'Method Not Allowed' }, { status: 405 });
 };
