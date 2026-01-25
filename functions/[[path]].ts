@@ -53,22 +53,39 @@ export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => 
 
   // revalidate-cache APIの場合、Workers Cache APIも削除する
   if (isRevalidateCacheRequest(url, request.method)) {
+    //eslint-disable-next-line no-console
+    console.info('[revalidate-cache] Start processing');
+
     const clonedRequest = request.clone();
     const response = await remixHandler(context);
+
+    //eslint-disable-next-line no-console
+    console.info('[revalidate-cache] remixHandler response:', {
+      status: response.status,
+      statusText: response.statusText,
+    });
 
     if (response.status === 200) {
       try {
         const body = await clonedRequest.json<{ id?: string }>();
+        //eslint-disable-next-line no-console
+        console.info('[revalidate-cache] Parsed body:', body);
+
         if (body.id) {
           // @ts-expect-error - caches.default is Cloudflare Workers specific API
           const cache = caches.default as Cache;
           await purgeArticleCache(cache, body.id, context.waitUntil);
+        } else {
+          //eslint-disable-next-line no-console
+          console.info('[revalidate-cache] body.id is undefined');
         }
-      } catch {
-        console.error('Failed to parse revalidate-cache request body');
+      } catch (e) {
+        console.error('[revalidate-cache] Failed to parse request body:', e);
       }
     }
 
+    //eslint-disable-next-line no-console
+    console.info('[revalidate-cache] Returning response');
     return response;
   }
 
