@@ -47,8 +47,10 @@ export const onRequest = async (context: Parameters<typeof remixHandler>[0]) => 
   // @ts-expect-error - ref: https://developers.cloudflare.com/workers/runtime-apis/cache/#accessing-cache
   const cache = caches.default as Cache;
 
-  // revalidate-cache APIの場合、Workers Cache APIも削除する
-  // NOTE: 削除しないと、
+  // revalidate-cache APIが実行された場合、Workers Cache APIも削除する
+  // NOTE: React Routerは画面遷移時にはHTMLを取得せず、loaderの結果を'.data'から取得する挙動になる。
+  // キャッシュを消すAPIでは、CDNのキャッシュは消せても、Workers Cache内の'.data'が残ってしまい、古いデータが表示されてしまう問題があるため、
+  // Workers Cache内の該当記事のキャッシュも削除する必要がある。
   if (isRevalidateCacheRequest(url, request.method)) {
     const clonedRequest = request.clone();
     const response = await remixHandler(context);
