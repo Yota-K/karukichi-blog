@@ -28,7 +28,7 @@ export const useActiveHeading = ({ topOffset }: Options) => {
       },
       {
         rootMargin: `${topOffset}px 0px -80% 0px`,
-      }
+      },
     );
 
     for (const heading of headings) {
