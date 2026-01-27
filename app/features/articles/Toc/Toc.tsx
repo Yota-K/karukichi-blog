@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-scroll';
+
+import { useActiveHeading } from './useActiveHeading';
 
 import type { Toc as TocType } from '../../../types';
 
@@ -20,21 +22,45 @@ const tocItemClassName = (tagName: string) => {
   return '';
 };
 
+const SCROLL_DURATION_MS = 600;
+const CLICK_HIGHLIGHT_DURATION_MS = SCROLL_DURATION_MS + 100;
+const HEADING_TOP_OFFSET = -70;
+
 type Props = {
   toc: TocType[];
 };
 
 export const Toc = ({ toc }: Props) => {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [clickedId, setClickedId] = useState<string | null>(null);
+  const scrollActiveId = useActiveHeading({ topOffset: HEADING_TOP_OFFSET });
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const navigate = useNavigate();
 
-  const handleScroll = (id: string) => {
-    setActiveId(id);
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
+
+  const handleClick = (id: string) => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    setClickedId(id);
     navigate({
       hash: `#${id}`,
     });
+
+    timerRef.current = setTimeout(() => {
+      setClickedId(null);
+    }, CLICK_HIGHLIGHT_DURATION_MS);
   };
+
+  const activeId = clickedId ?? scrollActiveId;
 
   return (
     <nav id="toc" aria-label="目次" className="hidden lg:block">
@@ -44,10 +70,10 @@ export const Toc = ({ toc }: Props) => {
             <Link
               to={item.id}
               smooth={true}
-              offset={-70}
-              duration={600}
-              onClick={() => handleScroll(item.id)}
-              className={`cursor-pointer font-bold ${activeId === item.id ? 'text-gray-900' : 'text-gray-400'}`}
+              offset={HEADING_TOP_OFFSET}
+              duration={SCROLL_DURATION_MS}
+              onClick={() => handleClick(item.id)}
+              className={`cursor-pointer font-bold ${activeId === item.id ? 'text-blue-primary' : 'text-gray-400'}`}
             >
               {item.text}
             </Link>
